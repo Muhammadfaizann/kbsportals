@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KBS.Portals.Calculator.Logic", "KBS.Portals.Calculator.Logic\KBS.Portals.Calculator.Logic.csproj", "{CF269F85-0B3A-4A73-AB6A-27646437FE10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KBS.Portals.Calculator.Logic.Tests", "KBS.Portals.Calculator.Logic.Tests\KBS.Portals.Calculator.Logic.Tests.csproj", "{47C58210-3669-4219-864F-3D857E8099E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__versioninfo", "__versioninfo", "{8A9E9F07-8207-4875-9403-631634D85DDF}"
+	ProjectSection(SolutionItems) = preProject
+		GlobalAssemblyInfo.cs = GlobalAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Core", "1. Core", "{9F70C35C-3B95-4328-91DD-E01637A5D2C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. User Interfaces", "2. User Interfaces", "{7724500F-5612-40CA-B8DD-8CEC9558F22C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Tests", "3. Tests", "{1008E449-E8A9-45D1-85DD-BA8A80FE2326}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF269F85-0B3A-4A73-AB6A-27646437FE10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF269F85-0B3A-4A73-AB6A-27646437FE10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF269F85-0B3A-4A73-AB6A-27646437FE10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF269F85-0B3A-4A73-AB6A-27646437FE10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47C58210-3669-4219-864F-3D857E8099E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47C58210-3669-4219-864F-3D857E8099E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47C58210-3669-4219-864F-3D857E8099E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47C58210-3669-4219-864F-3D857E8099E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CF269F85-0B3A-4A73-AB6A-27646437FE10} = {9F70C35C-3B95-4328-91DD-E01637A5D2C9}
+		{47C58210-3669-4219-864F-3D857E8099E1} = {1008E449-E8A9-45D1-85DD-BA8A80FE2326}
+	EndGlobalSection
+EndGlobal
