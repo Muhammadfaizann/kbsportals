@@ -8,23 +8,23 @@ namespace KBS.Portals.Calculator.Logic.Enums
     {
         [Display(Description = "Documentation Fee")]
         DOC,
-        [Display(Description = "??")]
+        [Display(Description = "Installment")]
         INS,
-        [Display(Description = "??")]
+        [Display(Description = "Fee")]
         FEE,
-        [Display(Description = "??")]
+        [Display(Description = "Payment Holiday")]
         HOL,
-        [Display(Description = "Balance")]
+        [Display(Description = "Balance Collection")]
         BAL,
-        [Display(Description = "Residual")]
+        [Display(Description = "Residual Payment")]
         RES,
-        [Display(Description = "Purchase")]
+        [Display(Description = "Purchase Fee")]
         PUR,
         [Display(Description = "Upfront")]
         UPF,
-        [Display(Description = "??")]
+        [Display(Description = "Leased Asset Displosal")]
         LAD,
-        [Display(Description = "??")]
+        [Display(Description = "LAD Renewal Installment")]
         REN
     }
 }

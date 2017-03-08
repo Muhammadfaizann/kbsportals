@@ -4,6 +4,7 @@
     {
         APRInstallment,
         IRRInstallment,
+        Rate,
         FinanceAmount,
         Term,
         BalRes,
