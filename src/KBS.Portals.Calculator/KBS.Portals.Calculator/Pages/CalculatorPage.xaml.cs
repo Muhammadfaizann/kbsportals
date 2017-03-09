@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
-namespace KBS.Portals.Calculator
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace KBS.Portals.Calculator.Pages
 {
-    public partial class MainPage : ContentPage
+
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class CalculatorPage : CarouselPage
     {
-        public MainPage()
+        public CalculatorPage()
         {
             InitializeComponent();
         }

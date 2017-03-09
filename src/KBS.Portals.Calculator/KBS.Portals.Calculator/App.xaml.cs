@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using FreshMvvm;
+using KBS.Portals.Calculator.Enums;
+using KBS.Portals.Calculator.PageModels;
 using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator
@@ -11,9 +9,12 @@ namespace KBS.Portals.Calculator
     {
         public App()
         {
-            InitializeComponent();
-
-            MainPage = new KBS.Portals.Calculator.MainPage();
+            var page = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
+            var navContainer = new FreshNavigationContainer(page, NavigationContainerNames.AuthenticationContainer);
+            var mainContainer = new FreshMasterDetailNavigationContainer(NavigationContainerNames.MainContainer);
+            mainContainer.AddPage<CalculatorPageModel>("Calculate");
+            mainContainer.Init("Menu");
+            MainPage = navContainer;
         }
 
         protected override void OnStart()
