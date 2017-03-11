@@ -11,6 +11,7 @@ namespace KBS.Portals.Calculator.Logic.Models
         public CalculatorData()
         {
             Schedules = new List<Schedule>();
+            Frequency = Frequency.Monthly;
         }
 
         public Product Product { get; set; } // will dictate data elemt validation (e.g HP must have a PurFee)
@@ -21,7 +22,7 @@ namespace KBS.Portals.Calculator.Logic.Models
         public double APR { get; set; }
         public double IRR { get; set; }
         public decimal Installment { get; set; }
-        public int Term { get; set; }
+        public int NoOfInstallments { get; set; }
 
 
         public decimal DocFee { get; set; } // Create a Documentation Fee Schedule Line
@@ -33,7 +34,9 @@ namespace KBS.Portals.Calculator.Logic.Models
         public decimal Residual { get; set; } // Create a Residual Payment Schedule Line
         public DateTime StartDate { get; set; }
         public DateTime NextDate { get; set; }
-        public IEnumerable<Schedule> Schedules { get; private set; } // Here for future useage by KBS to allow scheduels to be added
+        public Frequency Frequency { get; set; }
+//        public IEnumerable<Schedule> Schedules { get; set; } // Here for future useage by KBS to allow scheduels to be added
+        public List<Schedule> Schedules { get; set; } // Here for future useage by KBS to allow scheduels to be added
 
         public decimal Charges { get; set; }
         public decimal TotalCost { get; set; }

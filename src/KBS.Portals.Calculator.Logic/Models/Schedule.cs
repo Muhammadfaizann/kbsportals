@@ -13,5 +13,17 @@ namespace KBS.Portals.Calculator.Logic.Models
         public decimal Maintenance { get; set; }
         public DateTime NextDate { get; set; }
 
+        public Schedule(int serial,ScheduleType type, int counts, Frequency frequency, Decimal amount, DateTime nextDate)
+        {
+            this.Serial = serial;
+            this.Type = type;
+            this.Counts = counts;
+            this.Frequency = frequency;
+            this.Amount = amount;
+            this.Maintenance = 0;
+            this.NextDate = nextDate;
+        }
+
+
     }
 }

@@ -29,7 +29,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             {
                 CalculationType = ct,
                 FinanceAmount = fa,
-                Term = t,
+                NoOfInstallments = t,
                 APR = apr
             };
 

@@ -13,10 +13,10 @@ namespace KBS.Portals.Calculator.Logic.Util
 
             if (cd.CalculationType == CalculationType.APRInstallment)
             {
-                if(cd.Term <= 1)
+                if(cd.NoOfInstallments <= 1)
                     return new ValidationResult("A term of 1 or greater is required.");
 
-                if (cd.APR <= 0)
+                if (cd.APR <= 0 )
                     return new ValidationResult("A positive APR is required.");
 
                 if (cd.FinanceAmount <= 0)

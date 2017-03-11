@@ -51,6 +51,8 @@
     <Compile Include="Models\CalculatorData.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Enums\Product.cs" />
+    <Compile Include="Models\SortKey.cs" />
+    <Compile Include="Models\YieldCalc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enums\ScheduleType.cs" />
     <Compile Include="Util\DynamicRequireAttribute.cs" />

@@ -21,5 +21,6 @@ namespace KBS.Portals.Calculator.Logic.Util
             
             return e.ToString();
         }
+
     }
 }
