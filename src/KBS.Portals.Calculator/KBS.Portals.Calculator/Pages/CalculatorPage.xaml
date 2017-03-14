@@ -1,25 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:abstractions="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             xmlns:views="clr-namespace:KBS.Portals.Calculator.Views;assembly=KBS.Portals.Calculator"
              x:Class="KBS.Portals.Calculator.Pages.CalculatorPage"
-             Title="CarouselPage">
-  <ContentPage>
-    <StackLayout>
-      <Label Text="This is a CarouselPage, you can swipe left and right to browse through additional pages." Margin="5" />
-      <Label Text="Red" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5" />
-      <BoxView Color="Red" VerticalOptions="FillAndExpand" />
+             Title="CalculatorPage">
+    <StackLayout
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        Orientation="Vertical">
+        <abstractions:CarouselViewControl
+            x:Name="CalculatorCarousel"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            AnimateTransition="true"
+            Orientation="Horizontal"
+            ShowIndicators="true">
+            <abstractions:CarouselViewControl.ItemTemplate>
+                <DataTemplate>
+                    <views:CalculatorView />
+                </DataTemplate>
+            </abstractions:CarouselViewControl.ItemTemplate>
+        </abstractions:CarouselViewControl>
+        <Button 
+            x:Name="CalculateButton"
+            Text="Calculate" />
     </StackLayout>
-  </ContentPage>
-  <ContentPage>
-    <StackLayout>
-      <Label Text="Green" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5"  />
-      <BoxView Color="Green" VerticalOptions="FillAndExpand" />
-    </StackLayout>
-  </ContentPage>
-  <ContentPage>
-    <StackLayout>
-      <Label Text="Blue" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5"  />
-      <BoxView Color="Blue" VerticalOptions="FillAndExpand" />
-    </StackLayout>
-  </ContentPage>
-</CarouselPage>
+</ContentPage>
