@@ -1,8 +1,103 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="KBS.Portals.Calculator.Views.CalculatorView">
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:calc="clr-namespace:KBS;assembly=KBS.Portals.Calculator"
+             xmlns:enums="clr-namespace:KBS.Portals.Calculator.Logic.Enums;assembly=KBS.Portals.Calculator.Logic"
+             xmlns:valueConverters="clr-namespace:KBS.Portals.Calculator.ValueConverters;assembly=KBS.Portals.Calculator"
+             x:Class="KBS.Portals.Calculator.Views.CalculatorView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <valueConverters:ProductValueConverter x:Key="ProductValueConverter"></valueConverters:ProductValueConverter>
+            <valueConverters:FrequencyValueConverter x:Key="FrequencyValueConverter"></valueConverters:FrequencyValueConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentView.Content>
-        <StackLayout>
-            <Label Text="{Binding .}" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="{Binding Item1}" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Product" />
+                    <Picker x:Name="ProductPicker" HorizontalOptions="FillAndExpand" SelectedIndex="{Binding Item2.Product, Converter={StaticResource ProductValueConverter}}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="FinanceAmount" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.FinanceAmount}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Commission" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.Commission}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="UpFrontNo" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.UpFrontNo}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="UpFrontValue" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.UpFrontValue}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="APR" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.APR}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="IRR" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.IRR}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="DocFee" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.DocFee}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="PurFee" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.PurFee}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Ballon" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.Ballon}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Residual" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.Residual}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="StartDate" />
+                    <DatePicker HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"
+                                Date="{Binding Item2.StartDate}">
+                        <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                    </DatePicker>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="NextDate" />
+                    <DatePicker HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"
+                                Date="{Binding Item2.NextDate}">
+                        <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                    </DatePicker>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Frequency" />
+                    <Picker x:Name="FrequencyPicker" HorizontalOptions="FillAndExpand" SelectedIndex="{Binding Item2.Frequency, Converter={StaticResource FrequencyValueConverter}}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Installment" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.Installment}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Charges" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.Charges}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Term" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.Term}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="TotalCost" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.TotalCost}" IsEnabled="True" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="TotalSchedule" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding Item2.TotalSchedule}" IsEnabled="True" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentView.Content>
 </ContentView>
