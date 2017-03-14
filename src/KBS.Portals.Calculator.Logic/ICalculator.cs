@@ -8,6 +8,7 @@ namespace KBS.Portals.Calculator.Logic
     public interface ICalculator
     {
         CalculatorData Calculate();
+
         void Reload(CalculatorData input);
     }
 }

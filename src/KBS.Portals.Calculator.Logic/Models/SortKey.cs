@@ -4,42 +4,84 @@ using System.Text;
 
 namespace KBS.Portals.Calculator.Logic.Models
 {
-    class SortKey : IComparable
+    public class SortKey : IComparable<SortKey>, IComparable
     {
-        DateTime Date { get; set; }
-        int Serial { get; set; }
+        public DateTime Date { get; }
+        public int Serial { get; }
 
         public SortKey (DateTime date, int serial)
         {
-            this.Date = date;
-            this.Serial = serial;
+            Date = date;
+            Serial = serial;
         }
-
-        // The following code is to allow clases to be compared in Dictioary order
-
-        int IComparable.CompareTo(Object obj)
+        
+        public int CompareTo(object obj)
         {
-            if (obj == null) return 1;
+            if (obj != null && !(obj is SortKey))
+            {
+                throw new ArgumentException("Object must be of type SortKey.");
+            }
 
-            SortKey otherSortKey = obj as SortKey;
-            if (otherSortKey != null) 
-                if (this.Equals(obj)) {
-                    return 0;
-                } else { return 1; }
-            else
-                throw new ArgumentException("Object is not a Calculator.SortKey");
+            return CompareTo((SortKey)obj);           
         }
 
-
-        public bool Equals(SortKey x, SortKey y)
+        public int CompareTo(SortKey other)
         {
-            return x.Date == y.Date && x.Serial == y.Serial;
+            if (other == null) return 1;
+
+            return Equals(other) ? 0 : 1;
         }
 
-        public int GetHashCode(SortKey x)
+        public override bool Equals(object obj)
         {
-            return x.Date.GetHashCode() + x.Serial.GetHashCode();
+            return Equals(obj as SortKey);
         }
+
+        public bool Equals(SortKey other)
+        {
+            if (other == null) { return false; }
+
+            if (ReferenceEquals(this, other)) { return true; }
+
+            return Date == other.Date && Serial == other.Serial;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                var hash = 17;
+                
+                hash = hash * 23 + Date.GetHashCode();
+                hash = hash * 23 + Serial.GetHashCode();
+
+                return hash;
+            }
+        }
+
+        public static bool operator ==(SortKey item1, SortKey item2)
+        {
+            if ((object)item1 == null || (object)item2 == null) { return false; }
+
+            if (ReferenceEquals(item1, item2)) { return true; }
+
+            return item1.Date == item2.Date && item1.Serial == item2.Serial;
+        }
+
+        public static bool operator !=(SortKey item1, SortKey item2)
+        {
+            return !(item1 == item2);
+        }
+
+        //public bool Equals(SortKey x, SortKey y)
+        //{
+        //    return x.Date == y.Date && x.Serial == y.Serial;
+        //}
+
+        //public int GetHashCode(SortKey obj)
+        //{
+        //    return obj.Date.GetHashCode() + obj.Serial.GetHashCode();
+        //}
 
     }
 }

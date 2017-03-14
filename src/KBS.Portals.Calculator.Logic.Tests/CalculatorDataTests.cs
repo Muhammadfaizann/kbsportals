@@ -22,15 +22,23 @@ namespace KBS.Portals.Calculator.Logic.Tests
         [TestCase(false, CalculationType.APRInstallment, 0, 100, 0)]
         [TestCase(false, CalculationType.APRInstallment, 0, 0, .1)]
         [TestCase(false, CalculationType.APRInstallment, 0, 0, 0)]
-        [TestCase(true, CalculationType.IRRInstallment, 0,0,0)]
-        public void CheckCalculatorDataIsValidForAPRInstallment(bool expected, CalculationType ct, decimal fa, int t, double apr)
+        [TestCase(true, CalculationType.IRRInstallment, 100, 100, .1)]
+        [TestCase(false, CalculationType.IRRInstallment, 100, 100, 0)]
+        [TestCase(false, CalculationType.IRRInstallment, 100, 0, .1)]
+        [TestCase(false, CalculationType.IRRInstallment, 100, 0, 0)]
+        [TestCase(false, CalculationType.IRRInstallment, 0, 100, .1)]
+        [TestCase(false, CalculationType.IRRInstallment, 0, 100, 0)]
+        [TestCase(false, CalculationType.IRRInstallment, 0, 0, .1)]
+        [TestCase(false, CalculationType.IRRInstallment, 0, 0, 0)]
+        public void CheckCalculatorDataIsValidForAPRInstallment(bool expected, CalculationType ct, decimal fa, int t, double rate)
         {
             CalculatorData cd = new CalculatorData()
             {
                 CalculationType = ct,
                 FinanceAmount = fa,
                 NoOfInstallments = t,
-                APR = apr
+                APR = rate,
+                IRR = rate 
             };
 
             var context = new ValidationContext(cd, serviceProvider: null, items: null);

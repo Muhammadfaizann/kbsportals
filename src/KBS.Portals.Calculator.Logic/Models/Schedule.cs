@@ -15,13 +15,13 @@ namespace KBS.Portals.Calculator.Logic.Models
 
         public Schedule(int serial,ScheduleType type, int counts, Frequency frequency, Decimal amount, DateTime nextDate)
         {
-            this.Serial = serial;
-            this.Type = type;
-            this.Counts = counts;
-            this.Frequency = frequency;
-            this.Amount = amount;
-            this.Maintenance = 0;
-            this.NextDate = nextDate;
+            Serial = serial;
+            Type = type;
+            Counts = counts;
+            Frequency = frequency;
+            Amount = amount;
+            Maintenance = 0;
+            NextDate = nextDate;
         }
 
 
