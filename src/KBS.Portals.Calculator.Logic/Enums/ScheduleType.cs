@@ -25,6 +25,10 @@ namespace KBS.Portals.Calculator.Logic.Enums
         [Display(Description = "Leased Asset Displosal")]
         LAD,
         [Display(Description = "LAD Renewal Installment")]
-        REN
+        REN,
+        [Display(Description = "Commission")]
+        COM,
+        [Display(Description = "Finance Amount")]
+        FIN
     }
 }

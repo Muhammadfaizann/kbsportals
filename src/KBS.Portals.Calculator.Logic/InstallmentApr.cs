@@ -7,14 +7,13 @@ using KBS.Portals.Calculator.Logic.Models;
 
 namespace KBS.Portals.Calculator.Logic
 {
-    public class APRInstallmentCalculator : Calculator
+    public class InstallmentApr : Calculator
     {
         private SortedDictionary<SortKey, YieldCalc> YieldCalcChron = new SortedDictionary<SortKey, YieldCalc>();
-//        private int NumOfInstalments { get; set; }
-        private int AccountDays = 365;
+        private const int AccountDays = 365;
         private CalculatorData _input;
 
-        internal APRInstallmentCalculator(CalculatorData input) : base(input)
+        internal InstallmentApr(CalculatorData input) : base(input)
         {
             _input = input;
         }
@@ -31,6 +30,9 @@ namespace KBS.Portals.Calculator.Logic
                 _input.Schedules.Add(new Schedule(1, ScheduleType.INS, _input.NoOfInstallments, _input.Frequency, 0, _input.NextDate));
             }
 
+            //TODO I think we need to be adding the BAL,RES and PUR schedule lines but currently the caluclation does NOT take account of these!
+
+
             //TODO Gavin this next line was in call but never used to APR calc
             //BuildChron();
             CalculateAprInstallment();
@@ -39,84 +41,6 @@ namespace KBS.Portals.Calculator.Logic
 
         }
 
-        // This is a common routine so should be in shared component Calculatir.cs?
-        private void BuildChron()
-        {
-            var nextDate = default(DateTime);
-            var serial = 0;
-
-//            NumOfInstalments = 0;
-
-            try
-            {
-                SetTotals();
-                YieldCalcChron.Clear();
-                var amount = -((_input.TotalSchedule) - (_input.Charges));
-                YieldCalcChron.Add(new SortKey(_input.StartDate, serial), new YieldCalc(amount, _input.StartDate, true, ""));
-                serial++;
-                if (_input.Commission > 0)
-                {
-                    YieldCalcChron.Add(new SortKey(_input.StartDate, serial), new YieldCalc(_input.Commission, _input.StartDate, false, "COM"));
-                    serial++;
-                }
-
-                foreach (Schedule schedule in _input.Schedules)
-                {
-                    if (schedule.Type.Equals(ScheduleType.FEE) || schedule.Type.Equals(ScheduleType.DOC) || schedule.Type.Equals(ScheduleType.PUR))
-                    {
-                        YieldCalcChron.Add(new SortKey(_input.NextDate, serial), new YieldCalc(schedule.Amount, _input.NextDate, false, schedule.Type.ToString()));
-                        serial++;
-                        //                    if (schedule.Type.Equals("FEE"))  { iMonths += schedule.Counts; };
-                    }
-                    //                if (schedule.Type.Equals("HOL")) { iMonths += schedule.Counts; };
-                    if (schedule.Type.Equals(ScheduleType.INS) || schedule.Type.Equals(ScheduleType.BAL))
-                    {
-                        for (int i = 0; i <= schedule.Counts - 1; i++)
-                        {
-                            nextDate = schedule.NextDate.AddMonths(i * (int)schedule.Frequency);
-                            YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, nextDate, true, schedule.Type.ToString()));
-                            serial++;
-                        }
-                        //                    iMonths += schedule.Counts;
-//                        NumOfInstalments += schedule.Counts;
-                    }
-                    if (schedule.Type.Equals(ScheduleType.RES))
-                    {
-                        // Always Collect Residual on last Nextdate from INS
-                        YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, _input.NextDate, true, schedule.Type.ToString()));
-                        serial++;
-                        //                    iMonths += schedule.Counts;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
-
-
-        }
-
-        private void SetTotals()
-        {
-            decimal total = 0;
-//            decimal upFronts = 0;
-
-            foreach (var schedule in _input.Schedules)
-            {
-                //if (schedule.Type.Equals(ScheduleType.UPF))
-                //{
-                //    upFronts += schedule.Amount * Convert.ToDecimal(schedule.Counts);
-                //}
-                if (schedule.Type.Equals(ScheduleType.INS) || schedule.Type.Equals(ScheduleType.BAL) || schedule.Type.Equals(ScheduleType.RES))
-                {
-                    total += schedule.Amount * Convert.ToDecimal(schedule.Counts);
-                }
-            }
-            _input.TotalSchedule = total;
-            _input.Charges = _input.TotalCost - total;
-        }
 
         private void CalculateAprInstallment ()
         {
@@ -142,13 +66,10 @@ namespace KBS.Portals.Calculator.Logic
                     dModifyDocFee = Math.Round(Convert.ToDouble(_input.DocFee) / Math.Pow((1 + apr / 100), dtk),9);
                 }
 
-                //TODO GAVIN PLEASE Check this Logic it does not look right to me
-                //this was an AddMonth check but it only seemed to be set for CalcRental which is what this is and only used here??
-                //dNextDate = DateAdd(Microsoft.VisualBasic.DateInterval.Month, 1, _input.FirstInstallment);
-                nextDate = _input.StartDate.AddMonths(1);
+                nextDate = _input.NextDate;
 
 
-                //TODO Add logic for RES,BAL and PUR
+                //TODO Add logic for RES,BAL and PUR -- COMMISSION  AND UPFRONTS!!!!!
 
                 for (var i = 1; i <= _input.NoOfInstallments; i++)
                 {
@@ -175,7 +96,8 @@ namespace KBS.Portals.Calculator.Logic
                 }
                 if (dSumOfPayments > 0)
                 {
-                    var dealCost = Convert.ToDouble(_input.FinanceAmount) - Convert.ToDouble(_input.UpFrontValue);
+                    //TODO GAVIN should we add commission to deal Cost to get get full calculation????
+                    var dealCost = Convert.ToDouble(_input.FinanceAmount) - Convert.ToDouble(_input.UpFrontValue);//GC + Convert.ToDouble(_input.Commission);
                     _input.Installment = Math.Round(Convert.ToDecimal((dealCost - dModifyDocFee) / dSumOfPayments),2);
                     _input.TotalSchedule = _input.TotalSchedule + (_input.Installment * _input.NoOfInstallments);
                 }

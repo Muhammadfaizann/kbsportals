@@ -5,91 +5,91 @@ using NUnit.Framework;
 
 namespace KBS.Portals.Calculator.Logic.Tests
 {
-    [TestFixture]    
-    public class APRInstallmentTests
+    [TestFixture]
+    public class IrrInstallmentTests
     {
         [Test]
         public void CanGetCalculatorFromFactory()
         {
-            var calc = CalculatorFactory.Create(CalculationType.APRInstallment, new CalculatorData());
+            var calc = CalculatorFactory.Create(CalculationType.IRRInstallment, new CalculatorData());
 
-            Assert.AreEqual(calc.GetType(), typeof(InstallmentApr));
+            Assert.AreEqual(calc.GetType(), typeof(InstallmentIrr));
         }
 
         [Test]
-        public void CalculateAPRInstallmentForSimpleInputs()
+        public void CalculateIrrInstallmentForSimpleInputs()
         {
             CalculatorData cd = new CalculatorData()
             {
                 FinanceAmount = 10000,
                 NoOfInstallments = 60,
-                APR = 9,
-                StartDate =  Convert.ToDateTime("14 Feb 2017"),
+                IRR = 9,
+                StartDate = Convert.ToDateTime("14 Feb 2017"),
                 NextDate = Convert.ToDateTime("14 Mar 2017")
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.APRInstallment, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.IRRInstallment, cd);
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(205.83, result.Installment );
+            Assert.AreEqual(207.53, result.Installment);
         }
         [Test]
-        public void CalculateAPRInstallmentForQuarterly()
+        public void CalculateIRRInstallmentForQuarterly()
         {
             CalculatorData cd = new CalculatorData()
             {
                 FinanceAmount = 10000,
                 NoOfInstallments = 60,
-                APR = 9,
+                IRR = 9,
                 StartDate = Convert.ToDateTime("14 Feb 2017"),
                 NextDate = Convert.ToDateTime("14 Mar 2017"),
                 Frequency = Frequency.Quarterly
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.APRInstallment, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.IRRInstallment, cd);
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(295.89, result.Installment);
+            Assert.AreEqual(300.85, result.Installment);
         }
         [Test]
-        public void CalculateAPRInstallmentForAnnual()
+        public void CalculateIRRInstallmentForAnnual()
         {
             CalculatorData cd = new CalculatorData()
             {
                 FinanceAmount = 10000,
                 NoOfInstallments = 6,
-                APR = 9,
+                IRR = 9,
                 StartDate = Convert.ToDateTime("14 Feb 2017"),
                 NextDate = Convert.ToDateTime("14 Mar 2017"),
                 Frequency = Frequency.Annual
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.APRInstallment, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.IRRInstallment, cd);
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(2058.91, result.Installment);
+            Assert.AreEqual(2059.46, result.Installment);
         }
         [Test]
-        public void CalculateAPRWithDocFee()
+        public void CalculateIRRWithDocFee()
         {
             CalculatorData cd = new CalculatorData()
             {
                 FinanceAmount = 10000,
                 NoOfInstallments = 60,
-                APR = 9,
+                IRR = 9,
                 StartDate = Convert.ToDateTime("14 Feb 2017"),
                 NextDate = Convert.ToDateTime("14 Mar 2017"),
-                DocFee =  250
+                DocFee = 250
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.APRInstallment, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.IRRInstallment, cd);
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(200.72, result.Installment);
+            Assert.AreEqual(207.53, result.Installment);
         }
 
         [Test]
@@ -99,19 +99,19 @@ namespace KBS.Portals.Calculator.Logic.Tests
             {
                 FinanceAmount = 36900,
                 NoOfInstallments = 24,
-                APR = 15.381418,
+                IRR = 11.191345,
                 StartDate = Convert.ToDateTime("22 Nov 2016"),
                 NextDate = Convert.ToDateTime("09 Dec 2016"),
                 UpFrontValue = 15900,
-                Commission  = 650,
+                Commission = 650,
                 DocFee = 0
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.APRInstallment, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.IRRInstallment, cd);
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(1006.78, result.Installment);
+            Assert.AreEqual(1006.77, result.Installment);
         }
     }
 }

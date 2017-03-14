@@ -42,12 +42,13 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="APRInstallmentCalculator.cs" />
+    <Compile Include="InstallmentApr.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="CalculatorFactory.cs" />
     <Compile Include="Enums\CalculationType.cs" />
     <Compile Include="Enums\Frequency.cs" />
     <Compile Include="ICalculator.cs" />
+    <Compile Include="InstallmentIrr.cs" />
     <Compile Include="Models\CalculatorData.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Enums\Product.cs" />

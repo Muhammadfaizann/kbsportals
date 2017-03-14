@@ -9,7 +9,7 @@ namespace KBS.Portals.Calculator.Logic
     {
         private static Dictionary<CalculationType, Type> _types = new Dictionary<CalculationType, Type>
         {
-            {CalculationType.APRInstallment, typeof(APRInstallmentCalculator) }
+            {CalculationType.APRInstallment, typeof(InstallmentApr) }
         };
 
         public static ICalculator Create(CalculationType type, CalculatorData input)
@@ -18,7 +18,11 @@ namespace KBS.Portals.Calculator.Logic
 
             if (type == CalculationType.APRInstallment)
             {
-                return new APRInstallmentCalculator(input);
+                return new InstallmentApr(input);
+            }
+            if (type == CalculationType.IRRInstallment)
+            {
+                return new InstallmentIrr(input);
             }
 
             throw new ArgumentException($"Type {type} is not supported");

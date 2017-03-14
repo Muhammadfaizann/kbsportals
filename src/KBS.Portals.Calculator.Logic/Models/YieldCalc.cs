@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using KBS.Portals.Calculator.Logic.Enums;
 
 namespace KBS.Portals.Calculator.Logic.Models
 {
@@ -10,9 +11,9 @@ namespace KBS.Portals.Calculator.Logic.Models
         public DateTime EntryDate { get; set; }
         public double Days { get; set; }
         public Boolean AffectYield { get; set; }
-        public String Type { get; set; }
+        public ScheduleType Type { get; set; }
 
-        public YieldCalc (decimal amount, DateTime entryDate, Boolean affectYield,String type)
+        public YieldCalc (decimal amount, DateTime entryDate, Boolean affectYield, ScheduleType type)
         {
             this.Amount = amount;
             this.EntryDate = entryDate;
