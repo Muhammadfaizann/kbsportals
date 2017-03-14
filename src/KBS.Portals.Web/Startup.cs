@@ -1,4 +1,5 @@
 ﻿using IdentityServer3.Core.Configuration;
+using IdentityServer3.Core.Services;
 using Microsoft.Owin;
 using Owin;
 
@@ -12,6 +13,9 @@ namespace KBS.Portals.Web
             var factory = new IdentityServerServiceFactory()
                 .UseInMemoryClients(Clients.Get())
                 .UseInMemoryScopes(Scopes.Get());
+
+            // TODO: Once we have Autofac in place, update this line
+            factory.UserService = new Registration<IUserService>(x => new UserService());
 
             var options = new IdentityServerOptions
             {
