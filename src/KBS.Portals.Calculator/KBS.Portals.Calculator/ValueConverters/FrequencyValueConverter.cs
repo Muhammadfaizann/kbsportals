@@ -13,12 +13,14 @@ namespace KBS.Portals.Calculator.ValueConverters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (int) value;
+            return (int) Array.IndexOf(Enum.GetValues(value.GetType()), value);
+                // Enum values are reassigned in Frequency.cs so we have to match indexes
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (Frequency) value;
+            return (Frequency) (Enum.GetValues(typeof(Frequency))).GetValue((int) value);
+                // Enum values are reassigned in Frequency.cs so we have to match indexes
         }
     }
 }

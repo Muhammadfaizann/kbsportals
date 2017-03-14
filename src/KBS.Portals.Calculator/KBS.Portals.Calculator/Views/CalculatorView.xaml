@@ -14,88 +14,88 @@
     <ContentView.Content>
         <ScrollView>
             <Label Text="{Binding Item1}" />
-            <Grid>
+            <Grid Padding="15">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition>*</ColumnDefinition>
-                    <ColumnDefinition>*</ColumnDefinition>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
-                    <RowDefinition>*</RowDefinition>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Text="Product" />
-                <Picker Grid.Row="0" Grid.Column="1" x:Name="ProductPicker" 
+                <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Product" />
+                <Picker Grid.Row="0" Grid.Column="1" x:Name="ProductPicker"
                         SelectedIndex="{Binding Item2.Product, Converter={StaticResource ProductValueConverter}}"
                         IsEnabled="True" />
-                <Label Grid.Row="1" Grid.Column="0" Text="FinanceAmount" />
-                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Item2.FinanceAmount}"
+                <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Finance Amount" />
+                <Entry Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding Item2.FinanceAmount}"
                        IsEnabled="True" />
-                <Label Grid.Row="2" Grid.Column="0" Text="Commission" />
-                <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Item2.Commission}"
+                <Label VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Commission" />
+                <Entry Keyboard="Numeric" Grid.Row="2" Grid.Column="1" Text="{Binding Item2.Commission}"
                        IsEnabled="True" />
-                <Label Grid.Row="3" Grid.Column="0" Text="UpFrontNo" />
-                <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Item2.UpFrontNo}"
+                <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Up Front No." />
+                <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding Item2.UpFrontNo}"
                        IsEnabled="True" />
-                <Label Grid.Row="4" Grid.Column="0" Text="UpFrontValue" />
-                <Entry Grid.Row="4" Grid.Column="1" Text="{Binding Item2.UpFrontValue}"
+                <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="Up Front Value" />
+                <Entry Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Text="{Binding Item2.UpFrontValue}"
                        IsEnabled="True" />
-                <Label Grid.Row="5" Grid.Column="0" Text="APR" />
-                <Entry Grid.Row="5" Grid.Column="1" Text="{Binding Item2.APR}" IsEnabled="True" />
-                <Label Grid.Row="6" Grid.Column="0" Text="IRR" />
-                <Entry Grid.Row="6" Grid.Column="1" Text="{Binding Item2.IRR}" IsEnabled="True" />
-                <Label Grid.Row="7" Grid.Column="0" Text="DocFee" />
-                <Entry Grid.Row="7" Grid.Column="1" Text="{Binding Item2.DocFee}" IsEnabled="True" />
-                <Label Grid.Row="8" Grid.Column="0" Text="PurFee" />
-                <Entry Grid.Row="8" Grid.Column="1" Text="{Binding Item2.PurFee}" IsEnabled="True" />
-                <Label Grid.Row="9" Grid.Column="0" Text="Ballon" />
-                <Entry Grid.Row="9" Grid.Column="1" Text="{Binding Item2.Ballon}" IsEnabled="True" />
-                <Label Grid.Row="10" Grid.Column="0" Text="Residual" />
-                <Entry Grid.Row="10" Grid.Column="1" Text="{Binding Item2.Residual}"
+                <Label VerticalTextAlignment="Center" Grid.Row="5" Grid.Column="0" Text="APR" />
+                <Entry Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding Item2.APR}" IsEnabled="True" />
+                <Label VerticalTextAlignment="Center" Grid.Row="6" Grid.Column="0" Text="IRR" />
+                <Entry Keyboard="Numeric" Grid.Row="6" Grid.Column="1" Text="{Binding Item2.IRR}" IsEnabled="True" />
+                <Label VerticalTextAlignment="Center" Grid.Row="7" Grid.Column="0" Text="Doc Fee" />
+                <Entry Keyboard="Numeric" Grid.Row="7" Grid.Column="1" Text="{Binding Item2.DocFee}" IsEnabled="True" />
+                <Label VerticalTextAlignment="Center" Grid.Row="8" Grid.Column="0" Text="Pur Fee" />
+                <Entry Keyboard="Numeric" Grid.Row="8" Grid.Column="1" Text="{Binding Item2.PurFee}" IsEnabled="True" />
+                <Label VerticalTextAlignment="Center" Grid.Row="9" Grid.Column="0" Text="Ballon" />
+                <Entry Keyboard="Numeric" Grid.Row="9" Grid.Column="1" Text="{Binding Item2.Ballon}" IsEnabled="True" />
+                <Label VerticalTextAlignment="Center" Grid.Row="10" Grid.Column="0" Text="Residual" />
+                <Entry Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding Item2.Residual}"
                        IsEnabled="True" />
-                <Label Grid.Row="11" Grid.Column="0" Text="StartDate" />
-                <DatePicker Grid.Row="11" Grid.Column="1"  
+                <Label VerticalTextAlignment="Center" Grid.Row="11" Grid.Column="0" Text="Start Date" />
+                <DatePicker Grid.Row="11" Grid.Column="1"
                             Date="{Binding Item2.StartDate}">
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                 </DatePicker>
-                <Label Grid.Row="12" Grid.Column="0" Text="NextDate" />
-                <DatePicker Grid.Row="12" Grid.Column="1"  
+                <Label VerticalTextAlignment="Center" Grid.Row="12" Grid.Column="0" Text="Next Date" />
+                <DatePicker Grid.Row="12" Grid.Column="1"
                             Date="{Binding Item2.NextDate}">
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                 </DatePicker>
-                <Label Grid.Row="13" Grid.Column="0" Text="Frequency" />
-                <Picker Grid.Row="13" Grid.Column="1" x:Name="FrequencyPicker" 
+                <Label VerticalTextAlignment="Center" Grid.Row="13" Grid.Column="0" Text="Frequency" />
+                <Picker Grid.Row="13" Grid.Column="1" x:Name="FrequencyPicker"
                         SelectedIndex="{Binding Item2.Frequency, Converter={StaticResource FrequencyValueConverter}}"
                         IsEnabled="True" />
-                <Label Grid.Row="14" Grid.Column="0" Text="Installment" />
-                <Entry Grid.Row="14" Grid.Column="1" Text="{Binding Item2.Installment}"
+                <Label VerticalTextAlignment="Center" Grid.Row="14" Grid.Column="0" Text="Installment" />
+                <Entry Keyboard="Numeric" Grid.Row="14" Grid.Column="1" Text="{Binding Item2.Installment}"
                        IsEnabled="True" />
-                <Label Grid.Row="15" Grid.Column="0" Text="Charges" />
-                <Entry Grid.Row="15" Grid.Column="1" Text="{Binding Item2.Charges}"
+                <Label VerticalTextAlignment="Center" Grid.Row="15" Grid.Column="0" Text="Charges" />
+                <Entry Keyboard="Numeric" Grid.Row="15" Grid.Column="1" Text="{Binding Item2.Charges}"
                        IsEnabled="True" />
-                <Label Grid.Row="16" Grid.Column="0" Text="Term" />
-                <Entry Grid.Row="16" Grid.Column="1" Text="{Binding Item2.Term}" IsEnabled="True" />
-                <Label Grid.Row="17" Grid.Column="0" Text="TotalCost" />
-                <Entry Grid.Row="17" Grid.Column="1" Text="{Binding Item2.TotalCost}"
+                <Label VerticalTextAlignment="Center" Grid.Row="16" Grid.Column="0" Text="Term" />
+                <Entry Keyboard="Numeric" Grid.Row="16" Grid.Column="1" Text="{Binding Item2.Term}" IsEnabled="True" />
+                <Label VerticalTextAlignment="Center" Grid.Row="17" Grid.Column="0" Text="Total Cost" />
+                <Entry Keyboard="Numeric" Grid.Row="17" Grid.Column="1" Text="{Binding Item2.TotalCost}"
                        IsEnabled="True" />
-                <Label Grid.Row="18" Grid.Column="0" Text="TotalSchedule" />
-                <Entry Grid.Row="18" Grid.Column="1" Text="{Binding Item2.TotalSchedule}"
+                <Label VerticalTextAlignment="Center" Grid.Row="18" Grid.Column="0" Text="Total Schedule" />
+                <Entry Keyboard="Numeric" Grid.Row="18" Grid.Column="1" Text="{Binding Item2.TotalSchedule}"
                        IsEnabled="True" />
             </Grid>
         </ScrollView>

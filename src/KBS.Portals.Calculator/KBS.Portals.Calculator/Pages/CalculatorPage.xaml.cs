@@ -20,9 +20,10 @@ namespace KBS.Portals.Calculator.Pages
             InitializeComponent();
             var calculatorModel = new CalculatorModel()
             {
-                Frequency = Frequency.Annual,
+                Product = Product.Lease,
+                Frequency = Frequency.Monthly,
                 StartDate = DateTime.Today,
-                NextDate = DateTime.Today.AddYears(1)
+                NextDate = DateTime.Today.AddMonths(1)
             };
             CalculatorCarousel.ItemsSource = new List<Tuple<CalculationType, CalculatorModel>>
             {
