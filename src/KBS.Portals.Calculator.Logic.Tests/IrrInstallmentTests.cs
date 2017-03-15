@@ -92,6 +92,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             Assert.AreEqual(207.53, result.Installment);
         }
 
+       // [Ignore("Test is currently failing as the impl doesn't seem to take account of commissions yet.")]
         [Test]
         public void CapitalFlow_1()
         {

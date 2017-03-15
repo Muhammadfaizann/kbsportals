@@ -5,18 +5,27 @@ using KBS.Portals.Calculator.Logic.Models;
 
 namespace KBS.Portals.Calculator.Logic
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="KBS.Portals.Calculator.Logic.ICalculator" />
     public abstract class Calculator : ICalculator
     {
         protected const int AccountDays = 365;
 
         protected SortedDictionary<SortKey, YieldCalc> YieldCalcChron;
-           
-        protected CalculatorData Input { get; set; }
+        protected CalculatorData Input;
+
         public List<string> ErrorMessages { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Calculator"/> class.
+        /// </summary>
+        /// <param name="input">The input.</param>
         protected Calculator(CalculatorData input)
         {
             Input = input;
+
             ErrorMessages = new List<string>();
 
             YieldCalcChron = new SortedDictionary<SortKey, YieldCalc>();
@@ -24,30 +33,27 @@ namespace KBS.Portals.Calculator.Logic
 
         public CalculatorData Calculate()
         {
-            Input.Schedules = new List<Schedule>();
             if (Input.DocFee > 0)
             {
-                Input.Schedules.Add(new Schedule(0, ScheduleType.DOC, 1, Input.Frequency, Input.DocFee,
-                    Input.NextDate));
+                Input.AddSchedule(0, ScheduleType.DOC, 1, Input.Frequency, Input.DocFee, Input.NextDate);
             }
             if (Input.NoOfInstallments > 0)
             {
-                Input.Schedules.Add(new Schedule(1, ScheduleType.INS, Input.NoOfInstallments, Input.Frequency, Input.Installment, Input.NextDate));
+                Input.AddSchedule(1, ScheduleType.INS, Input.NoOfInstallments, Input.Frequency, Input.Installment, Input.NextDate);
             }
             if (Input.Ballon > 0)
             {
-                Input.Schedules.Add(new Schedule(2, ScheduleType.BAL, 1, Input.Frequency, Input.Ballon,
-                    Input.NextDate));
+                Input.AddSchedule(2, ScheduleType.BAL, 1, Input.Frequency, Input.Ballon,Input.NextDate);
             }
             if (Input.Residual > 0)
             {
-                Input.Schedules.Add(new Schedule(3, ScheduleType.RES, 1, Input.Frequency, Input.Residual,
-                    Input.NextDate));
+                Input.AddSchedule(3, ScheduleType.RES, 1, Input.Frequency, Input.Residual, Input.NextDate);
             }
             if (Input.PurchaseFee > 0)
             {
-                Input.Schedules.Add(new Schedule(4, ScheduleType.RES, 1, Input.Frequency, Input.PurchaseFee,
-                    Input.NextDate));
+                Input.AddSchedule(4, ScheduleType.RES, 1, Input.Frequency, Input.PurchaseFee, Input.NextDate);
+                //TODO: Ask Gary is type=RES a bug in teh above line.
+                //TODO: Ask Gary if using 1,2,3,4 for the serials here is a bug since they may not be contiguous.
             }
 
             BuildChron();
@@ -57,7 +63,7 @@ namespace KBS.Portals.Calculator.Logic
             return Input;
         }
 
-        protected abstract void CalculateImplementation();
+        internal abstract void CalculateImplementation();
 
         public void Reload(CalculatorData input)
         {

@@ -11,7 +11,7 @@ namespace KBS.Portals.Calculator.Logic
     {
         internal InstallmentIrr(CalculatorData input) : base(input) { }
 
-        protected override void CalculateImplementation()
+        internal override void CalculateImplementation()
         {
             double sNpv = 0;
             var date = default(DateTime);

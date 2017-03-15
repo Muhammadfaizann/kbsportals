@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="KBS.Portals.Calculator.Logic.Models.CalculatorData">
+    <Position X="6.5" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQGAgAAAAKAAIEBQAAAAwAgAMAGAAABAAAAAMAgCAA=</HashCode>
+      <FileName>Models\CalculatorData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KBS.Portals.Calculator.Logic.Models.SortKey" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAgAAAAAAAABAAAIABAAAAAAAAAiA=</HashCode>
+      <FileName>Models\SortKey.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="KBS.Portals.Calculator.Logic.Models.YieldCalc" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAACAAAAAAAAAQQAAAAAAAAA=</HashCode>
+      <FileName>Models\YieldCalc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KBS.Portals.Calculator.Logic.Calculator">
+    <Position X="3.25" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABACAAACAAAAAAAAoAAECQAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Calculator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Input" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="YieldCalcChron" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="KBS.Portals.Calculator.Logic.CalculatorFactory">
+    <Position X="1.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>CalculatorFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KBS.Portals.Calculator.Logic.InstallmentApr">
+    <Position X="4" Y="8" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstallmentApr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KBS.Portals.Calculator.Logic.InstallmentIrr">
+    <Position X="1.25" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstallmentIrr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="KBS.Portals.Calculator.Logic.ICalculator" Collapsed="true">
+    <Position X="9" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>ICalculator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

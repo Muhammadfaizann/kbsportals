@@ -10,8 +10,57 @@ namespace KBS.Portals.Calculator.Logic
     public sealed class InstallmentApr : Calculator
     {
         internal InstallmentApr(CalculatorData input) : base(input) { }
-        
-        protected override void CalculateImplementation()
+
+        internal override void CalculateImplementation()
+        {
+            //var nextDate = default(DateTime);
+            //double dtk;
+            //var apr = Input.APR;
+            //double interim;
+            //double dSumOfPayments = 0;
+            //double dModifyDocFee = 0;
+            //Dim cLoanAmount As Decimal
+            //nextDate = Input.NextDate;
+            //interim = (nextDate - Input.StartDate).TotalDays;
+            //dtk = Math.Round((interim / AccountDays),9);
+            //var iFrequency = (int)Enum.Parse(typeof(Frequency), Enum.GetName(typeof(Frequency), Input.Frequency));
+            //All above can be summarised on next 4 lines.
+
+
+            DateTime nextDate = Input.NextDate;
+            int iFrequency = (int)Input.Frequency;
+
+            double interim = (nextDate - Input.StartDate).TotalDays,
+                dtk = Math.Round(interim / AccountDays, 9),
+                dSumOfPayments = 0,
+                dModifyDocFee = 0;
+
+            if (Input.DocFee > 0)
+            {
+                dModifyDocFee = Math.Round(Convert.ToDouble(Input.DocFee) / Math.Pow((1 + Input.APR / 100), dtk), 9);
+            }
+            
+            //TODO Add logic for RES,BAL and PUR -- COMMISSION  AND UPFRONTS!!!!!
+
+            for (var i = 1; i <= Input.NoOfInstallments; i++)
+            {
+                interim = (nextDate - Input.StartDate).TotalDays;
+                dtk = Math.Round((interim / AccountDays), 9);
+
+                dSumOfPayments = Math.Round(dSumOfPayments + 1 / Math.Pow((1 + Input.APR / 100), dtk), 9);
+                
+                nextDate = nextDate.AddMonths(iFrequency);
+            }
+            if (dSumOfPayments > 0)
+            {
+                //TODO GAVIN should we add commission to deal Cost to get get full calculation????
+                var dealCost = Convert.ToDouble(Input.FinanceAmount) - Convert.ToDouble(Input.UpFrontValue);//GC + Convert.ToDouble(Input.Commission);
+                Input.Installment = Math.Round(Convert.ToDecimal((dealCost - dModifyDocFee) / dSumOfPayments), 2);
+                Input.TotalSchedule = Input.TotalSchedule + (Input.Installment * Input.NoOfInstallments);
+            }
+        }
+
+        private void CalculateImplementationOldPreRefactor()
         {
             var nextDate = default(DateTime);
             double dtk;
