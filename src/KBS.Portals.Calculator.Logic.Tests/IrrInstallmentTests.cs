@@ -14,6 +14,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             var calc = CalculatorFactory.Create(CalculationType.IRRInstallment, new CalculatorData());
 
             Assert.AreEqual(calc.GetType(), typeof(InstallmentIrr));
+            
         }
 
         [Test]

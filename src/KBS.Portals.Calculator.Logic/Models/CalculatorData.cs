@@ -5,6 +5,9 @@ using KBS.Portals.Calculator.Logic.Util;
 
 namespace KBS.Portals.Calculator.Logic.Models
 {
+    /// <summary>
+    /// Model class for capturing settings required to perform a calculation. Acts as both an input and output model to the <see cref="KBS.Portals.Calculator.Logic.ICalculator"/>
+    /// </summary>
     [DynamicRequire]
     public class CalculatorData
     {
@@ -15,7 +18,7 @@ namespace KBS.Portals.Calculator.Logic.Models
         }
 
         public Product Product { get; set; } // will dictate data elemt validation (e.g HP must have a PurFee)
-        public CalculationType CalculationType { get; set; }
+        public CalculationType CalculationType { get; set; }//TODO: This feels smelly putting the type on the poco when it's an external requirement. What happens if someone reloads an already instantiated calculator with the wrong calculator data type
 
 
         public decimal FinanceAmount { get; set; }
@@ -35,12 +38,26 @@ namespace KBS.Portals.Calculator.Logic.Models
         public DateTime StartDate { get; set; }
         public DateTime NextDate { get; set; }
         public Frequency Frequency { get; set; }
-//        public IEnumerable<Schedule> Schedules { get; set; } // Here for future useage by KBS to allow scheduels to be added
-        public List<Schedule> Schedules { get; set; } // Here for future useage by KBS to allow scheduels to be added
+        public List<Schedule> Schedules { get; private set; } // Here for future useage by KBS to allow scheduels to be added
 
         public decimal Charges { get; set; }
         public decimal TotalCost { get; set; }
         public decimal TotalSchedule { get; set; }
+
+        public void AddSchedule(int serial, ScheduleType type, int counts, Frequency frequency, decimal amount, DateTime nextDate)
+        {
+            AddSchedule(new Schedule(serial, type, counts, frequency,amount, nextDate));
+        }
+
+        public void AddSchedule(Schedule schedule)
+        {
+            if (Schedules == null)
+            {
+                Schedules = new List<Schedule>();
+            }
+
+            Schedules.Add(schedule);
+        }
 
         
     }

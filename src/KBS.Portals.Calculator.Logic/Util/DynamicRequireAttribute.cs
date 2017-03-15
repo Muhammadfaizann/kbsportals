@@ -22,7 +22,7 @@ namespace KBS.Portals.Calculator.Logic.Util
                 if (cd.FinanceAmount <= 0)
                     return new ValidationResult("A positive finance amount is required.");
             }
-           if (cd.CalculationType == CalculationType.IRRInstallment)
+            if (cd.CalculationType == CalculationType.IRRInstallment)
             {
                 if (cd.NoOfInstallments <= 1)
                     return new ValidationResult("A term of 1 or greater is required.");
