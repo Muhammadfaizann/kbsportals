@@ -33,25 +33,26 @@ namespace KBS.Portals.Calculator.Logic
 
         public CalculatorData Calculate()
         {
+            int i = 0;
             if (Input.DocFee > 0)
             {
-                Input.AddSchedule(0, ScheduleType.DOC, 1, Input.Frequency, Input.DocFee, Input.NextDate);
+                Input.AddSchedule(i++, ScheduleType.DOC, 1, Input.Frequency, Input.DocFee, Input.NextDate);
             }
             if (Input.NoOfInstallments > 0)
             {
-                Input.AddSchedule(1, ScheduleType.INS, Input.NoOfInstallments, Input.Frequency, Input.Installment, Input.NextDate);
+                Input.AddSchedule(i++, ScheduleType.INS, Input.NoOfInstallments, Input.Frequency, Input.Installment, Input.NextDate);
             }
             if (Input.Ballon > 0)
             {
-                Input.AddSchedule(2, ScheduleType.BAL, 1, Input.Frequency, Input.Ballon,Input.NextDate);
+                Input.AddSchedule(i++, ScheduleType.BAL, 1, Input.Frequency, Input.Ballon,Input.NextDate);
             }
             if (Input.Residual > 0)
             {
-                Input.AddSchedule(3, ScheduleType.RES, 1, Input.Frequency, Input.Residual, Input.NextDate);
+                Input.AddSchedule(i++, ScheduleType.RES, 1, Input.Frequency, Input.Residual, Input.NextDate);
             }
             if (Input.PurchaseFee > 0)
             {
-                Input.AddSchedule(4, ScheduleType.RES, 1, Input.Frequency, Input.PurchaseFee, Input.NextDate);
+                Input.AddSchedule(i++, ScheduleType.RES, 1, Input.Frequency, Input.PurchaseFee, Input.NextDate);
                 //TODO: Ask Gary is type=RES a bug in teh above line.
                 //TODO: Ask Gary if using 1,2,3,4 for the serials here is a bug since they may not be contiguous.
             }

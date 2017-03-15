@@ -7,7 +7,7 @@ namespace KBS.Portals.Calculator.Logic.Models
     {
         public decimal Amount { get; set; }
         public DateTime EntryDate { get; set; }
-        public double Days { get; set; } //TODO Ask Gary about this variable
+        public double Days { get; set; }
         public bool AffectYield { get; set; }
         public ScheduleType Type { get; set; }
 

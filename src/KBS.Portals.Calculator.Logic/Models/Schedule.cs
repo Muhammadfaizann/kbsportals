@@ -10,7 +10,7 @@ namespace KBS.Portals.Calculator.Logic.Models
         public int Counts { get; set; }
         public Frequency Frequency { get; set; }
         public decimal Amount { get; set; }
-        public decimal Maintenance { get; set; } //TODO: Ask Gary... this doesn't appear to be used.
+        public decimal Maintenance { get; set; } 
         public DateTime NextDate { get; set; }
 
         public Schedule(int serial, ScheduleType type, int counts, Frequency frequency, decimal amount, DateTime nextDate)

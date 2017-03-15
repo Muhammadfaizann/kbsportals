@@ -48,6 +48,5 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             Assert.AreEqual(expected, isValid);
         }
-
     }
 }

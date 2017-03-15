@@ -2,8 +2,6 @@
 
 namespace KBS.Portals.Calculator.Logic.Enums
 {
-
-    ///TODO: Get proper descriptions from Gary for the following.
     public enum ScheduleType
     {
         [Display(Description = "Documentation Fee")]
