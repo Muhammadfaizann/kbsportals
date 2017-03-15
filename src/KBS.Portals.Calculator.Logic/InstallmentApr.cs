@@ -75,7 +75,9 @@ namespace KBS.Portals.Calculator.Logic
                 {
                     interim = (nextDate - _input.StartDate).TotalDays;
                     dtk = Math.Round((interim / AccountDays), 9);
-                    dSumOfPayments = Math.Round(dSumOfPayments + 1 / Math.Pow((1 + apr / 100), dtk),9);
+                    dSumOfPayments = dSumOfPayments + 1 / Math.Pow((1 + apr / 100), dtk); // dSumOfPayments + 1 / (1 + dAPR / 100) ^ dTK =		dSumOfPayments	0.993358473	Double
+
+                    dSumOfPayments = Math.Round(dSumOfPayments , 9);
 
                     //if (bWriteCalc == true)
                     //    {

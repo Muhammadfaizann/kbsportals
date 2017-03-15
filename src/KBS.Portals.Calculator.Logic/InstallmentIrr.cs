@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Runtime.InteropServices.ComTypes;
 using KBS.Portals.Calculator.Logic.Enums;
 using KBS.Portals.Calculator.Logic.Models;
 
@@ -60,6 +60,8 @@ namespace KBS.Portals.Calculator.Logic
             var date = default(DateTime);
             var loopCount = 0;
             double lastDays = 0;
+            var bFindUpfront = false;
+
             var lastKey = new SortKey(default(DateTime), 0);
 
             try
@@ -69,6 +71,9 @@ namespace KBS.Portals.Calculator.Logic
 
                 double inc;
                 double amount;
+                if (_input.UpFrontNo > 0 && _input.UpFrontValue == 0)
+                {
+                    bFindUpfront = true;}
 
                 foreach (var entry in YieldCalcChron)
                 {
@@ -85,7 +90,14 @@ namespace KBS.Portals.Calculator.Logic
                     entry.Value.Days = (entry.Value.EntryDate - date).TotalDays;
                 }
 
-                amount = Math.Round(Convert.ToDouble(_input.FinanceAmount / (_input.NoOfInstallments + _input.UpFrontNo)), 4);
+                if (bFindUpfront)
+                {
+                    amount = Convert.ToDouble(_input.TotalCost / (_input.NoOfInstallments + _input.UpFrontNo));
+                }
+                else
+                {
+                    amount = Convert.ToDouble(_input.TotalCost / _input.NoOfInstallments );
+                }
                 inc = amount / 2;
                 do
                 {
@@ -101,7 +113,7 @@ namespace KBS.Portals.Calculator.Logic
                         }
                     }
 
-                    if (_input.UpFrontNo > 0)
+                    if (bFindUpfront)
                     {
                         if (sNpv > 0)
                         {
@@ -183,11 +195,6 @@ namespace KBS.Portals.Calculator.Logic
                 YieldCalcChron.Clear();
                 var amount = -((_input.TotalSchedule) - (_input.Charges));
 
-                //TODO GAVIN We need a debug on old routine to see what should happen here, Only when I add the following override does calc work
-                //first step I dont know if we need
-                // need to confimr i got this right
-                amount = - _input.FinanceAmount;
-
                 YieldCalcChron.Add(new SortKey(_input.StartDate, serial), new YieldCalc(amount, _input.StartDate, true, ScheduleType.FIN));
                 serial++;
                 if (_input.Commission > 0)
@@ -250,7 +257,10 @@ namespace KBS.Portals.Calculator.Logic
                 }
             }
             _input.TotalSchedule = total;
-            _input.Charges = _input.TotalCost - total;
+            _input.TotalCost = _input.FinanceAmount + _input.Commission - _input.UpFrontValue;
+            _input.Charges = _input.TotalSchedule - _input.TotalCost;
+            // if no startdate use today
+            //if (_input.StartDate.CompareTo(default(DateTime)) > 1) {  _input.StartDate = DateTime.Today;}
         }
 
 

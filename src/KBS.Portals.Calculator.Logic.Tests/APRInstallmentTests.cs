@@ -92,8 +92,9 @@ namespace KBS.Portals.Calculator.Logic.Tests
             Assert.AreEqual(200.72, result.Installment);
         }
 
+
         [Test]
-        public void CapitalFlow_1()
+        public void CapitalFlowAPR_1()
         {
             CalculatorData cd = new CalculatorData()
             {
@@ -102,8 +103,9 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 APR = 15.381418,
                 StartDate = Convert.ToDateTime("22 Nov 2016"),
                 NextDate = Convert.ToDateTime("09 Dec 2016"),
+                UpFrontNo = 1,
                 UpFrontValue = 15900,
-                Commission  = 650,
+                Commission = 650,
                 DocFee = 0
             };
 
@@ -112,6 +114,29 @@ namespace KBS.Portals.Calculator.Logic.Tests
             var result = calc.Calculate();
 
             Assert.AreEqual(1006.78, result.Installment);
+        }
+
+        [Test]
+        public void CapitalFlowAPR_3()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                FinanceAmount = 30750,
+                NoOfInstallments = 24,
+                APR = 15.381418,
+                StartDate = Convert.ToDateTime("22 Nov 2016"),
+                NextDate = Convert.ToDateTime("09 Dec 2016"),
+                UpFrontNo = 1,
+                UpFrontValue = 16750,
+                Commission = 350,
+                DocFee = 0
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.APRInstallment, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(671.19, result.Installment);
         }
     }
 }
