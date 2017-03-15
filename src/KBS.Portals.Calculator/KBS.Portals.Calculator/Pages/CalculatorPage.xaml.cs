@@ -32,6 +32,18 @@ namespace KBS.Portals.Calculator.Pages
                 Tuple.Create(CalculationType.Rate, calculatorModel)
             };
             CalculatorCarousel.Position = 0;
+            UpdateTitle();
+            CalculatorCarousel.PositionSelected += PositionSelected;
+        }
+
+        private void UpdateTitle()
+        {
+            Title = (CalculatorCarousel.ItemsSource[CalculatorCarousel.Position] as Tuple<CalculationType, CalculatorModel>).Item1.ToString();
+        }
+
+        private void PositionSelected(object sender, EventArgs eventArgs)
+        {
+            UpdateTitle();
         }
     }
 }
