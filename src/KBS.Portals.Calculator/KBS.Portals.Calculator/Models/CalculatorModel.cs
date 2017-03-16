@@ -20,18 +20,6 @@ namespace KBS.Portals.Calculator.Models
             }
         }
 
-        private CalculationType _calcType;
-
-        public CalculationType CalcType
-        {
-            get { return _calcType; }
-            set
-            {
-                _calcType = value;
-                OnPropertyChanged();
-            }
-        }
-
         private decimal _financeAmount;
 
         public decimal FinanceAmount
