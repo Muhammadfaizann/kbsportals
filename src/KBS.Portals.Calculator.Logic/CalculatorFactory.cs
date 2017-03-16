@@ -24,6 +24,10 @@ namespace KBS.Portals.Calculator.Logic
             {
                 return new InstallmentIrr(input);
             }
+            if (type == CalculationType.Rate)
+            {
+                return new Rate(input);
+            }
 
             throw new ArgumentException($"Type {type} is not supported");
         }

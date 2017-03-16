@@ -70,6 +70,7 @@
     <Compile Include="EnumTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IrrInstallmentTests.cs" />
+    <Compile Include="RateTests.cs" />
     <Compile Include="SortKeyTests.cs" />
   </ItemGroup>
   <ItemGroup>

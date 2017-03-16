@@ -33,29 +33,33 @@ namespace KBS.Portals.Calculator.Logic
 
         public CalculatorData Calculate()
         {
+            var i = 0;
             if (Input.DocFee > 0)
             {
-                Input.AddSchedule(0, ScheduleType.DOC, 1, Input.Frequency, Input.DocFee, Input.NextDate);
+                Input.AddSchedule(i, ScheduleType.DOC, 1, Input.Frequency, Input.DocFee, Input.NextDate);
+                i++;
             }
             if (Input.NoOfInstallments > 0)
             {
-                Input.AddSchedule(1, ScheduleType.INS, Input.NoOfInstallments, Input.Frequency, Input.Installment, Input.NextDate);
+                Input.AddSchedule(i, ScheduleType.INS, Input.NoOfInstallments, Input.Frequency, Input.Installment, Input.NextDate);
+                i++;
             }
             if (Input.Ballon > 0)
             {
-                Input.AddSchedule(2, ScheduleType.BAL, 1, Input.Frequency, Input.Ballon,Input.NextDate);
+                Input.AddSchedule(i, ScheduleType.BAL, 1, Input.Frequency, Input.Ballon,Input.NextDate);
+                i++;
             }
             if (Input.Residual > 0)
             {
-                Input.AddSchedule(3, ScheduleType.RES, 1, Input.Frequency, Input.Residual, Input.NextDate);
+                Input.AddSchedule(i, ScheduleType.RES, 1, Input.Frequency, Input.Residual, Input.NextDate);
+                i++;
             }
             if (Input.PurchaseFee > 0)
             {
-                Input.AddSchedule(4, ScheduleType.RES, 1, Input.Frequency, Input.PurchaseFee, Input.NextDate);
-                //TODO: Ask Gary is type=RES a bug in teh above line.
-                //TODO: Ask Gary if using 1,2,3,4 for the serials here is a bug since they may not be contiguous.
+                Input.AddSchedule(i,ScheduleType.PUR, 1, Input.Frequency, Input.PurchaseFee, Input.NextDate);
             }
 
+            //TODO Gavin This is NOT used in APR Calc
             BuildChron();
 
             CalculateImplementation();
@@ -143,7 +147,7 @@ namespace KBS.Portals.Calculator.Logic
                 }
             }
             Input.TotalSchedule = total;
-            Input.TotalCost = Input.FinanceAmount + Input.Commission - Input.UpFrontValue;
+            Input.TotalCost = Input.FinanceAmount + Input.Commission - (Input.UpFrontValue * Input.UpFrontNo);
             Input.Charges = Input.TotalSchedule - Input.TotalCost;
         }
     }

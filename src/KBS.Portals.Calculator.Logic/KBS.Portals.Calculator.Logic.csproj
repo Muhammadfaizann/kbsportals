@@ -57,6 +57,7 @@
     <Compile Include="Models\YieldCalc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enums\ScheduleType.cs" />
+    <Compile Include="Rate.cs" />
     <Compile Include="Util\DynamicRequireAttribute.cs" />
     <Compile Include="Util\Extensions.cs" />
   </ItemGroup>
