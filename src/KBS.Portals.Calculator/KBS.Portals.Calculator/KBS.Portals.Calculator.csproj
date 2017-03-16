@@ -39,6 +39,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviours\BaseEntryBehavior.cs" />
+    <Compile Include="Behaviours\PositiveNumberBehavior.cs" />
     <Compile Include="Enums\NavigationContainerNames.cs" />
     <Compile Include="Models\CalculatorModel.cs" />
     <Compile Include="PageModels\CalculatorPageModel.cs" />

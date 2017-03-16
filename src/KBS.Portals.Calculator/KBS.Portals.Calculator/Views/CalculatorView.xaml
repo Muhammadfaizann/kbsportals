@@ -4,6 +4,7 @@
              xmlns:calc="clr-namespace:KBS;assembly=KBS.Portals.Calculator"
              xmlns:enums="clr-namespace:KBS.Portals.Calculator.Logic.Enums;assembly=KBS.Portals.Calculator.Logic"
              xmlns:valueConverters="clr-namespace:KBS.Portals.Calculator.ValueConverters;assembly=KBS.Portals.Calculator"
+             xmlns:behaviors="clr-namespace:KBS.Portals.Calculator.Behaviours;assembly=KBS.Portals.Calculator"
              x:Class="KBS.Portals.Calculator.Views.CalculatorView">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -16,8 +17,8 @@
             <Label Text="{Binding Item1}" />
             <Grid Padding="15">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -46,20 +47,28 @@
                         IsEnabled="True" />
                 <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Finance Amount" />
                 <Entry Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding Item2.FinanceAmount}"
-                       IsEnabled="True" />
+                       IsEnabled="True">
+                    <Entry.Behaviors>
+                        <behaviors:PositiveNumberBehavior />
+                    </Entry.Behaviors>
+                </Entry>
                 <Label VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Commission" />
                 <Entry Keyboard="Numeric" Grid.Row="2" Grid.Column="1" Text="{Binding Item2.Commission}"
                        IsEnabled="True" />
                 <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Up Front No." />
-                <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding Item2.UpFrontNo}"
-                       IsEnabled="True" />
+                <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" x:Name="UpFrontNo" Text="{Binding Item2.UpFrontNo}"
+                       IsEnabled="True">
+                    <Entry.Behaviors>
+                        <behaviors:PositiveNumberBehavior />
+                    </Entry.Behaviors>
+                </Entry>
                 <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="Up Front Value" />
-                <Entry Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Text="{Binding Item2.UpFrontValue}"
+                <Entry Keyboard="Numeric" Grid.Row="4" Grid.Column="1" x:Name="UpFrontValue" Text="{Binding Item2.UpFrontValue}"
                        IsEnabled="True" />
                 <Label VerticalTextAlignment="Center" Grid.Row="5" Grid.Column="0" Text="APR" />
-                <Entry Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding Item2.APR}" IsEnabled="True" />
+                <Entry Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding Item2.APR}" />
                 <Label VerticalTextAlignment="Center" Grid.Row="6" Grid.Column="0" Text="IRR" />
-                <Entry Keyboard="Numeric" Grid.Row="6" Grid.Column="1" Text="{Binding Item2.IRR}" IsEnabled="True" />
+                <Entry Keyboard="Numeric" Grid.Row="6" Grid.Column="1" Text="{Binding Item2.IRR}" x:Name="IRR" />
                 <Label VerticalTextAlignment="Center" Grid.Row="7" Grid.Column="0" Text="Doc Fee" />
                 <Entry Keyboard="Numeric" Grid.Row="7" Grid.Column="1" Text="{Binding Item2.DocFee}" IsEnabled="True" />
                 <Label VerticalTextAlignment="Center" Grid.Row="8" Grid.Column="0" Text="Pur Fee" />
@@ -84,7 +93,7 @@
                         SelectedIndex="{Binding Item2.Frequency, Converter={StaticResource FrequencyValueConverter}}"
                         IsEnabled="True" />
                 <Label VerticalTextAlignment="Center" Grid.Row="14" Grid.Column="0" Text="Installment" />
-                <Entry Keyboard="Numeric" Grid.Row="14" Grid.Column="1" Text="{Binding Item2.Installment}"
+                <Entry Keyboard="Numeric" Grid.Row="14" Grid.Column="1" x:Name="Installment" Text="{Binding Item2.Installment}"
                        IsEnabled="True" />
                 <Label VerticalTextAlignment="Center" Grid.Row="15" Grid.Column="0" Text="Charges" />
                 <Entry Keyboard="Numeric" Grid.Row="15" Grid.Column="1" Text="{Binding Item2.Charges}"
