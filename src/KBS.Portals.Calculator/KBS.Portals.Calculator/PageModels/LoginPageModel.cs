@@ -22,7 +22,7 @@ namespace KBS.Portals.Calculator.PageModels
                 return new Command(async () =>
                 {
                     LoggedIn = true;
-                    CoreMethods.SwitchOutRootNavigation(NavigationContainerNames.MainContainer);
+                    //CoreMethods.SwitchOutRootNavigation(NavigationContainerNames.MainContainer);
                     await CoreMethods.PushPageModel<CalculatorPageModel>();
                 });
             }

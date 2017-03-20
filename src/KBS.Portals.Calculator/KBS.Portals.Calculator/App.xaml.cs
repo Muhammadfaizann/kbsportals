@@ -11,9 +11,6 @@ namespace KBS.Portals.Calculator
         {
             var page = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
             var navContainer = new FreshNavigationContainer(page, NavigationContainerNames.AuthenticationContainer);
-            var mainContainer = new FreshMasterDetailNavigationContainer(NavigationContainerNames.MainContainer);
-            mainContainer.AddPage<CalculatorPageModel>("Calculate");
-            mainContainer.Init("Menu");
             MainPage = navContainer;
         }
 
