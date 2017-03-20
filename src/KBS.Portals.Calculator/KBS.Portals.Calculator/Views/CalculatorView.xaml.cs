@@ -13,6 +13,7 @@ namespace KBS.Portals.Calculator.Views
 {
     public partial class CalculatorView : ContentView
     {
+
         public CalculatorView()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace KBS.Portals.Calculator.Views
             {
                 var calcType = tuple.Item1;
                 IRR.IsEnabled = calcType == CalculationType.IRRInstallment;
-                Installment.IsEnabled = calcType == CalculationType.Rate;
+                Installment.IsEnabled = calcType == CalculationType.Rate;   
             }
             base.OnBindingContextChanged();
         }

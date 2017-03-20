@@ -5,11 +5,13 @@
              xmlns:enums="clr-namespace:KBS.Portals.Calculator.Logic.Enums;assembly=KBS.Portals.Calculator.Logic"
              xmlns:valueConverters="clr-namespace:KBS.Portals.Calculator.ValueConverters;assembly=KBS.Portals.Calculator"
              xmlns:behaviors="clr-namespace:KBS.Portals.Calculator.Behaviours;assembly=KBS.Portals.Calculator"
+             xmlns:customViews="clr-namespace:KBS.Portals.Calculator.CustomViews;assembly=KBS.Portals.Calculator"
              x:Class="KBS.Portals.Calculator.Views.CalculatorView">
     <ContentPage.Resources>
         <ResourceDictionary>
             <valueConverters:ProductValueConverter x:Key="ProductValueConverter" />
             <valueConverters:FrequencyValueConverter x:Key="FrequencyValueConverter" />
+            <valueConverters:CurrencyConverter x:Key="CurrencyConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentView.Content>
@@ -41,49 +43,70 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                
+
                 <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Product" />
                 <Picker Grid.Row="0" Grid.Column="1" x:Name="ProductPicker"
                         SelectedIndex="{Binding Item2.Product, Converter={StaticResource ProductValueConverter}}"
                         IsEnabled="True" />
-                
+
                 <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Finance Amount" />
-                <Entry Keyboard="Numeric" Grid.Row="1" Grid.Column="1" Text="{Binding Item2.FinanceAmount}"
-                       IsEnabled="True">
+                <customViews:FormattedEntry x:Name="FinanceAmount" Keyboard="Numeric" Grid.Row="1" Grid.Column="1"
+                                            Value="{Binding Item2.FinanceAmount}"
+                                            IsEnabled="True">
+                    <x:Arguments>
+                        <valueConverters:CurrencyConverter />
+                    </x:Arguments>
                     <Entry.Behaviors>
                         <behaviors:PositiveNumberBehavior />
                     </Entry.Behaviors>
-                </Entry>
+                </customViews:FormattedEntry>
 
-                <Label VerticalTextAlignment="Center" Grid.Row="13" Grid.Column="0" Text="Frequency" />
-                <Picker Grid.Row="13" Grid.Column="1" x:Name="FrequencyPicker"
+                <Label VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Frequency" />
+                <Picker Grid.Row="2" Grid.Column="1" x:Name="FrequencyPicker"
                         SelectedIndex="{Binding Item2.Frequency, Converter={StaticResource FrequencyValueConverter}}"
                         IsEnabled="True" />
 
-                <Label VerticalTextAlignment="Center" Grid.Row="16" Grid.Column="0" Text="Term" />
-                <Entry Keyboard="Numeric" Grid.Row="16" Grid.Column="1" Text="{Binding Item2.Term}" IsEnabled="True" />
+                <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Term" />
+                <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding Item2.Term}" IsEnabled="True" />
 
-                <Label VerticalTextAlignment="Center" Grid.Row="5" Grid.Column="0" Text="APR" />
-                <Entry Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Text="{Binding Item2.APR}" />
-                
-                <Label VerticalTextAlignment="Center" Grid.Row="6" Grid.Column="0" Text="IRR" />
-                <Entry Keyboard="Numeric" Grid.Row="6" Grid.Column="1" Text="{Binding Item2.IRR}" x:Name="IRR" />
+                <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="APR" />
+                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Value="{Binding Item2.APR}">
+                    <x:Arguments>
+                        <valueConverters:PercentageConverter />
+                    </x:Arguments>
+                </customViews:FormattedEntry>
 
-                <Label VerticalTextAlignment="Center" Grid.Row="14" Grid.Column="0" Text="Installment" />
-                <Entry Keyboard="Numeric" Grid.Row="14" Grid.Column="1" x:Name="Installment" Text="{Binding Item2.Installment}"
-                       IsEnabled="True" />
-                
-                
+                <Label VerticalTextAlignment="Center" Grid.Row="5" Grid.Column="0" Text="IRR" />
+                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Value="{Binding Item2.IRR}"
+                                            x:Name="IRR">
+                    <x:Arguments>
+                        <valueConverters:PercentageConverter />
+                    </x:Arguments>
+                </customViews:FormattedEntry>
+
+                <Label VerticalTextAlignment="Center" Grid.Row="6" Grid.Column="0" Text="Installment" />
+                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="6" Grid.Column="1" x:Name="Installment"
+                                            Value="{Binding Item2.Installment}"
+                                            IsEnabled="True">
+                    <x:Arguments>
+                        <valueConverters:CurrencyConverter />
+                    </x:Arguments>
+                    <Entry.Behaviors>
+                        <behaviors:PositiveNumberBehavior />
+                    </Entry.Behaviors>
+                </customViews:FormattedEntry>
+
+
                 <!-- Line break here -->
 
-                
-                <Label VerticalTextAlignment="Center" Grid.Row="11" Grid.Column="0" Text="Start Date" />
-                <DatePicker Grid.Row="11" Grid.Column="1"
+
+                <Label VerticalTextAlignment="Center" Grid.Row="7" Grid.Column="0" Text="Start Date" />
+                <DatePicker Grid.Row="7" Grid.Column="1"
                             Date="{Binding Item2.StartDate}">
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                 </DatePicker>
-                <Label VerticalTextAlignment="Center" Grid.Row="12" Grid.Column="0" Text="Next Date" />
-                <DatePicker Grid.Row="12" Grid.Column="1"
+                <Label VerticalTextAlignment="Center" Grid.Row="8" Grid.Column="0" Text="Next Date" />
+                <DatePicker Grid.Row="8" Grid.Column="1"
                             Date="{Binding Item2.NextDate}">
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                 </DatePicker>
@@ -91,46 +114,85 @@
 
                 <!-- Line break here -->
 
-                
-                <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Up Front No." />
-                <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" x:Name="UpFrontNo" Text="{Binding Item2.UpFrontNo}"
-                       IsEnabled="True">
-                    <Entry.Behaviors>
-                        <behaviors:PositiveNumberBehavior />
-                    </Entry.Behaviors>
-                </Entry>
-                
-                <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="Up Front Value" />
-                <Entry Keyboard="Numeric" Grid.Row="4" Grid.Column="1" x:Name="UpFrontValue" Text="{Binding Item2.UpFrontValue}"
-                       IsEnabled="True" />
-                
-                <Label VerticalTextAlignment="Center" Grid.Row="7" Grid.Column="0" Text="Doc Fee" />
-                <Entry Keyboard="Numeric" Grid.Row="7" Grid.Column="1" Text="{Binding Item2.DocFee}" IsEnabled="True" />
 
-                <Label VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Commission" />
-                <Entry Keyboard="Numeric" Grid.Row="2" Grid.Column="1" Text="{Binding Item2.Commission}"
-                       IsEnabled="True" />
-                
-                <Label VerticalTextAlignment="Center" Grid.Row="8" Grid.Column="0" Text="Pur Fee" />
-                <Entry Keyboard="Numeric" Grid.Row="8" Grid.Column="1" Text="{Binding Item2.PurFee}" IsEnabled="True" />
-                
-                <Label VerticalTextAlignment="Center" Grid.Row="9" Grid.Column="0" Text="Ballon" />
-                <Entry Keyboard="Numeric" Grid.Row="9" Grid.Column="1" Text="{Binding Item2.Ballon}" IsEnabled="True" />
-                
-                <Label VerticalTextAlignment="Center" Grid.Row="10" Grid.Column="0" Text="Residual" />
-                <Entry Keyboard="Numeric" Grid.Row="10" Grid.Column="1" Text="{Binding Item2.Residual}"
+                <Label VerticalTextAlignment="Center" Grid.Row="9" Grid.Column="0" Text="Up Front No." />
+                <Entry Keyboard="Numeric" Grid.Row="9" Grid.Column="1" x:Name="UpFrontNo"
+                       Text="{Binding Item2.UpFrontNo}"
                        IsEnabled="True" />
 
-                
+                <Label VerticalTextAlignment="Center" Grid.Row="10" Grid.Column="0" Text="Up Front Value" />
+                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="10" Grid.Column="1" x:Name="UpFrontValue"
+                                            Value="{Binding Item2.UpFrontValue}"
+                                            IsEnabled="True">
+                    <x:Arguments>
+                        <valueConverters:CurrencyConverter />
+                    </x:Arguments>
+                </customViews:FormattedEntry>
+
+                <Label VerticalTextAlignment="Center" Grid.Row="11" Grid.Column="0" Text="Doc Fee" />
+                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="11" Grid.Column="1"
+                                            Value="{Binding Item2.DocFee}" IsEnabled="True">
+                    <x:Arguments>
+                        <valueConverters:CurrencyConverter />
+                    </x:Arguments>
+                </customViews:FormattedEntry>
+
+                <Label VerticalTextAlignment="Center" Grid.Row="12" Grid.Column="0" Text="Commission" />
+                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="12" Grid.Column="1"
+                                            Value="{Binding Item2.Commission}"
+                                            IsEnabled="True">
+                    <x:Arguments>
+                        <valueConverters:CurrencyConverter />
+                    </x:Arguments>
+                </customViews:FormattedEntry>
+
+                <Label VerticalTextAlignment="Center" Grid.Row="13" Grid.Column="0" Text="Pur Fee" />
+                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="13" Grid.Column="1"
+                                            Value="{Binding Item2.PurFee}" IsEnabled="True">
+                    <x:Arguments>
+                        <valueConverters:CurrencyConverter />
+                    </x:Arguments>
+                </customViews:FormattedEntry>
+
+                <Label VerticalTextAlignment="Center" Grid.Row="14" Grid.Column="0" Text="Ballon" />
+                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="14" Grid.Column="1"
+                                            Value="{Binding Item2.Ballon}" IsEnabled="True">
+                    <x:Arguments>
+                        <valueConverters:CurrencyConverter />
+                    </x:Arguments>
+                </customViews:FormattedEntry>
+
+                <Label VerticalTextAlignment="Center" Grid.Row="15" Grid.Column="0" Text="Residual" />
+                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="15" Grid.Column="1"
+                                            Value="{Binding Item2.Residual}"
+                                            IsEnabled="True">
+                    <x:Arguments>
+                        <valueConverters:CurrencyConverter />
+                    </x:Arguments>
+                </customViews:FormattedEntry>
+
+
                 <!-- Line break here -->
+
+
+                <Label VerticalTextAlignment="Center" Grid.Row="16" Grid.Column="0" Text="Charges" />
+                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="16" Grid.Column="1"
+                                            Value="{Binding Item2.Charges}"
+                                            IsEnabled="True">
+                    <x:Arguments>
+                        <valueConverters:CurrencyConverter />
+                    </x:Arguments>
+                </customViews:FormattedEntry>
                 
-                
-                <Label VerticalTextAlignment="Center" Grid.Row="15" Grid.Column="0" Text="Charges" />
-                <Entry Keyboard="Numeric" Grid.Row="15" Grid.Column="1" Text="{Binding Item2.Charges}"
-                       IsEnabled="True" />
                 <Label VerticalTextAlignment="Center" Grid.Row="17" Grid.Column="0" Text="Total Cost" />
-                <Entry Keyboard="Numeric" Grid.Row="17" Grid.Column="1" Text="{Binding Item2.TotalCost}"
-                       IsEnabled="True" />
+                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="17" Grid.Column="1"
+                                            Value="{Binding Item2.TotalCost}"
+                                            IsEnabled="True">
+                    <x:Arguments>
+                        <valueConverters:CurrencyConverter />
+                    </x:Arguments>
+                </customViews:FormattedEntry>
+                
                 <Label VerticalTextAlignment="Center" Grid.Row="18" Grid.Column="0" Text="Total Schedule" />
                 <Entry Keyboard="Numeric" Grid.Row="18" Grid.Column="1" Text="{Binding Item2.TotalSchedule}"
                        IsEnabled="True" />
