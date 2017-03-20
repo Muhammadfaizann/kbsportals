@@ -12,6 +12,7 @@
             <valueConverters:ProductValueConverter x:Key="ProductValueConverter" />
             <valueConverters:FrequencyValueConverter x:Key="FrequencyValueConverter" />
             <valueConverters:CurrencyConverter x:Key="CurrencyConverter" />
+            <valueConverters:MandatoryForHPConverter x:Key="MandatoryForHPConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentView.Content>
@@ -69,8 +70,8 @@
                 <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Term" />
                 <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding Item2.Term}" IsEnabled="True" />
 
-                <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="APR" />
-                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Value="{Binding Item2.APR}">
+                <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="APR"/>
+                <customViews:FormattedEntry x:Name="APR" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Value="{Binding Item2.APR}">
                     <x:Arguments>
                         <valueConverters:PercentageConverter />
                     </x:Arguments>
@@ -147,8 +148,8 @@
                 </customViews:FormattedEntry>
 
                 <Label VerticalTextAlignment="Center" Grid.Row="13" Grid.Column="0" Text="Pur Fee" />
-                <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="13" Grid.Column="1"
-                                            Value="{Binding Item2.PurFee}" IsEnabled="True">
+                <customViews:FormattedEntry x:Name="PurFee"  Keyboard="Numeric" Grid.Row="13" Grid.Column="1"
+                                            Value="{Binding Item2.PurFee}">
                     <x:Arguments>
                         <valueConverters:CurrencyConverter />
                     </x:Arguments>
@@ -178,7 +179,7 @@
                 <Label VerticalTextAlignment="Center" Grid.Row="16" Grid.Column="0" Text="Charges" />
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="16" Grid.Column="1"
                                             Value="{Binding Item2.Charges}"
-                                            IsEnabled="True">
+                                            IsEnabled="False">
                     <x:Arguments>
                         <valueConverters:CurrencyConverter />
                     </x:Arguments>
@@ -187,7 +188,7 @@
                 <Label VerticalTextAlignment="Center" Grid.Row="17" Grid.Column="0" Text="Total Cost" />
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="17" Grid.Column="1"
                                             Value="{Binding Item2.TotalCost}"
-                                            IsEnabled="True">
+                                            IsEnabled="False">
                     <x:Arguments>
                         <valueConverters:CurrencyConverter />
                     </x:Arguments>
@@ -195,7 +196,7 @@
                 
                 <Label VerticalTextAlignment="Center" Grid.Row="18" Grid.Column="0" Text="Total Schedule" />
                 <Entry Keyboard="Numeric" Grid.Row="18" Grid.Column="1" Text="{Binding Item2.TotalSchedule}"
-                       IsEnabled="True" />
+                       IsEnabled="False" />
             </Grid>
         </ScrollView>
     </ContentView.Content>

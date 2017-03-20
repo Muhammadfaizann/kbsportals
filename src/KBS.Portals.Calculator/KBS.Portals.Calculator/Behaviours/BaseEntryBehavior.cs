@@ -15,12 +15,14 @@ namespace KBS.Portals.Calculator.Behaviours
         protected override void OnAttachedTo(Entry entry)
         {
             entry.TextChanged += OnEntryTextChanged;
+            OnEntryTextChanged(entry, null);
             base.OnAttachedTo(entry);
         }
 
         protected override void OnDetachingFrom(Entry entry)
         {
             entry.TextChanged -= OnEntryTextChanged;
+            entry.BackgroundColor = ValidColor;
             base.OnDetachingFrom(entry);
         }
 
