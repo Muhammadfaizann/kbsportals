@@ -10,11 +10,11 @@ using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator.ValueConverters
 {
-    class MandatoryForHPConverter : IValueConverter
+    class IsPositiveConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value as Product?) == Product.HirePurchase;
+            return (value as int?) > 0;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

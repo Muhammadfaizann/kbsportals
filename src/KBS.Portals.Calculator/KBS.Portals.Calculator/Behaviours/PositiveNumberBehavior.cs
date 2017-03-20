@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KBS.Portals.Calculator.CustomViews;
 using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator.Behaviours
@@ -12,7 +13,14 @@ namespace KBS.Portals.Calculator.Behaviours
         protected override bool IsValid(Entry entry)
         {
             decimal parsedDecimal;
-            decimal.TryParse(entry.Text, out parsedDecimal);
+            if (entry is FormattedEntry)
+            {
+                parsedDecimal = ((FormattedEntry) entry).Value;
+            }
+            else
+            {
+                decimal.TryParse(entry.Text, out parsedDecimal);
+            }
             return parsedDecimal > 0;
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KBS.Portals.Calculator.Behaviours;
+using KBS.Portals.Calculator.CustomViews;
 using KBS.Portals.Calculator.Logic.Enums;
 using KBS.Portals.Calculator.Models;
 using KBS.Portals.Calculator.ValueConverters;
@@ -29,6 +30,18 @@ namespace KBS.Portals.Calculator.Views
             }
             PositiveNumberBehavior = new PositiveNumberBehavior();
             ProductPicker.SelectedIndexChanged += ProductPickerOnSelectedIndexChanged;
+            UpFrontNo.TextChanged += UpFrontNoOnTextChanged;
+        }
+
+        private void UpFrontNoOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
+        {
+            var tuple = BindingContext as Tuple<CalculationType, CalculatorModel>;
+            if (tuple != null)
+            {
+                int value;
+                int.TryParse(textChangedEventArgs.NewTextValue, out value);
+                UpFrontValue.IsEnabled = tuple.Item1 == CalculationType.Rate && value > 0;
+            }
         }
 
         private void ProductPickerOnSelectedIndexChanged(object sender, EventArgs eventArgs)
