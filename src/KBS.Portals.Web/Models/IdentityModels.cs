@@ -8,7 +8,7 @@ namespace KBS.Portals.Web.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext() : base("DefaultConnection")
+        public ApplicationDbContext() : base("name=DefaultConnection")
         {
         }
 
