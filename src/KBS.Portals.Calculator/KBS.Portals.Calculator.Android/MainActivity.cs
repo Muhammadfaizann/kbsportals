@@ -10,15 +10,13 @@ using CarouselView.FormsPlugin.Android;
 
 namespace KBS.Portals.Calculator.Droid
 {
-    [Activity(Label = "KBS.Portals.Calculator", Icon = "@drawable/icon", Theme = "@android:style/Theme.Material.Light", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "KBS.Portals.Calculator", Icon = "@drawable/icon", Theme = "@android:style/Theme.Material.Light", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            CarouselViewRenderer.Init();    
             LoadApplication(new App());
         }
     }
