@@ -1,6 +1,7 @@
 ﻿using FreshMvvm;
 using KBS.Portals.Calculator.Enums;
 using KBS.Portals.Calculator.PageModels;
+using KBS.Portals.Calculator.Services;
 using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator
@@ -9,9 +10,15 @@ namespace KBS.Portals.Calculator
     {
         public App()
         {
+            SetupIOC();
             var page = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
             var navContainer = new FreshNavigationContainer(page, NavigationContainerNames.AuthenticationContainer);
             MainPage = navContainer;
+        }
+
+        private void SetupIOC()
+        {
+            FreshMvvm.FreshIOC.Container.Register<ISettingsService, SettingsService>();
         }
 
         protected override void OnStart()

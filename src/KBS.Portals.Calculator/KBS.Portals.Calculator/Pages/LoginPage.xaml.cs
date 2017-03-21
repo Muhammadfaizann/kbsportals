@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FreshMvvm;
+using KBS.Portals.Calculator.PageModels;
+using KBS.Portals.Calculator.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
