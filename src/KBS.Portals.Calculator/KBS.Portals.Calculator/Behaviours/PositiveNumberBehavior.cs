@@ -15,7 +15,7 @@ namespace KBS.Portals.Calculator.Behaviours
         protected override bool IsValid(Entry entry)
         {
             decimal parsedDecimal;
-            var matchCollection = Regex.Matches(entry.Text, "\\d+.?\\d*");
+            var matchCollection = Regex.Matches(entry.Text, "-?\\d+.?\\d*");
             if (matchCollection.Count > 0)
             {
                 string stringToParse = matchCollection[0].Value;

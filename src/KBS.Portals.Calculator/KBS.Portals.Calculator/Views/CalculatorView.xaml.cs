@@ -50,10 +50,12 @@ namespace KBS.Portals.Calculator.Views
             if (product == Product.HirePurchase)
             {
                 PurFee.Behaviors.Add(PositiveNumberBehavior);
+                PositiveNumberBehavior.CheckEntryIsValid(PurFee, null);
             }
             else
             {
                 PurFee.Behaviors.Remove(PositiveNumberBehavior);
+                PositiveNumberBehavior.Validate(PurFee);
             }
         }
 

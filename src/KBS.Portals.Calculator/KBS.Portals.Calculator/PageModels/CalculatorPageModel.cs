@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CarouselView.FormsPlugin.Abstractions;
 using FreshMvvm;
-using KBS.Portals.Calculator.Annotations;
 using KBS.Portals.Calculator.Logic.Enums;
 using KBS.Portals.Calculator.Models;
 using KBS.Portals.Calculator.Services;
@@ -77,7 +76,6 @@ namespace KBS.Portals.Calculator.PageModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

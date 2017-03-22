@@ -14,22 +14,38 @@ namespace KBS.Portals.Calculator.Behaviours
 
         protected override void OnAttachedTo(Entry entry)
         {
-            entry.TextChanged += OnEntryTextChanged;
+            entry.TextChanged += CheckEntryIsValid;
             base.OnAttachedTo(entry);
         }
 
         protected override void OnDetachingFrom(Entry entry)
         {
-            entry.TextChanged -= OnEntryTextChanged;
+            entry.TextChanged -= CheckEntryIsValid;
             entry.BackgroundColor = ValidColor;
             base.OnDetachingFrom(entry);
         }
 
-        private void OnEntryTextChanged(object sender, TextChangedEventArgs args)
+        public void CheckEntryIsValid(object sender, TextChangedEventArgs args)
         {
             var entry = (sender as Entry);
-            bool isValid = IsValid(entry);
-            entry.BackgroundColor = isValid ? ValidColor : InvalidColor;
+            if (IsValid(entry))
+            {
+                Validate(entry);
+            }
+            else
+            {
+                Invalidate(entry);
+            }
+        }
+
+        public void Validate(Entry entry)
+        {
+            entry.BackgroundColor = ValidColor;
+        }
+
+        public void Invalidate(Entry entry)
+        {
+            entry.BackgroundColor = InvalidColor;
         }
 
         protected abstract bool IsValid(Entry entry);

@@ -12,8 +12,9 @@
             <valueConverters:ProductValueConverter x:Key="ProductValueConverter" />
             <valueConverters:FrequencyValueConverter x:Key="FrequencyValueConverter" />
             <valueConverters:IsPositiveConverter x:Key="IsPositiveConverter" />
-            <valueConverters:CurrencyConverter x:Key="CurrencyConverter" />
             <valueConverters:PercentageConverter x:Key="PercentageConverter" />
+            <x:String x:Key="CurrencySymbol">€</x:String>
+            <valueConverters:CurrencyConverter x:Key="CurrencyConverter" CurrencySymbol="{StaticResource CurrencySymbol}" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentView.Content>
@@ -48,15 +49,16 @@
 
                 <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Product" />
                 <Picker Grid.Row="0" Grid.Column="1" x:Name="ProductPicker"
-                        SelectedIndex="{Binding Item2.Product, Converter={StaticResource ProductValueConverter}}"
+                        SelectedIndex="{Binding Item2.Product}"
                         IsEnabled="True" />
 
                 <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Finance Amount" />
                 <customViews:FormattedEntry x:Name="FinanceAmount" Keyboard="Numeric" Grid.Row="1" Grid.Column="1"
-                                            Value="{Binding Item2.FinanceAmount}" Text="{Binding Item2.FinanceAmount, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
+                                            Value="{Binding Item2.FinanceAmount}" 
+                                            Text="{Binding Item2.FinanceAmount, Mode=OneWay, Converter={StaticResource CurrencyConverter}, ConverterParameter={StaticResource CurrencySymbol}}"
                                             IsEnabled="True">
                     <x:Arguments>
-                        <valueConverters:CurrencyConverter />
+                        <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
                     </x:Arguments>
                     <Entry.Behaviors>
                         <behaviors:PositiveNumberBehavior />
@@ -91,7 +93,7 @@
                                             Value="{Binding Item2.Installment}" Text="{Binding Item2.Installment, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="False">
                     <x:Arguments>
-                        <valueConverters:CurrencyConverter />
+                        <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
@@ -124,7 +126,7 @@
                                             Value="{Binding Item2.UpFrontValue}" Text="{Binding Item2.UpFrontValue, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="{Binding Item2.UpFrontNo, Converter={StaticResource IsPositiveConverter}}">
                     <x:Arguments>
-                        <valueConverters:CurrencyConverter />
+                        <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
@@ -132,7 +134,7 @@
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="11" Grid.Column="1"
                                             Value="{Binding Item2.DocFee}" Text="{Binding Item2.DocFee, Mode=OneWay, Converter={StaticResource CurrencyConverter}}" IsEnabled="True">
                     <x:Arguments>
-                        <valueConverters:CurrencyConverter />
+                        <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
@@ -141,7 +143,7 @@
                                             Value="{Binding Item2.Commission}" Text="{Binding Item2.Commission, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="True">
                     <x:Arguments>
-                        <valueConverters:CurrencyConverter />
+                        <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
@@ -149,7 +151,7 @@
                 <customViews:FormattedEntry x:Name="PurFee"  Keyboard="Numeric" Grid.Row="13" Grid.Column="1"
                                             Value="{Binding Item2.PurFee}" Text="{Binding Item2.PurFee, Mode=OneWay, Converter={StaticResource CurrencyConverter}}">
                     <x:Arguments>
-                        <valueConverters:CurrencyConverter />
+                        <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
@@ -157,7 +159,7 @@
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="14" Grid.Column="1"
                                             Value="{Binding Item2.Ballon}" Text="{Binding Item2.Ballon, Mode=OneWay, Converter={StaticResource CurrencyConverter}}" IsEnabled="True">
                     <x:Arguments>
-                        <valueConverters:CurrencyConverter />
+                        <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
@@ -166,7 +168,7 @@
                                             Value="{Binding Item2.Residual}" Text="{Binding Item2.Residual, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="True">
                     <x:Arguments>
-                        <valueConverters:CurrencyConverter />
+                        <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
@@ -179,7 +181,7 @@
                                             Value="{Binding Item2.Charges}" Text="{Binding Item2.Charges, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="False">
                     <x:Arguments>
-                        <valueConverters:CurrencyConverter />
+                        <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
                     </x:Arguments>
                 </customViews:FormattedEntry>
                 
@@ -188,7 +190,7 @@
                                             Value="{Binding Item2.TotalCost}" Text="{Binding Item2.TotalCost, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="False">
                     <x:Arguments>
-                        <valueConverters:CurrencyConverter />
+                        <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
                     </x:Arguments>
                 </customViews:FormattedEntry>
                 

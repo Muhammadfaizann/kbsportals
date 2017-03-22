@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using KBS.Portals.Calculator.Annotations;
 using KBS.Portals.Calculator.Logic.Enums;
 
 namespace KBS.Portals.Calculator.Models
@@ -238,7 +237,6 @@ namespace KBS.Portals.Calculator.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

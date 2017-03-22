@@ -8,6 +8,7 @@ using KBS.Portals.Calculator.Logic.Enums;
 using KBS.Portals.Calculator.Models;
 using KBS.Portals.Calculator.ValueConverters;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace KBS.Portals.Calculator.CustomViews
 {
@@ -17,14 +18,10 @@ namespace KBS.Portals.Calculator.CustomViews
             typeof(FormattedEntry), 0.0m, BindingMode.TwoWay);
 
 
-
         public decimal Value
         {
             get { return (decimal) GetValue(ValueProperty); }
-            set
-            {
-                SetValue(ValueProperty, value);
-            }
+            set { SetValue(ValueProperty, value); }
         }
 
         public IValueConverter Converter { get; set; }
@@ -36,16 +33,11 @@ namespace KBS.Portals.Calculator.CustomViews
             this.Focused += OnFocused;
             this.Unfocused += OnUnfocused;
         }
-
-        public void UpdateText()
-        {
-            Text = (string) Converter.Convert(Value, null, null, null);
-        }
-
+        
         private void OnUnfocused(object sender, FocusEventArgs focusEventArgs)
         {
             Value = (decimal) Converter.ConvertBack(Text, null, null, null);
-            UpdateText();
+            Text = (string) Converter.Convert(Value, null, null, null);
         }
 
         private void OnFocused(object sender, FocusEventArgs e)

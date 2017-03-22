@@ -27,7 +27,6 @@ namespace KBS.Portals.Calculator.PageModels
                 return new Command(async () =>
                 {
                     LoggedIn = true;
-                    //CoreMethods.SwitchOutRootNavigation(NavigationContainerNames.MainContainer);
                     _settingsService.Username = Username;
                     _settingsService.Password = Password;
                     await CoreMethods.PushPageModel<CalculatorPageModel>();
