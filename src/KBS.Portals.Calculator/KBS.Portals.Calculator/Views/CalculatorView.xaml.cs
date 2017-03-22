@@ -35,12 +35,12 @@ namespace KBS.Portals.Calculator.Views
 
         private void UpFrontNoOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
-            var tuple = BindingContext as Tuple<CalculationType, CalculatorModel>;
-            if (tuple != null)
+            var calculatorCarouselModel = BindingContext as CalculatorCarouselModel;
+            if (calculatorCarouselModel != null)
             {
                 int value;
                 int.TryParse(textChangedEventArgs.NewTextValue, out value);
-                UpFrontValue.IsEnabled = tuple.Item1 == CalculationType.Rate && value > 0;
+                UpFrontValue.IsEnabled = calculatorCarouselModel.CalculationType == CalculationType.Rate && value > 0;
             }
         }
 
@@ -61,10 +61,10 @@ namespace KBS.Portals.Calculator.Views
 
         protected override void OnBindingContextChanged()
         {
-            var tuple = BindingContext as Tuple<CalculationType, CalculatorModel>;
-            if (tuple != null)
+            var calculatorCarouselModel = BindingContext as CalculatorCarouselModel;
+            if (calculatorCarouselModel != null)
             {
-                var calcType = tuple.Item1;
+                var calcType = calculatorCarouselModel.CalculationType;
                 APR.IsEnabled = calcType == CalculationType.APRInstallment;
                 IRR.IsEnabled = calcType == CalculationType.IRRInstallment;
                 Installment.IsEnabled = calcType == CalculationType.Rate;

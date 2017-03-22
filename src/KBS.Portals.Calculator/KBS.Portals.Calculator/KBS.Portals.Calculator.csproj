@@ -44,6 +44,7 @@
     <Compile Include="CustomViews\FormattedEntry.cs" />
     <Compile Include="Enums\NavigationContainerNames.cs" />
     <Compile Include="Exceptions\TwoWayBindingNotSupportedException.cs" />
+    <Compile Include="Models\CalculatorCarouselModel.cs" />
     <Compile Include="Models\CalculatorModel.cs" />
     <Compile Include="PageModels\CalculatorPageModel.cs" />
     <Compile Include="PageModels\LoginPageModel.cs" />

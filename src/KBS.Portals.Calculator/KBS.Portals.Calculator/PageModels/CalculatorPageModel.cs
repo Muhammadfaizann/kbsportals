@@ -16,7 +16,7 @@ namespace KBS.Portals.Calculator.PageModels
     {
         private ISettingsService _settingsService;
         private CalculatorModel _calculatorModel;
-        public IList<Tuple<CalculationType, CalculatorModel>> PageModels { get; set; }
+        public IList<CalculatorCarouselModel> PageModels { get; set; }
         private string _title;
         public string Title
         {
@@ -44,13 +44,13 @@ namespace KBS.Portals.Calculator.PageModels
                 Term = _settingsService.Term
             };
 
-            PageModels = new List<Tuple<CalculationType, CalculatorModel>>
+            PageModels = new List<CalculatorCarouselModel>
             {
-                Tuple.Create(CalculationType.APRInstallment, _calculatorModel),
-                Tuple.Create(CalculationType.IRRInstallment, _calculatorModel),
-                Tuple.Create(CalculationType.Rate, _calculatorModel)
+                new CalculatorCarouselModel(CalculationType.APRInstallment, _calculatorModel),
+                new CalculatorCarouselModel(CalculationType.IRRInstallment, _calculatorModel),
+                new CalculatorCarouselModel(CalculationType.Rate, _calculatorModel)
             };
-            Title = PageModels[0].Item1.ToString();
+            Title = PageModels[0].CalculationType.ToString();
         }
 
         public Command Calculate
@@ -71,7 +71,7 @@ namespace KBS.Portals.Calculator.PageModels
         public void OnPositionSelected(object sender, EventArgs e)
         {
             var carouselViewControl = (sender as CarouselViewControl);
-            Title = PageModels[carouselViewControl.Position].Item1.ToString();
+            Title = PageModels[carouselViewControl.Position].CalculationType.ToString();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
