@@ -13,7 +13,7 @@ namespace KBS.Portals.Calculator.CustomViews
 {
     class FormattedEntry : Entry
     {
-        public static readonly BindableProperty ValueProperty = BindableProperty.Create("Value", typeof(decimal),
+        public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(decimal),
             typeof(FormattedEntry), 0.0m, BindingMode.TwoWay);
 
 

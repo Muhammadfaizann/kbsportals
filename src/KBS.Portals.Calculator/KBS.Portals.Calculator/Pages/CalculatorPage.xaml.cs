@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CarouselView.FormsPlugin.Abstractions;
 using KBS.Portals.Calculator.Logic.Enums;
 using KBS.Portals.Calculator.Models;
+using KBS.Portals.Calculator.PageModels;
 using KBS.Portals.Calculator.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,32 +19,14 @@ namespace KBS.Portals.Calculator.Pages
         public CalculatorPage()
         {
             InitializeComponent();
-            var calculatorModel = new CalculatorModel()
-            {
-                Product = Product.Lease,
-                Frequency = Frequency.Monthly,
-                StartDate = DateTime.Today,
-                NextDate = DateTime.Today.AddMonths(1)
-            };
-            CalculatorCarousel.ItemsSource = new List<Tuple<CalculationType, CalculatorModel>>
-            {
-                Tuple.Create(CalculationType.APRInstallment, calculatorModel),
-                Tuple.Create(CalculationType.IRRInstallment, calculatorModel),
-                Tuple.Create(CalculationType.Rate, calculatorModel)
-            };
             CalculatorCarousel.Position = 0;
-            UpdateTitle();
             CalculatorCarousel.PositionSelected += PositionSelected;
-        }
-
-        private void UpdateTitle()
-        {
-            Title = (CalculatorCarousel.ItemsSource[CalculatorCarousel.Position] as Tuple<CalculationType, CalculatorModel>).Item1.ToString();
         }
 
         private void PositionSelected(object sender, EventArgs eventArgs)
         {
-            UpdateTitle();
+            var calculatorPageModel = (BindingContext as CalculatorPageModel);
+            calculatorPageModel?.OnPositionSelected(sender, eventArgs);
         }
     }
 }
