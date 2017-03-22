@@ -41,7 +41,9 @@
     </Compile>
     <Compile Include="Behaviours\BaseEntryBehavior.cs" />
     <Compile Include="Behaviours\PositiveNumberBehavior.cs" />
+    <Compile Include="CustomViews\BindablePicker.cs" />
     <Compile Include="CustomViews\FormattedEntry.cs" />
+    <Compile Include="Enums\EnumerableExtensions.cs" />
     <Compile Include="Enums\NavigationContainerNames.cs" />
     <Compile Include="Exceptions\TwoWayBindingNotSupportedException.cs" />
     <Compile Include="Models\CalculatorCarouselModel.cs" />
@@ -60,8 +62,6 @@
     <Compile Include="ValueConverters\IsPositiveConverter.cs" />
     <Compile Include="ValueConverters\PercentageConverter.cs" />
     <Compile Include="ValueConverters\CurrencyConverter.cs" />
-    <Compile Include="ValueConverters\FrequencyValueConverter.cs" />
-    <Compile Include="ValueConverters\ProductValueConverter.cs" />
     <Compile Include="Views\CalculatorView.xaml.cs">
       <DependentUpon>CalculatorView.xaml</DependentUpon>
     </Compile>

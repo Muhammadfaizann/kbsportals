@@ -18,19 +18,11 @@ namespace KBS.Portals.Calculator.Views
         public CalculatorView()
         {
             InitializeComponent();
-            var products = Enum.GetNames(typeof(Product));
-            foreach (var product in products)
-            {
-                ProductPicker.Items.Add(product);
-            }
-            var frequencies = Enum.GetNames(typeof(Frequency));
-            foreach (var frequency in frequencies)
-            {
-                FrequencyPicker.Items.Add(frequency);
-            }
             PositiveNumberBehavior = new PositiveNumberBehavior();
             ProductPicker.SelectedIndexChanged += ProductPickerOnSelectedIndexChanged;
             UpFrontNo.TextChanged += UpFrontNoOnTextChanged;
+            ProductPicker.ItemsSource = Enum.GetValues(typeof(Product));
+            FrequencyPicker.ItemsSource = Enum.GetValues(typeof(Frequency));
         }
 
         private void UpFrontNoOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
@@ -46,7 +38,7 @@ namespace KBS.Portals.Calculator.Views
 
         private void ProductPickerOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            Product product = (Product) new ProductValueConverter().ConvertBack(ProductPicker.SelectedIndex, null, null, null);
+            Product product = (Product) ProductPicker.SelectedItem;
             if (product == Product.HirePurchase)
             {
                 PurFee.Behaviors.Add(PositiveNumberBehavior);

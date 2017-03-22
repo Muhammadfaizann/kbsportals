@@ -9,8 +9,6 @@
              x:Class="KBS.Portals.Calculator.Views.CalculatorView">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <valueConverters:ProductValueConverter x:Key="ProductValueConverter" />
-            <valueConverters:FrequencyValueConverter x:Key="FrequencyValueConverter" />
             <valueConverters:IsPositiveConverter x:Key="IsPositiveConverter" />
             <valueConverters:PercentageConverter x:Key="PercentageConverter" />
             <x:String x:Key="CurrencySymbol">€</x:String>
@@ -48,9 +46,7 @@
                 </Grid.RowDefinitions>
 
                 <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Product" />
-                <Picker Grid.Row="0" Grid.Column="1" x:Name="ProductPicker"
-                        SelectedIndex="{Binding CalculatorModel.Product, Converter={StaticResource ProductValueConverter}}"
-                        IsEnabled="True" />
+                <customViews:BindablePicker x:Name="ProductPicker" Grid.Row="0" Grid.Column="1" SelectedItem="{Binding CalculatorModel.Product}"/>
 
                 <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Finance Amount" />
                 <customViews:FormattedEntry x:Name="FinanceAmount" Keyboard="Numeric" Grid.Row="1" Grid.Column="1"
@@ -66,9 +62,7 @@
                 </customViews:FormattedEntry>
 
                 <Label VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Frequency" />
-                <Picker Grid.Row="2" Grid.Column="1" x:Name="FrequencyPicker"
-                        SelectedIndex="{Binding CalculatorModel.Frequency, Converter={StaticResource FrequencyValueConverter}}"
-                        IsEnabled="True" />
+                <customViews:BindablePicker x:Name="FrequencyPicker" Grid.Row="2" Grid.Column="1" SelectedItem="{Binding CalculatorModel.Frequency}"/>
 
                 <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Term" />
                 <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding CalculatorModel.Term}" IsEnabled="True" />
