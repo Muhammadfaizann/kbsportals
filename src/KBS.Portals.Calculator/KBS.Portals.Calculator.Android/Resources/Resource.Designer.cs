@@ -4101,8 +4101,14 @@ namespace KBS.Portals.Calculator.Droid
 			// aapt resource value: 0x7f0200a0
 			public const int mr_ic_play_light = 2130837664;
 			
+			// aapt resource value: 0x7f0200a3
+			public const int notification_template_icon_bg = 2130837667;
+			
 			// aapt resource value: 0x7f0200a1
-			public const int notification_template_icon_bg = 2130837665;
+			public const int splash_layout = 2130837665;
+			
+			// aapt resource value: 0x7f0200a2
+			public const int title = 2130837666;
 			
 			static Drawable()
 			{
@@ -5783,6 +5789,9 @@ namespace KBS.Portals.Calculator.Droid
 			
 			// aapt resource value: 0x7f0a0172
 			public const int Theme_PageIndicatorDefaults = 2131362162;
+			
+			// aapt resource value: 0x7f0a0178
+			public const int Theme_Splash = 2131362168;
 			
 			// aapt resource value: 0x7f0a010e
 			public const int ThemeOverlay_AppCompat = 2131362062;

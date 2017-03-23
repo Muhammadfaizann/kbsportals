@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using KBS.Portals.Calculator.Enums;
+using KBS.Portals.Calculator.Services;
 using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator.PageModels
@@ -10,9 +11,13 @@ namespace KBS.Portals.Calculator.PageModels
         public string Password { get; set; }
         public bool RememberCredentials { get; set; }
         public bool LoggedIn { get; set; }
+        private ISettingsService _settingsService;
 
-        public LoginPageModel()
+        public LoginPageModel(ISettingsService settingsService)
         {
+            _settingsService = settingsService;
+            Username = _settingsService.Username;
+            Password = _settingsService.Password;
         }
 
         public Command Login
@@ -22,7 +27,8 @@ namespace KBS.Portals.Calculator.PageModels
                 return new Command(async () =>
                 {
                     LoggedIn = true;
-                    CoreMethods.SwitchOutRootNavigation(NavigationContainerNames.MainContainer);
+                    _settingsService.Username = Username;
+                    _settingsService.Password = Password;
                     await CoreMethods.PushPageModel<CalculatorPageModel>();
                 });
             }

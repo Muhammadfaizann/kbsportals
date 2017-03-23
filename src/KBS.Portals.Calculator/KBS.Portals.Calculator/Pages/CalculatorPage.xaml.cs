@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarouselView.FormsPlugin.Abstractions;
+using KBS.Portals.Calculator.Logic.Enums;
+using KBS.Portals.Calculator.Models;
+using KBS.Portals.Calculator.PageModels;
 using KBS.Portals.Calculator.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,9 +19,14 @@ namespace KBS.Portals.Calculator.Pages
         public CalculatorPage()
         {
             InitializeComponent();
-
-            CalculatorCarousel.ItemsSource = new List<string> {"APR", "IRR", "Rate"};
             CalculatorCarousel.Position = 0;
+            CalculatorCarousel.PositionSelected += PositionSelected;
+        }
+
+        private void PositionSelected(object sender, EventArgs eventArgs)
+        {
+            var calculatorPageModel = (BindingContext as CalculatorPageModel);
+            calculatorPageModel?.OnPositionSelected(sender, eventArgs);
         }
     }
 }
