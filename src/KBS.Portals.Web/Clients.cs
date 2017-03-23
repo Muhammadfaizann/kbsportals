@@ -21,12 +21,28 @@ namespace KBS.Portals.Web
                     ClientSecrets = new List<Secret>
                     {
                         new Secret("secret".Sha256()),
-                        //new Secret
-                        //{
-                        //    Value = "", // TODO: Thumbprint here
-                        //    Type = Constants.SecretTypes.X509CertificateThumbprint,
-                        //    Description = "Client Certificate"
-                        //},
+                    },
+
+                    AllowedScopes = new List<string>
+                    {
+                        "KBS.Portals.Calculator"
+                    },
+
+                    Claims = new List<Claim>
+                    {
+                        new Claim("location", "datacenter")
+                    }
+                },
+                new Client
+                {
+                    ClientName = "Client Credentials Flow Client",
+                    Enabled = true,
+                    ClientId = "idmgr",
+                    Flow = Flows.ClientCredentials,
+
+                    ClientSecrets = new List<Secret>
+                    {
+                        new Secret("secret".Sha256()),
                     },
 
                     AllowedScopes = new List<string>
