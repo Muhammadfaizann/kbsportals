@@ -165,6 +165,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="IdentityManagerConfig.cs" />
+    <Compile Include="IdentityServerConfig.cs" />
     <Compile Include="Services\ApplicationIdentityManagerService.cs" />
     <Compile Include="App_Packages\IdentityServer3.AspNetIdentity\IdentityServer3.AspNetIdentity.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -172,8 +174,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scopes.cs" />
+    <Compile Include="Services\ApplicationUserService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Users.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\KBSPortal - Web Deploy.pubxml" />
