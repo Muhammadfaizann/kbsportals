@@ -15,6 +15,7 @@ namespace KBS.Portals.Web
             var factory = new IdentityServerServiceFactory()
                 .UseInMemoryClients(Clients.Get())
                 .UseInMemoryScopes(Scopes.Get());
+
             factory.UserService =
                 new Registration<IUserService>(typeof (ApplicationUserService));
             factory.Register(new Registration<UserManager<ApplicationUser, string>>());
