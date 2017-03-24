@@ -12,6 +12,7 @@ namespace KBS.Portals.Calculator.PageModels
     public class LoginPageModel : FreshBasePageModel, INotifyPropertyChanged
     {
         private string _username;
+
         public string Username
         {
             get { return _username; }
@@ -23,6 +24,7 @@ namespace KBS.Portals.Calculator.PageModels
         }
 
         private string _password;
+
         public string Password
         {
             get { return _password; }
@@ -32,6 +34,19 @@ namespace KBS.Portals.Calculator.PageModels
                 OnPropertyChanged();
             }
         }
+
+        private bool _isBusy;
+
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                _isBusy = value;
+                OnPropertyChanged();
+            }
+        }
+
         public bool RememberCredentials { get; set; }
         public bool LoggedIn { get; set; }
         private readonly ISettingsService _settingsService;
@@ -52,23 +67,22 @@ namespace KBS.Portals.Calculator.PageModels
             _quitApplicationService.Quit();
         }
 
-        public Command Login
-        {
-            get
+        public Command Login =>
+            new Command(async () =>
             {
-                return new Command(() =>
+                IsBusy = true;
+                bool loggedIn = await _authenticationService.LogIn(Username, Password);
+                IsBusy = false;
+                if (loggedIn)
                 {
-                    if (_authenticationService.LogIn(Username, Password))
-                    {
-                        LoginSuccess();
-                    }
-                    else
-                    {
-                        LoginFailure();
-                    }
-                });
-            }
-        }
+                    LoginSuccess();
+                }
+                else
+                {
+                    LoginFailure();
+                }
+            });
+        
 
         private void LoginFailure()
         {
