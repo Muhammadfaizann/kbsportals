@@ -8,7 +8,7 @@
         <Label Text="Username"/>
         <Entry x:Name="UsernameEntry" Text="{Binding Username}"/>
         <Label Text="Password"/>
-        <Entry x:Name="PasswordEntry" Text="{Binding Password}"/>
+        <Entry x:Name="PasswordEntry" Text="{Binding Password}" IsPassword="True"/>
         <Label Text="Remember Me"/>
         <Switch x:Name="RememberUserSwitch" />
         <StackLayout>
