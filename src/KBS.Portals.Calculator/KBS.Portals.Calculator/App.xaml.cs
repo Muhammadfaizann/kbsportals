@@ -19,6 +19,7 @@ namespace KBS.Portals.Calculator
         private void SetupIOC()
         {
             FreshIOC.Container.Register<ISettingsService, SettingsService>();
+            FreshIOC.Container.Register<IAuthenticationService, AuthenticationService>();
             AutoMapperConfig.Init();
         }
 

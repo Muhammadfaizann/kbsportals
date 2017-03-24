@@ -4,6 +4,7 @@
     "AutoMapper": "6.0.2",
     "CarouselView.FormsPlugin": "3.0.1",
     "FreshMvvm": "2.2.0",
+    "IdentityModel": "2.6.0",
     "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
     "NETStandard.Library": "1.6.0",
     "Xam.Plugins.Settings": "2.5.4",
