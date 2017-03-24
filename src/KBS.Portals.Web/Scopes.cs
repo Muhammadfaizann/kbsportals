@@ -10,23 +10,7 @@ namespace KBS.Portals.Web
             return new[]
             {
                 StandardScopes.OpenId,
-                StandardScopes.Profile,
-                StandardScopes.Email,
-                StandardScopes.Address,
-                StandardScopes.OfflineAccess,
-                StandardScopes.RolesAlwaysInclude,
-                StandardScopes.AllClaims,
-                new Scope
-                {
-                    Name = "KBS.Portals.Calculator",
-                    DisplayName = "KBS Calculator",
-                    Type = ScopeType.Resource,
-                    Emphasize = false,
-                    ScopeSecrets = new List<Secret>
-                    {
-                        new Secret("secret".Sha256())
-                    }
-                }
+                StandardScopes.AllClaims
             };
         }
     }
