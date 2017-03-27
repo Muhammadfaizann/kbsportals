@@ -11,7 +11,7 @@ namespace KBS.Portals.Calculator.PageModels
         public string Password { get; set; }
         public bool RememberCredentials { get; set; }
         public bool LoggedIn { get; set; }
-        private ISettingsService _settingsService;
+        private readonly ISettingsService _settingsService;
         private readonly IQuitApplicationService _quitApplicationService;
 
         public LoginPageModel(ISettingsService settingsService, IQuitApplicationService quitApplicationService)

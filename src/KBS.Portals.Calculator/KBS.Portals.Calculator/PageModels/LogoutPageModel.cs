@@ -24,7 +24,7 @@ namespace KBS.Portals.Calculator.PageModels
             _settingsService.Username = "";
             _settingsService.Password = "";
             
-            CoreMethods.PushPageModel<LoginPageModel>(null);
+            CoreMethods.PushPageModelWithNewNavigation<LoginPageModel>(null);
         }
     }
 }
