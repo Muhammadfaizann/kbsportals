@@ -1,10 +1,14 @@
-﻿using Microsoft.Owin;
+﻿using IdentityManager;
+using KBS.Portals.Web.Services;
+using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
 using Owin;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens;
+using System.Threading.Tasks;
 using System.Web.Configuration;
+using System.Web.Mvc;
 
 [assembly: OwinStartup(typeof(KBS.Portals.Web.Startup))]
 namespace KBS.Portals.Web
@@ -23,7 +27,7 @@ namespace KBS.Portals.Web
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
             {
                 AuthenticationType = "oidc",
-                Authority = "https://dev.local/core/",
+                Authority = WebConfigurationManager.AppSettings["IdentityServerUri"],
                 ClientId = "idmgr",
                 RedirectUri = WebConfigurationManager.AppSettings["IdentityManagerUri"],
                 ResponseType = "id_token",
@@ -33,6 +37,17 @@ namespace KBS.Portals.Web
 
             IdentityManagerConfig.SetUpIdentityManager(app);
             IdentityServerConfig.SetUpIdentityServer(app);
+
+            Task.Run(async () =>
+            {
+                var aims = new ApplicationIdentityManagerService(new ApplicationUserManager(new ApplicationUserStore(new Models.ApplicationDbContext())), new ApplicationRoleManager(new ApplicationRoleStore(new Models.ApplicationDbContext())));
+                var admin = await aims.GetUserAsync("admin");
+                if (admin.Result == null)
+                {
+                    await aims.CreateRoleAsync(new PropertyValue[] { new PropertyValue { Type = Constants.ClaimTypes.Name, Value = "Admin" } });
+                    await aims.CreateUserAsync(new PropertyValue[] { new PropertyValue { Type = Constants.ClaimTypes.Username, Value = "admin" }, new PropertyValue { Type = Constants.ClaimTypes.Password, Value = "OK*3Smdm1tLq" } });
+                }
+            });
         }
     }
 }
