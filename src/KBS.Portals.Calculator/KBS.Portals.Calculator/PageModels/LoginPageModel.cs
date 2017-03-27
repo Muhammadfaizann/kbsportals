@@ -71,9 +71,9 @@ namespace KBS.Portals.Calculator.PageModels
             new Command(async () =>
             {
                 IsBusy = true;
-                bool loggedIn = await _authenticationService.LogIn(Username, Password);
+                LoggedIn = await _authenticationService.LogIn(Username, Password);
                 IsBusy = false;
-                if (loggedIn)
+                if (LoggedIn)
                 {
                     LoginSuccess();
                 }
@@ -86,7 +86,7 @@ namespace KBS.Portals.Calculator.PageModels
 
         private void LoginFailure()
         {
-            Password = "";
+            LoggedIn = false;
             (CurrentPage as LoginPage)?.DisplayLoginFailed();
         }
 
@@ -102,7 +102,7 @@ namespace KBS.Portals.Calculator.PageModels
             Application.Current.MainPage = mainContainer;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

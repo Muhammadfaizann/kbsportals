@@ -15,6 +15,6 @@
             <Button x:Name="ForgetCredentialsButton" Text="Forgot my password"/>
             <Button x:Name="LoginButton" Command="{Binding Login}" Text="LOG IN"/>
         </StackLayout>
-        <ActivityIndicator IsRunning="{Binding IsBusy}" Color="Black" IsVisible="True" />
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="True" />
     </StackLayout>
 </ContentPage>
