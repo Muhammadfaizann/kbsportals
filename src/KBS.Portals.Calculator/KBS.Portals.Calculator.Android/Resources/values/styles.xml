@@ -23,6 +23,10 @@
     <item name="windowActionModeOverlay">true</item>
 
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item name="android:actionBarStyle">@style/MainTheme.ActionBar</item>
+  </style>
+
+  <style name="MainTheme.ActionBar" parent="MainTheme.Base">
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
