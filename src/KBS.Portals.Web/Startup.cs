@@ -1,8 +1,10 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.OpenIdConnect;
 using Owin;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens;
+using System.Web.Configuration;
 
 [assembly: OwinStartup(typeof(KBS.Portals.Web.Startup))]
 namespace KBS.Portals.Web
@@ -11,16 +13,22 @@ namespace KBS.Portals.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            AreaRegistration.RegisterAllAreas();
-            GlobalFilters.Filters.Add(new HandleErrorAttribute());
-            RouteTable.Routes.MapRoute("Default", "{controller}/{action}/{id}",
-                new {controller = "Home", action = "Index", id = UrlParameter.Optional}
-                );
+            JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>(); // for authorizing the identitymanager user
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationType = "Cookies",
-                LoginPath = new PathString("/Home/Login")
+                AuthenticationType = CookieAuthenticationDefaults.AuthenticationType
+            });
+
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
+            {
+                AuthenticationType = "oidc",
+                Authority = "https://dev.local/core/",
+                ClientId = "idmgr",
+                RedirectUri = WebConfigurationManager.AppSettings["IdentityManagerUri"],
+                ResponseType = "id_token",
+                Scope = "openid idmgr",
+                SignInAsAuthenticationType = CookieAuthenticationDefaults.AuthenticationType
             });
 
             IdentityManagerConfig.SetUpIdentityManager(app);

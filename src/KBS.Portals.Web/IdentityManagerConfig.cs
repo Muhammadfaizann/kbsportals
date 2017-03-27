@@ -2,6 +2,7 @@
 using IdentityManager.Configuration;
 using KBS.Portals.Web.Models;
 using KBS.Portals.Web.Services;
+using Microsoft.Owin.Security.Cookies;
 using Owin;
 
 namespace KBS.Portals.Web
@@ -28,10 +29,12 @@ namespace KBS.Portals.Web
                     Factory = identityManagerServiceFactory,
                     SecurityConfiguration = new HostSecurityConfiguration
                     {
-                        HostAuthenticationType = "Cookies",
-                        NameClaimType = Constants.ClaimTypes.Name,
+                        HostAuthenticationType = CookieAuthenticationDefaults.AuthenticationType,
+                        RequireSsl = false,
+                        AdditionalSignOutType = "oidc",
+                        AdminRoleName = "Admin",
                         RoleClaimType = Constants.ClaimTypes.Role,
-                        AdminRoleName = "Admin"
+                        NameClaimType = Constants.ClaimTypes.Name
                     }
                 });
             });

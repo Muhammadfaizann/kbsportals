@@ -28,6 +28,7 @@ namespace KBS.Portals.Web
             var options = new IdentityServerOptions
             {
                 Factory = factory,
+                SigningCertificate = Certificate.Get()
             };
             app.Map("/core", idsrvApp => { idsrvApp.UseIdentityServer(options); });
         }
