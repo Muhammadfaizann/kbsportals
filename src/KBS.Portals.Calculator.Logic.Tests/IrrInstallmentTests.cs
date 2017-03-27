@@ -138,5 +138,55 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             Assert.AreEqual(671.2, result.Installment);
         }
+
+        [Test]
+        public void CapitalFlow_4()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                FinanceAmount = 16250,
+                IRR = 11.167938,
+                UpFrontNo = 3,
+                UpFrontValue = 518,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 33,
+                //Installment = Convert.ToDecimal(518),
+                StartDate = Convert.ToDateTime("17 Oct 2016"),
+                NextDate = Convert.ToDateTime("09 Nov 2016")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.IRRInstallment, cd);
+
+            var result = calc.Calculate();
+
+            //            Assert.AreEqual(16250, result.FinanceAmount);
+            Assert.AreEqual(518, result.Installment);
+        }
+
+        [Test]
+        public void CapitalFlow_6()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                FinanceAmount = 68000,
+                IRR = 11.000107,
+                UpFrontNo = 1,
+                UpFrontValue = 6800,
+                Commission = 0,
+                DocFee = 250,
+                NoOfInstallments = 30,
+                //Installment = Convert.ToDecimal(2343.3),
+                StartDate = Convert.ToDateTime("10 Mar 2017"),
+                NextDate = Convert.ToDateTime("10 Apr 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.IRRInstallment, cd);
+
+            var result = calc.Calculate();
+
+            //            Assert.AreEqual(68000, result.FinanceAmount);
+            Assert.AreEqual(2343.3, result.Installment);
+        }
     }
 }

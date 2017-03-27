@@ -19,12 +19,14 @@ namespace KBS.Portals.Calculator.Logic
             var rate = Input.IRR;
             ICalculator calc = CalculatorFactory.Create(CalculationType.Rate, Input);
 
+            Input.Schedules.Clear(); // Have to clear as following line will rebuild scheduels!!!
             var result = calc.Calculate();
 
-            if (rate > result.IRR)
-            {
-                throw new Exception("Rate is already higher than that on the deal. Please change the details");
-            }
+            //If sRate > CDbl(APRInputs.IntRR) Then //This following validation operated off Inputs which never changed!!!!!
+            //if (rate > result.IRR)
+            //{
+            //    throw new Exception("Rate is already higher than that on the deal. Please change the details " + result.IRR.ToString());
+            //}
 
             var charges = Convert.ToDouble( result.Charges);
 
@@ -51,9 +53,9 @@ namespace KBS.Portals.Calculator.Logic
             }
 
             inc = charges / 2;
-            var skipCount = 0;
             do
             {
+                var skipCount = 0;
                 //look for the first yield affecting entry
                 foreach (var entry in YieldCalcChron)
                 {
@@ -94,7 +96,7 @@ namespace KBS.Portals.Calculator.Logic
             { Input.IRR = -9999; }
             else
             { Input.IRR = Math.Round(rate, 6); }
-            Input.Commission = Convert.ToDecimal( charges);
+            Input.Commission = Convert.ToDecimal(Math.Round(charges,2));
 
         }
     }

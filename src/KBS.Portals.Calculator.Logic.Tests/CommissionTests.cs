@@ -43,8 +43,8 @@ namespace KBS.Portals.Calculator.Logic.Tests
             {
                 FinanceAmount = 10000,
                 IRR = 3.069061,
-                NoOfInstallments = 55,
-                Installment = Convert.ToDecimal(207.53),
+                NoOfInstallments = 60,
+                Installment = Convert.ToDecimal(240.00),
                 StartDate = Convert.ToDateTime("14 Feb 2017"),
                 NextDate = Convert.ToDateTime("14 Mar 2017"),
                 Frequency = Frequency.Quarterly
@@ -54,7 +54,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(1021.99, result.Commission);
+            Assert.AreEqual(1564.59, result.Commission);
         }
 
         [Test]
@@ -64,8 +64,8 @@ namespace KBS.Portals.Calculator.Logic.Tests
             {
                 FinanceAmount = 10000,
                 IRR = 9.000031,
-                NoOfInstallments = 5,
-                Installment = Convert.ToDecimal(2059.46),
+                NoOfInstallments = 6,
+                Installment = Convert.ToDecimal(2100),
                 StartDate = Convert.ToDateTime("14 Feb 2017"),
                 NextDate = Convert.ToDateTime("14 Mar 2017"),
                 Frequency = Frequency.Annual
@@ -75,7 +75,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(2059.46, result.Commission);
+            Assert.AreEqual(196.85, result.Commission);
         }
         [Test]
         public void CalculateCommissionWithDocFee()
@@ -84,8 +84,8 @@ namespace KBS.Portals.Calculator.Logic.Tests
             {
                 FinanceAmount = 10000,
                 IRR = 9,
-                NoOfInstallments = 55,
-                Installment = Convert.ToDecimal(207.53),
+                NoOfInstallments = 60,
+                Installment = Convert.ToDecimal(220),
                 StartDate = Convert.ToDateTime("14 Feb 2017"),
                 NextDate = Convert.ToDateTime("14 Mar 2017"),
                 DocFee = 250
@@ -95,7 +95,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(1022.20, result.Commission);
+            Assert.AreEqual(600.86, result.Commission);
         }
 
         [Test]
@@ -108,9 +108,9 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 NoOfInstallments = 22,
                 UpFrontNo = 1,
                 UpFrontValue = 15900,
-                Commission = 650,
+                //Commission = 650,
                 DocFee = 0,
-                Installment = Convert.ToDecimal(1006.80),
+                Installment = Convert.ToDecimal(1088.53),
                 StartDate = Convert.ToDateTime("22 Nov 2016"),
                 NextDate = Convert.ToDateTime("09 Dec 2016")
             };
@@ -119,7 +119,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(2004.12, result.Commission);
+            Assert.AreEqual(650.02, result.Commission);
         }
 
         [Test]
@@ -132,9 +132,9 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 NoOfInstallments = 22,
                 UpFrontNo = 1,
                 UpFrontValue = 16750,
-                Commission = 350,
+                //Commission = 350,
                 DocFee = 0,
-                Installment = Convert.ToDecimal(671.20),
+                Installment = Convert.ToDecimal(725.35),
                 StartDate = Convert.ToDateTime("22 Nov 2016"),
                 NextDate = Convert.ToDateTime("09 Dec 2016")
             };
@@ -143,7 +143,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(1335.74, result.Commission);
+            Assert.AreEqual(350, result.Commission);
 
         }
 
@@ -159,7 +159,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 Commission = 0,
                 DocFee = 0,
                 NoOfInstallments = 30,
-                Installment = Convert.ToDecimal(518),
+                Installment = Convert.ToDecimal(600),
                 StartDate = Convert.ToDateTime("17 Oct 2016"),
                 NextDate = Convert.ToDateTime("09 Nov 2016")
             };
@@ -168,7 +168,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(1539.60, result.Commission);
+            Assert.AreEqual(984.59, result.Commission);
         }
 
         [Test]
@@ -182,8 +182,8 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 UpFrontValue = 6800,
                 Commission = 0,
                 DocFee = 250,
-                NoOfInstallments = 28,
-                Installment = Convert.ToDecimal(2343.3),
+                NoOfInstallments = 30,
+                Installment = Convert.ToDecimal(2400),
                 StartDate = Convert.ToDateTime("10 Mar 2017"),
                 NextDate = Convert.ToDateTime("10 Apr 2017")
             };
@@ -192,7 +192,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(4664.91, result.Commission);
+            Assert.AreEqual(1480.84, result.Commission);
         }
     }
 }
