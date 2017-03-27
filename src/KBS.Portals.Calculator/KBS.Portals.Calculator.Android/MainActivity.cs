@@ -1,26 +1,45 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
-using CarouselView.FormsPlugin.Android;
+using HockeyApp.Android;
+using HockeyApp.Android.Metrics;
 
 namespace KBS.Portals.Calculator.Droid
 {
-    [Activity(Label = "KBS.Portals.Calculator", Icon = "@drawable/icon", Theme = "@android:style/Theme.Material.Light", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Theme = "@android:style/Theme.Material.Light", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
+        private readonly string APP_ID = "73871aab6c0c4b64be0eec934803394a";
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
+            SetupHockeyApp();
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            CarouselViewRenderer.Init();    
             LoadApplication(new App());
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            UnregisterManagers();
+        }
+
+        private void SetupHockeyApp()
+        {
+            CrashManager.Register(this, APP_ID);
+            MetricsManager.Register(Application, APP_ID);
+            CheckForUpdates();
+        }
+
+        private void CheckForUpdates()
+        {
+            // Remove this for store builds!
+            UpdateManager.Register(this, APP_ID);
+        }
+
+        private void UnregisterManagers()
+        {
+            UpdateManager.Unregister();
         }
     }
 }
-

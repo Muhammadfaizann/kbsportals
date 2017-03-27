@@ -4,7 +4,7 @@
              xmlns:abstractions="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              xmlns:views="clr-namespace:KBS.Portals.Calculator.Views;assembly=KBS.Portals.Calculator"
              x:Class="KBS.Portals.Calculator.Pages.CalculatorPage"
-             Title="CalculatorPage">
+             Title="{Binding Title}">
     <StackLayout
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand"
@@ -15,6 +15,7 @@
             VerticalOptions="FillAndExpand"
             AnimateTransition="true"
             Orientation="Horizontal"
+            ItemsSource="{Binding PageModels}"
             ShowIndicators="true">
             <abstractions:CarouselViewControl.ItemTemplate>
                 <DataTemplate>
@@ -24,6 +25,7 @@
         </abstractions:CarouselViewControl>
         <Button 
             x:Name="CalculateButton"
-            Text="Calculate" />
+            Text="Calculate"
+            Command="{Binding Calculate}"/>
     </StackLayout>
 </ContentPage>
