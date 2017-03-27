@@ -12,13 +12,12 @@ namespace KBS.Portals.Calculator
         {
             SetupIOC();
             var page = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
-            var navContainer = new FreshNavigationContainer(page, NavigationContainerNames.AuthenticationContainer);
-            MainPage = navContainer;
+            MainPage = page;
         }
 
         private void SetupIOC()
         {
-            FreshMvvm.FreshIOC.Container.Register<ISettingsService, SettingsService>();
+            FreshIOC.Container.Register<ISettingsService, SettingsService>();
         }
 
         protected override void OnStart()
