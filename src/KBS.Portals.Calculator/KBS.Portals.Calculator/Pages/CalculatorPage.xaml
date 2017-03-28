@@ -26,6 +26,7 @@
         <Button 
             x:Name="CalculateButton"
             Text="Calculate"
+            IsEnabled="{Binding CalculatorModel.IsDirty}"
             Command="{Binding Calculate}"/>
     </StackLayout>
 </ContentPage>

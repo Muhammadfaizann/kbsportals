@@ -20,7 +20,7 @@ namespace KBS.Portals.Calculator.PageModels
     {
         private readonly ISettingsService _settingsService;
         private readonly IMappingService _mappingService;
-        private readonly CalculatorModel _calculatorModel;
+        public CalculatorModel CalculatorModel { get; set; }
         public IList<CalculatorCarouselModel> PageModels { get; set; }
         private CalculationType _title;
         public CalculationType Title
@@ -37,7 +37,7 @@ namespace KBS.Portals.Calculator.PageModels
         {
             _settingsService = settingsService;
             _mappingService = mappingService;
-            _calculatorModel = new CalculatorModel()
+            CalculatorModel = new CalculatorModel()
             {
                 Product = Product.Lease,
                 Frequency = Frequency.Monthly,
@@ -52,9 +52,9 @@ namespace KBS.Portals.Calculator.PageModels
 
             PageModels = new List<CalculatorCarouselModel>
             {
-                new CalculatorCarouselModel(CalculationType.APRInstallment, _calculatorModel),
-                new CalculatorCarouselModel(CalculationType.IRRInstallment, _calculatorModel),
-                new CalculatorCarouselModel(CalculationType.Rate, _calculatorModel)
+                new CalculatorCarouselModel(CalculationType.APRInstallment, CalculatorModel),
+                new CalculatorCarouselModel(CalculationType.IRRInstallment, CalculatorModel),
+                new CalculatorCarouselModel(CalculationType.Rate, CalculatorModel)
             };
             Title = PageModels[0].CalculationType;
         }
@@ -66,22 +66,23 @@ namespace KBS.Portals.Calculator.PageModels
                 return new Command(() =>
                 {
                     SaveLastUsedValues();
-                    CalculatorData backendDataModel = _mappingService.Map(_calculatorModel);
+                    CalculatorData backendDataModel = _mappingService.Map(CalculatorModel);
                     ICalculator calculator = CalculatorFactory.Create(Title, backendDataModel);
                     var resultData = calculator.Calculate();
                     CalculatorModel resultModel = _mappingService.Map(resultData);
-                    _mappingService.MapInto(resultModel, _calculatorModel); // Call the set methods to trigger bindings
+                    _mappingService.MapInto(resultModel, CalculatorModel); // Call the set methods to trigger bindings
+                    CalculatorModel.IsDirty = false;
                 });
             }
         }
 
         private void SaveLastUsedValues()
         {
-            _settingsService.APR = _calculatorModel.APR;
-            _settingsService.IRR = _calculatorModel.IRR;
-            _settingsService.DocFee = _calculatorModel.DocFee;
-            _settingsService.PurFee = _calculatorModel.PurFee;
-            _settingsService.Term = _calculatorModel.Term;
+            _settingsService.APR = CalculatorModel.APR;
+            _settingsService.IRR = CalculatorModel.IRR;
+            _settingsService.DocFee = CalculatorModel.DocFee;
+            _settingsService.PurFee = CalculatorModel.PurFee;
+            _settingsService.Term = CalculatorModel.Term;
         }
 
         public void OnPositionSelected(object sender, EventArgs e)
