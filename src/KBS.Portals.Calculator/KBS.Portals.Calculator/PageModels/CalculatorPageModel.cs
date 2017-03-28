@@ -19,7 +19,6 @@ namespace KBS.Portals.Calculator.PageModels
     public class CalculatorPageModel : FreshBasePageModel, INotifyPropertyChanged
     {
         private readonly ISettingsService _settingsService;
-        private readonly IMappingService _mappingService;
         public CalculatorModel CalculatorModel { get; set; }
         public IList<CalculatorCarouselModel> PageModels { get; set; }
         private CalculationType _title;
@@ -33,10 +32,9 @@ namespace KBS.Portals.Calculator.PageModels
             }
         }
 
-        public CalculatorPageModel(ISettingsService settingsService, IMappingService mappingService)
+        public CalculatorPageModel(ISettingsService settingsService)
         {
             _settingsService = settingsService;
-            _mappingService = mappingService;
             CalculatorModel = new CalculatorModel()
             {
                 Product = Product.Lease,
@@ -66,11 +64,11 @@ namespace KBS.Portals.Calculator.PageModels
                 return new Command(() =>
                 {
                     SaveLastUsedValues();
-                    CalculatorData backendDataModel = _mappingService.Map(CalculatorModel);
+                    CalculatorData backendDataModel = Mapper.Map<CalculatorData>(CalculatorModel);
                     ICalculator calculator = CalculatorFactory.Create(Title, backendDataModel);
                     var resultData = calculator.Calculate();
-                    CalculatorModel resultModel = _mappingService.Map(resultData);
-                    _mappingService.MapInto(resultModel, CalculatorModel); // Call the set methods to trigger bindings
+                    CalculatorModel resultModel = Mapper.Map<CalculatorModel>(resultData);
+                    Mapper.Map(resultModel, CalculatorModel); // Call the set methods to trigger bindings
                     CalculatorModel.IsDirty = false;
                 });
             }

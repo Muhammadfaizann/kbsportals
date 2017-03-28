@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using KBS.Portals.Calculator.Config;
 using KBS.Portals.Calculator.Enums;
 using KBS.Portals.Calculator.PageModels;
 using KBS.Portals.Calculator.Services;
@@ -18,7 +19,7 @@ namespace KBS.Portals.Calculator
         private void SetupIOC()
         {
             FreshIOC.Container.Register<ISettingsService, SettingsService>();
-            FreshIOC.Container.Register<IMappingService, MappingService>();
+            AutoMapperConfig.Init();
         }
 
         protected override void OnStart()
