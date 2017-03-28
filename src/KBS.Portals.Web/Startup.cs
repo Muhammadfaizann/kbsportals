@@ -41,12 +41,7 @@ namespace KBS.Portals.Web
             Task.Run(async () =>
             {
                 var aims = new ApplicationIdentityManagerService(new ApplicationUserManager(new ApplicationUserStore(new Models.ApplicationDbContext())), new ApplicationRoleManager(new ApplicationRoleStore(new Models.ApplicationDbContext())));
-                var admin = await aims.GetUserAsync("admin");
-                if (admin.Result == null)
-                {
-                    await aims.CreateRoleAsync(new PropertyValue[] { new PropertyValue { Type = Constants.ClaimTypes.Name, Value = "Admin" } });
-                    await aims.CreateUserAsync(new PropertyValue[] { new PropertyValue { Type = Constants.ClaimTypes.Username, Value = "admin" }, new PropertyValue { Type = Constants.ClaimTypes.Password, Value = "OK*3Smdm1tLq" } });
-                }
+                await aims.InitialiseAdmin();
             });
         }
     }

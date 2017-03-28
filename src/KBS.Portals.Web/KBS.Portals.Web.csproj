@@ -210,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\KBSPortal - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\KBSPortal.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -11,7 +11,7 @@ namespace KBS.Portals.Web
 
         public static X509Certificate2 Get()
         {
-            var store = new X509Store("MY", StoreLocation.LocalMachine);
+            var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
             store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
             var foundCertificates = store.Certificates.Find(X509FindType.FindBySubjectName, CertificateSubject, false);
             store.Close();
