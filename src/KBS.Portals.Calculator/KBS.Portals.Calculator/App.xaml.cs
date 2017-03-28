@@ -18,6 +18,7 @@ namespace KBS.Portals.Calculator
         private void SetupIOC()
         {
             FreshIOC.Container.Register<ISettingsService, SettingsService>();
+            FreshIOC.Container.Register<IMappingService, MappingService>();
         }
 
         protected override void OnStart()

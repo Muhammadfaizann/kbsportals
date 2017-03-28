@@ -5,20 +5,25 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CarouselView.FormsPlugin.Abstractions;
 using FreshMvvm;
+using KBS.Portals.Calculator.Logic;
 using KBS.Portals.Calculator.Logic.Enums;
+using KBS.Portals.Calculator.Logic.Models;
 using KBS.Portals.Calculator.Models;
+using KBS.Portals.Calculator.Pages;
 using KBS.Portals.Calculator.Services;
 using Xamarin.Forms;
+using AutoMapper;
 
 namespace KBS.Portals.Calculator.PageModels
 {
     public class CalculatorPageModel : FreshBasePageModel, INotifyPropertyChanged
     {
-        private ISettingsService _settingsService;
-        private CalculatorModel _calculatorModel;
+        private readonly ISettingsService _settingsService;
+        private readonly IMappingService _mappingService;
+        private readonly CalculatorModel _calculatorModel;
         public IList<CalculatorCarouselModel> PageModels { get; set; }
-        private string _title;
-        public string Title
+        private CalculationType _title;
+        public CalculationType Title
         {
             get { return _title; }
             set
@@ -28,9 +33,10 @@ namespace KBS.Portals.Calculator.PageModels
             }
         }
 
-        public CalculatorPageModel(ISettingsService settingsService)
+        public CalculatorPageModel(ISettingsService settingsService, IMappingService mappingService)
         {
             _settingsService = settingsService;
+            _mappingService = mappingService;
             _calculatorModel = new CalculatorModel()
             {
                 Product = Product.Lease,
@@ -50,7 +56,7 @@ namespace KBS.Portals.Calculator.PageModels
                 new CalculatorCarouselModel(CalculationType.IRRInstallment, _calculatorModel),
                 new CalculatorCarouselModel(CalculationType.Rate, _calculatorModel)
             };
-            Title = PageModels[0].CalculationType.ToString();
+            Title = PageModels[0].CalculationType;
         }
 
         public Command Calculate
@@ -59,19 +65,29 @@ namespace KBS.Portals.Calculator.PageModels
             {
                 return new Command(() =>
                 {
-                    _settingsService.APR = _calculatorModel.APR;
-                    _settingsService.IRR = _calculatorModel.IRR;
-                    _settingsService.DocFee = _calculatorModel.DocFee;
-                    _settingsService.PurFee = _calculatorModel.PurFee;
-                    _settingsService.Term = _calculatorModel.Term;
+                    SaveLastUsedValues();
+                    CalculatorData backendDataModel = _mappingService.Map(_calculatorModel);
+                    ICalculator calculator = CalculatorFactory.Create(Title, backendDataModel);
+                    var resultData = calculator.Calculate();
+                    CalculatorModel resultModel = _mappingService.Map(resultData);
+                    _mappingService.MapInto(resultModel, _calculatorModel); // Call the set methods to trigger bindings
                 });
             }
+        }
+
+        private void SaveLastUsedValues()
+        {
+            _settingsService.APR = _calculatorModel.APR;
+            _settingsService.IRR = _calculatorModel.IRR;
+            _settingsService.DocFee = _calculatorModel.DocFee;
+            _settingsService.PurFee = _calculatorModel.PurFee;
+            _settingsService.Term = _calculatorModel.Term;
         }
 
         public void OnPositionSelected(object sender, EventArgs e)
         {
             var carouselViewControl = (sender as CarouselViewControl);
-            Title = PageModels[carouselViewControl.Position].CalculationType.ToString();
+            Title = PageModels[carouselViewControl.Position].CalculationType;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
