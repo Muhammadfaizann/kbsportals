@@ -41,6 +41,7 @@
     </Compile>
     <Compile Include="Behaviours\BaseEntryBehavior.cs" />
     <Compile Include="Behaviours\PositiveNumberBehavior.cs" />
+    <Compile Include="Config\AutoMapperConfig.cs" />
     <Compile Include="CustomViews\BindablePicker.cs" />
     <Compile Include="CustomViews\FormattedEntry.cs" />
     <Compile Include="Enums\EnumerableExtensions.cs" />
