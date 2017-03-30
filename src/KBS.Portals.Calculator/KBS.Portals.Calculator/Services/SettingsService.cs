@@ -18,6 +18,9 @@ namespace KBS.Portals.Calculator.Services
         private readonly string PasswordKey = "password";
         private readonly string PasswordDefaultValue = string.Empty;
 
+        private readonly string RememberMeKey = "rememberMe";
+        private readonly bool RememberMeDefaultValue = false;
+
         private readonly string APRKey = "apr";
         private readonly decimal APRDefaultValue = 0.0m;
 
@@ -44,6 +47,13 @@ namespace KBS.Portals.Calculator.Services
             get { return Settings.GetValueOrDefault(PasswordKey, PasswordDefaultValue); }
             set { Settings.AddOrUpdateValue(PasswordKey, value); }
         }
+
+        public bool RememberMe
+        {
+            get { return Settings.GetValueOrDefault(RememberMeKey, RememberMeDefaultValue); }
+            set { Settings.AddOrUpdateValue(RememberMeKey, value); }
+        }
+
         public decimal APR
         {
             get { return Settings.GetValueOrDefault(APRKey, APRDefaultValue); }
