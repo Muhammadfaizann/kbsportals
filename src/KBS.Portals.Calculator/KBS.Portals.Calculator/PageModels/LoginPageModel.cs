@@ -119,8 +119,26 @@ namespace KBS.Portals.Calculator.PageModels
             var mainContainer = new FreshMasterDetailNavigationContainer(NavigationContainerNames.MainContainer);
             mainContainer.AddPage<CalculatorPageModel>("Calculate");
             mainContainer.AddPage<LogoutPageModel>("Log out");
+            ((NavigationPage)mainContainer.Detail).Style = MainContainerStyle();
             mainContainer.Init("Menu");
             Application.Current.MainPage = mainContainer;
+        }
+
+        private Style MainContainerStyle()
+        {
+            Style style = new Style(typeof(NavigationPage));
+            style.Setters.Add(new Setter()
+            {
+                Property = NavigationPage.BarBackgroundColorProperty,
+                Value = Color.FromHex("#FFFFFF")
+            });
+            style.Setters.Add(new Setter()
+            {
+                Property = NavigationPage.BarTextColorProperty,
+                Value = Color.FromHex("#FF00FF")
+            });
+
+            return style;
         }
 
         public new event PropertyChangedEventHandler PropertyChanged;

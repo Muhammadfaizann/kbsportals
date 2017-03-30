@@ -11,20 +11,30 @@
         <ResourceDictionary>
             <valueConverters:IsPositiveConverter x:Key="IsPositiveConverter" />
             <valueConverters:PercentageConverter x:Key="PercentageConverter" />
+            <x:String x:Key="EntryColour">#5e5e5e</x:String>
             <x:String x:Key="CurrencySymbol">€</x:String>
             <valueConverters:CurrencyConverter x:Key="CurrencyConverter" CurrencySymbol="{StaticResource CurrencySymbol}" />
-            <Style x:Key="LabelStyle" TargetType="Label">
-                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-                <Setter Property="HorizontalTextAlignment" Value="End"/>
+            <Style TargetType="Label">
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-                <Setter Property="TextColor" Value="#cf6733" />
+                <Setter Property="TextColor" Value="#8e8e8e" />
+            </Style>
+            <Style TargetType="customViews:FormattedEntry">
+                <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
+            </Style>
+            <Style TargetType="customViews:BindablePicker">
+                <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentView.Content>
         <ScrollView>
-            <Label Style="{StaticResource LabelStyle}" Text="{Binding CalculationType}" />
-            <Grid Padding="15">
+            <Grid Padding="15" Margin="30, 0, 30, 20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="2*" />
@@ -51,10 +61,10 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Product" />
+                <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Product" />
                 <customViews:BindablePicker x:Name="ProductPicker" Grid.Row="0" Grid.Column="1" SelectedItem="{Binding CalculatorModel.Product}"/>
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Finance Amount" />
+                <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Finance Amount" />
                 <customViews:FormattedEntry x:Name="FinanceAmount" Keyboard="Numeric" Grid.Row="1" Grid.Column="1"
                                             Value="{Binding CalculatorModel.FinanceAmount}" 
                                             Text="{Binding CalculatorModel.FinanceAmount, Mode=OneWay, Converter={StaticResource CurrencyConverter}, ConverterParameter={StaticResource CurrencySymbol}}"
@@ -67,20 +77,20 @@
                     </Entry.Behaviors>
                 </customViews:FormattedEntry>
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Frequency" />
+                <Label VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Frequency" />
                 <customViews:BindablePicker x:Name="FrequencyPicker" Grid.Row="2" Grid.Column="1" SelectedItem="{Binding CalculatorModel.Frequency}"/>
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Term" />
+                <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Term" />
                 <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding CalculatorModel.Term}" IsEnabled="True" />
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="APR"/>
+                <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="APR"/>
                 <customViews:FormattedEntry x:Name="APR" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Value="{Binding CalculatorModel.APR}" Text="{Binding CalculatorModel.APR, Mode=OneWay, Converter={StaticResource PercentageConverter}}">
                     <x:Arguments>
                         <valueConverters:PercentageConverter />
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="5" Grid.Column="0" Text="IRR" />
+                <Label VerticalTextAlignment="Center" Grid.Row="5" Grid.Column="0" Text="IRR" />
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="5" Grid.Column="1" Value="{Binding CalculatorModel.IRR}" Text="{Binding CalculatorModel.IRR, Mode=OneWay, Converter={StaticResource PercentageConverter}}"
                                             x:Name="IRR">
                     <x:Arguments>
@@ -88,7 +98,7 @@
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="6" Grid.Column="0" Text="Installment" />
+                <Label VerticalTextAlignment="Center" Grid.Row="6" Grid.Column="0" Text="Installment" />
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="6" Grid.Column="1" x:Name="Installment"
                                             Value="{Binding CalculatorModel.Installment}" Text="{Binding CalculatorModel.Installment, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="False">
@@ -101,12 +111,12 @@
                 <!-- Line break here -->
 
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="7" Grid.Column="0" Text="Start Date" />
+                <Label VerticalTextAlignment="Center" Grid.Row="7" Grid.Column="0" Text="Start Date" />
                 <DatePicker Grid.Row="7" Grid.Column="1"
                             Date="{Binding CalculatorModel.StartDate}">
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                 </DatePicker>
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="8" Grid.Column="0" Text="Next Date" />
+                <Label VerticalTextAlignment="Center" Grid.Row="8" Grid.Column="0" Text="Next Date" />
                 <DatePicker Grid.Row="8" Grid.Column="1"
                             Date="{Binding CalculatorModel.NextDate}">
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
@@ -116,12 +126,12 @@
                 <!-- Line break here -->
 
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="9" Grid.Column="0" Text="Up Front No." />
+                <Label VerticalTextAlignment="Center" Grid.Row="9" Grid.Column="0" Text="Up Front No." />
                 <Entry Keyboard="Numeric" Grid.Row="9" Grid.Column="1" x:Name="UpFrontNo"
                        Text="{Binding CalculatorModel.UpFrontNo}"
                        IsEnabled="True" />
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="10" Grid.Column="0" Text="Up Front Value" />
+                <Label VerticalTextAlignment="Center" Grid.Row="10" Grid.Column="0" Text="Up Front Value" />
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="10" Grid.Column="1" x:Name="UpFrontValue"
                                             Value="{Binding CalculatorModel.UpFrontValue}" Text="{Binding CalculatorModel.UpFrontValue, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="{Binding CalculatorModel.UpFrontNo, Converter={StaticResource IsPositiveConverter}}">
@@ -130,7 +140,7 @@
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="11" Grid.Column="0" Text="Doc Fee" />
+                <Label VerticalTextAlignment="Center" Grid.Row="11" Grid.Column="0" Text="Doc Fee" />
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="11" Grid.Column="1"
                                             Value="{Binding CalculatorModel.DocFee}" Text="{Binding CalculatorModel.DocFee, Mode=OneWay, Converter={StaticResource CurrencyConverter}}" IsEnabled="True">
                     <x:Arguments>
@@ -138,7 +148,7 @@
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="12" Grid.Column="0" Text="Commission" />
+                <Label VerticalTextAlignment="Center" Grid.Row="12" Grid.Column="0" Text="Commission" />
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="12" Grid.Column="1"
                                             Value="{Binding CalculatorModel.Commission}" Text="{Binding CalculatorModel.Commission, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="True">
@@ -147,7 +157,7 @@
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="13" Grid.Column="0" Text="Pur Fee" />
+                <Label VerticalTextAlignment="Center" Grid.Row="13" Grid.Column="0" Text="Pur Fee" />
                 <customViews:FormattedEntry x:Name="PurFee"  Keyboard="Numeric" Grid.Row="13" Grid.Column="1"
                                             Value="{Binding CalculatorModel.PurFee}" Text="{Binding CalculatorModel.PurFee, Mode=OneWay, Converter={StaticResource CurrencyConverter}}">
                     <x:Arguments>
@@ -155,7 +165,7 @@
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="14" Grid.Column="0" Text="Ballon" />
+                <Label VerticalTextAlignment="Center" Grid.Row="14" Grid.Column="0" Text="Ballon" />
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="14" Grid.Column="1"
                                             Value="{Binding CalculatorModel.Ballon}" Text="{Binding CalculatorModel.Ballon, Mode=OneWay, Converter={StaticResource CurrencyConverter}}" IsEnabled="True">
                     <x:Arguments>
@@ -163,7 +173,7 @@
                     </x:Arguments>
                 </customViews:FormattedEntry>
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="15" Grid.Column="0" Text="Residual" />
+                <Label VerticalTextAlignment="Center" Grid.Row="15" Grid.Column="0" Text="Residual" />
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="15" Grid.Column="1"
                                             Value="{Binding CalculatorModel.Residual}" Text="{Binding CalculatorModel.Residual, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="True">
@@ -176,7 +186,7 @@
                 <!-- Line break here -->
 
 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="16" Grid.Column="0" Text="Charges" />
+                <Label VerticalTextAlignment="Center" Grid.Row="16" Grid.Column="0" Text="Charges" />
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="16" Grid.Column="1"
                                             Value="{Binding CalculatorModel.Charges}" Text="{Binding CalculatorModel.Charges, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="False">
@@ -185,7 +195,7 @@
                     </x:Arguments>
                 </customViews:FormattedEntry>
                 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="17" Grid.Column="0" Text="Total Cost" />
+                <Label VerticalTextAlignment="Center" Grid.Row="17" Grid.Column="0" Text="Total Cost" />
                 <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="17" Grid.Column="1"
                                             Value="{Binding CalculatorModel.TotalCost}" Text="{Binding CalculatorModel.TotalCost, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                             IsEnabled="False">
@@ -194,7 +204,7 @@
                     </x:Arguments>
                 </customViews:FormattedEntry>
                 
-                <Label Style="{StaticResource LabelStyle}" VerticalTextAlignment="Center" Grid.Row="18" Grid.Column="0" Text="Total Schedule" />
+                <Label VerticalTextAlignment="Center" Grid.Row="18" Grid.Column="0" Text="Total Schedule" />
                 <Entry Keyboard="Numeric" Grid.Row="18" Grid.Column="1" Text="{Binding CalculatorModel.TotalSchedule}"
                        IsEnabled="False" />
             </Grid>
