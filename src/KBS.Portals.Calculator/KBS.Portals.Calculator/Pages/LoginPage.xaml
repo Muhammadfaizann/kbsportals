@@ -11,7 +11,6 @@
         <Entry x:Name="UsernameEntry" Text="{Binding Username}" Placeholder="Username" />
         <Entry x:Name="PasswordEntry" Text="{Binding Password}" IsPassword="True" Placeholder="Password" />
         <StackLayout Orientation="Horizontal">
-            <Button x:Name="ForgetCredentialsButton" Text="Forgot my password" HorizontalOptions="Start" VerticalOptions="Center" />
             <Label Text="Remember Me" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
             <Switch x:Name="RememberUserSwitch" IsToggled="{Binding RememberCredentials}"  VerticalOptions="Center" />
         </StackLayout>
