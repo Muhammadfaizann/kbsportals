@@ -42,7 +42,7 @@ namespace KBS.Portals.Web
                     },
                     AllowedScopes = new List<string>
                     {
-                        "openid",
+                        StandardScopes.OpenId.Name,
                         "idmgr"
                     }
                 }

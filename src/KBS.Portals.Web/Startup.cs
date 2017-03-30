@@ -40,7 +40,9 @@ namespace KBS.Portals.Web
 
             Task.Run(async () =>
             {
-                var aims = new ApplicationIdentityManagerService(new ApplicationUserManager(new ApplicationUserStore(new Models.ApplicationDbContext())), new ApplicationRoleManager(new ApplicationRoleStore(new Models.ApplicationDbContext())));
+                var aims = new ApplicationIdentityManagerService(
+                    new ApplicationUserManager(new ApplicationUserStore(new Models.ApplicationDbContext())), 
+                    new ApplicationRoleManager(new ApplicationRoleStore(new Models.ApplicationDbContext())));
                 await aims.InitialiseAdmin();
             });
         }
