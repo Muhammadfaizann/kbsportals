@@ -4,17 +4,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KBS.Portals.Calculator.Pages.LoginPage"
              Title="Log in"
-             Padding="20,20,20,20"
+             Padding="40,0"
              BackgroundColor="White">
     <StackLayout VerticalOptions="CenterAndExpand" BackgroundColor="White">
         <Image Source="kbs_banner.png" HorizontalOptions="Center" Margin="0,0,0,20"/>
         <Entry x:Name="UsernameEntry" Text="{Binding Username}" Placeholder="Username" />
         <Entry x:Name="PasswordEntry" Text="{Binding Password}" IsPassword="True" Placeholder="Password" />
         <StackLayout Orientation="Horizontal">
-            <Label Text="Remember Me" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="True" />
+            <Label Text="Remember me" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
             <Switch x:Name="RememberUserSwitch" IsToggled="{Binding RememberCredentials}"  VerticalOptions="Center" />
         </StackLayout>
-        <Button x:Name="LoginButton" Command="{Binding Login}" Text="Log in" HorizontalOptions="FillAndExpand" />
-        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="True" />
+        <Button x:Name="LoginButton" Command="{Binding Login}" Text="Log in" WidthRequest="200" Margin="0, 40" HorizontalOptions="Center" BackgroundColor="#cf6733" TextColor="White"/>
     </StackLayout>
 </ContentPage>
