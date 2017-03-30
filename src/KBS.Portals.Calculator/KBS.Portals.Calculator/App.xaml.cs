@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using KBS.Portals.Calculator.Config;
 using KBS.Portals.Calculator.Enums;
 using KBS.Portals.Calculator.PageModels;
 using KBS.Portals.Calculator.Services;
@@ -12,13 +13,14 @@ namespace KBS.Portals.Calculator
         {
             SetupIOC();
             var page = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
-            var navContainer = new FreshNavigationContainer(page, NavigationContainerNames.AuthenticationContainer);
-            MainPage = navContainer;
+            MainPage = page;
         }
 
         private void SetupIOC()
         {
-            FreshMvvm.FreshIOC.Container.Register<ISettingsService, SettingsService>();
+            FreshIOC.Container.Register<ISettingsService, SettingsService>();
+            FreshIOC.Container.Register<IAuthenticationService, AuthenticationService>();
+            AutoMapperConfig.Init();
         }
 
         protected override void OnStart()

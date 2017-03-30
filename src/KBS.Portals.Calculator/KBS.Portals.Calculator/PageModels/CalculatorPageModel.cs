@@ -5,20 +5,24 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CarouselView.FormsPlugin.Abstractions;
 using FreshMvvm;
+using KBS.Portals.Calculator.Logic;
 using KBS.Portals.Calculator.Logic.Enums;
+using KBS.Portals.Calculator.Logic.Models;
 using KBS.Portals.Calculator.Models;
+using KBS.Portals.Calculator.Pages;
 using KBS.Portals.Calculator.Services;
 using Xamarin.Forms;
+using AutoMapper;
 
 namespace KBS.Portals.Calculator.PageModels
 {
     public class CalculatorPageModel : FreshBasePageModel, INotifyPropertyChanged
     {
-        private ISettingsService _settingsService;
-        private CalculatorModel _calculatorModel;
+        private readonly ISettingsService _settingsService;
+        public CalculatorModel CalculatorModel { get; set; }
         public IList<CalculatorCarouselModel> PageModels { get; set; }
-        private string _title;
-        public string Title
+        private CalculationType _title;
+        public CalculationType Title
         {
             get { return _title; }
             set
@@ -31,7 +35,7 @@ namespace KBS.Portals.Calculator.PageModels
         public CalculatorPageModel(ISettingsService settingsService)
         {
             _settingsService = settingsService;
-            _calculatorModel = new CalculatorModel()
+            CalculatorModel = new CalculatorModel()
             {
                 Product = Product.Lease,
                 Frequency = Frequency.Monthly,
@@ -46,11 +50,11 @@ namespace KBS.Portals.Calculator.PageModels
 
             PageModels = new List<CalculatorCarouselModel>
             {
-                new CalculatorCarouselModel(CalculationType.APRInstallment, _calculatorModel),
-                new CalculatorCarouselModel(CalculationType.IRRInstallment, _calculatorModel),
-                new CalculatorCarouselModel(CalculationType.Rate, _calculatorModel)
+                new CalculatorCarouselModel(CalculationType.APRInstallment, CalculatorModel),
+                new CalculatorCarouselModel(CalculationType.IRRInstallment, CalculatorModel),
+                new CalculatorCarouselModel(CalculationType.Rate, CalculatorModel)
             };
-            Title = PageModels[0].CalculationType.ToString();
+            Title = PageModels[0].CalculationType;
         }
 
         public Command Calculate
@@ -59,19 +63,30 @@ namespace KBS.Portals.Calculator.PageModels
             {
                 return new Command(() =>
                 {
-                    _settingsService.APR = _calculatorModel.APR;
-                    _settingsService.IRR = _calculatorModel.IRR;
-                    _settingsService.DocFee = _calculatorModel.DocFee;
-                    _settingsService.PurFee = _calculatorModel.PurFee;
-                    _settingsService.Term = _calculatorModel.Term;
+                    SaveLastUsedValues();
+                    CalculatorData backendDataModel = Mapper.Map<CalculatorData>(CalculatorModel);
+                    ICalculator calculator = CalculatorFactory.Create(Title, backendDataModel);
+                    var resultData = calculator.Calculate();
+                    CalculatorModel resultModel = Mapper.Map<CalculatorModel>(resultData);
+                    Mapper.Map(resultModel, CalculatorModel); // Call the set methods to trigger bindings
+                    CalculatorModel.IsDirty = false;
                 });
             }
+        }
+
+        private void SaveLastUsedValues()
+        {
+            _settingsService.APR = CalculatorModel.APR;
+            _settingsService.IRR = CalculatorModel.IRR;
+            _settingsService.DocFee = CalculatorModel.DocFee;
+            _settingsService.PurFee = CalculatorModel.PurFee;
+            _settingsService.Term = CalculatorModel.Term;
         }
 
         public void OnPositionSelected(object sender, EventArgs e)
         {
             var carouselViewControl = (sender as CarouselViewControl);
-            Title = PageModels[carouselViewControl.Position].CalculationType.ToString();
+            Title = PageModels[carouselViewControl.Position].CalculationType;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

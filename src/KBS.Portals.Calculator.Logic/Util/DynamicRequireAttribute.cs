@@ -7,6 +7,7 @@ namespace KBS.Portals.Calculator.Logic.Util
 {
     public class DynamicRequireAttribute : ValidationAttribute
     {
+        //TODO Add required validaion and ensure it is linked into models
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var cd = (CalculatorData)validationContext.ObjectInstance;

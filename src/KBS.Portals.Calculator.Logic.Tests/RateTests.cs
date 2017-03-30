@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace KBS.Portals.Calculator.Logic.Tests
 {
     [TestFixture]
-    public class Rateests
+    public class RateTests
     {
         [Test]
         public void CanGetCalculatorFromFactory()

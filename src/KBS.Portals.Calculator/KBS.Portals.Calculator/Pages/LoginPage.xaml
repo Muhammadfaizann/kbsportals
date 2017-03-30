@@ -1,18 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KBS.Portals.Calculator.Pages.LoginPage">
+             x:Class="KBS.Portals.Calculator.Pages.LoginPage"
+             Title="Log in">
     <StackLayout>
         <Label Text="Logo comes here"></Label>
         <Label Text="Username"/>
         <Entry x:Name="UsernameEntry" Text="{Binding Username}"/>
         <Label Text="Password"/>
-        <Entry x:Name="PasswordEntry" Text="{Binding Password}"/>
+        <Entry x:Name="PasswordEntry" Text="{Binding Password}" IsPassword="True"/>
         <Label Text="Remember Me"/>
         <Switch x:Name="RememberUserSwitch" />
         <StackLayout>
             <Button x:Name="ForgetCredentialsButton" Text="Forgot my password"/>
             <Button x:Name="LoginButton" Command="{Binding Login}" Text="LOG IN"/>
         </StackLayout>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="True" />
     </StackLayout>
 </ContentPage>

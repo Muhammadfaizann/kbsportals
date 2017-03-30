@@ -22,7 +22,8 @@ namespace KBS.Portals.Web
                         new ScopeClaim(Constants.ClaimTypes.Name),
                         new ScopeClaim(Constants.ClaimTypes.Role)
                     }
-                }};
+                }
+            };
         }
     }
 }

@@ -41,6 +41,7 @@
     </Compile>
     <Compile Include="Behaviours\BaseEntryBehavior.cs" />
     <Compile Include="Behaviours\PositiveNumberBehavior.cs" />
+    <Compile Include="Config\AutoMapperConfig.cs" />
     <Compile Include="CustomViews\BindablePicker.cs" />
     <Compile Include="CustomViews\FormattedEntry.cs" />
     <Compile Include="Enums\EnumerableExtensions.cs" />
@@ -50,14 +51,21 @@
     <Compile Include="Models\CalculatorModel.cs" />
     <Compile Include="PageModels\CalculatorPageModel.cs" />
     <Compile Include="PageModels\LoginPageModel.cs" />
+    <Compile Include="PageModels\LogoutPageModel.cs" />
     <Compile Include="Pages\CalculatorPage.xaml.cs">
       <DependentUpon>CalculatorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LogoutPage.xaml.cs">
+      <DependentUpon>LogoutPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\ISettingsService.cs" />
+    <Compile Include="Services\IQuitApplicationService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="ValueConverters\IsPositiveConverter.cs" />
     <Compile Include="ValueConverters\PercentageConverter.cs" />
@@ -72,7 +80,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\LogoutPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

@@ -39,7 +39,7 @@ namespace KBS.Portals.Calculator.Logic
                 Input.AddSchedule(i, ScheduleType.DOC, 1, Input.Frequency, Input.DocFee, Input.NextDate);
                 i++;
             }
-            if (Input.NoOfInstallments > 0)
+            if (Input.NoOfInstallments > 0 || Input.Installment > 0)
             {
                 Input.AddSchedule(i, ScheduleType.INS, Input.NoOfInstallments, Input.Frequency, Input.Installment, Input.NextDate);
                 i++;
@@ -74,7 +74,7 @@ namespace KBS.Portals.Calculator.Logic
             Input = input;
         }
 
-        private void BuildChron()
+        protected void BuildChron()
         {
             var nextDate = default(DateTime);
             var serial = 0;
@@ -96,7 +96,13 @@ namespace KBS.Portals.Calculator.Logic
                 }
 
                 foreach (Schedule schedule in Input.Schedules)
+
                 {
+                    if (schedule.NextDate == default(DateTime))
+                    {
+                        schedule.NextDate = nextDate;
+                    }
+
                     if (schedule.Type.Equals(ScheduleType.FEE) || schedule.Type.Equals(ScheduleType.DOC) || schedule.Type.Equals(ScheduleType.PUR))
                     {
                         YieldCalcChron.Add(new SortKey(Input.NextDate, serial), new YieldCalc(schedule.Amount, Input.NextDate, false, schedule.Type));

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FreshMvvm;
+﻿using System.Linq;
 using KBS.Portals.Calculator.PageModels;
 using KBS.Portals.Calculator.Services;
 using Xamarin.Forms;
@@ -18,6 +13,18 @@ namespace KBS.Portals.Calculator.Pages
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            var loginPageModel = BindingContext as LoginPageModel;
+            loginPageModel.Quit();
+            return base.OnBackButtonPressed();
+        }
+
+        public void DisplayLoginFailed()
+        {
+            DisplayAlert("Log In Failed", "Your username or password wasn't accepted by the server.", "Okay");
         }
     }
 }

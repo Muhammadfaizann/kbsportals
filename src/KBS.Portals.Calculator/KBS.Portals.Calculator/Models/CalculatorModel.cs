@@ -14,8 +14,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _product; }
             set
             {
-                _product = value;
-                OnPropertyChanged();
+                if (_product != value)
+                {
+                    _product = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -26,8 +29,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _financeAmount; }
             set
             {
-                _financeAmount = value;
-                OnPropertyChanged();
+                if (_financeAmount != value)
+                {
+                    _financeAmount = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -38,8 +44,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _commission; }
             set
             {
-                _commission = value;
-                OnPropertyChanged();
+                if (_commission != value)
+                {
+                    _commission = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -50,8 +59,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _upFrontNo; }
             set
             {
-                _upFrontNo = value;
-                OnPropertyChanged();
+                if (_upFrontNo != value)
+                {
+                    _upFrontNo = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -62,8 +74,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _upFrontValue; }
             set
             {
-                _upFrontValue = value;
-                OnPropertyChanged();
+                if (_upFrontValue != value)
+                {
+                    _upFrontValue = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -74,8 +89,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _aPR; }
             set
             {
-                _aPR = value;
-                OnPropertyChanged();
+                if (_aPR != value)
+                {
+                    _aPR = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -86,8 +104,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _iRR; }
             set
             {
-                _iRR = value;
-                OnPropertyChanged();
+                if (_iRR != value)
+                {
+                    _iRR = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -98,8 +119,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _docFee; }
             set
             {
-                _docFee = value;
-                OnPropertyChanged();
+                if (_docFee != value)
+                {
+                    _docFee = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -110,8 +134,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _purFee; }
             set
             {
-                _purFee = value;
-                OnPropertyChanged();
+                if (_purFee != value)
+                {
+                    _purFee = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -122,8 +149,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _ballon; }
             set
             {
-                _ballon = value;
-                OnPropertyChanged();
+                if (_ballon != value)
+                {
+                    _ballon = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -134,8 +164,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _residual; }
             set
             {
-                _residual = value;
-                OnPropertyChanged();
+                if (_residual != value)
+                {
+                    _residual = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -146,8 +179,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _startDate; }
             set
             {
-                _startDate = value;
-                OnPropertyChanged();
+                if (_startDate != value)
+                {
+                    _startDate = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -158,8 +194,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _nextDate; }
             set
             {
-                _nextDate = value;
-                OnPropertyChanged();
+                if (_nextDate != value)
+                {
+                    _nextDate = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -170,8 +209,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _frequency; }
             set
             {
-                _frequency = value;
-                OnPropertyChanged();
+                if (_frequency != value)
+                {
+                    _frequency = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -182,8 +224,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _installment; }
             set
             {
-                _installment = value;
-                OnPropertyChanged();
+                if (_installment != value)
+                {
+                    _installment = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -194,8 +239,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _charges; }
             set
             {
-                _charges = value;
-                OnPropertyChanged();
+                if (_charges != value)
+                {
+                    _charges = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -206,8 +254,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _term; }
             set
             {
-                _term = value;
-                OnPropertyChanged();
+                if (_term != value)
+                {
+                    _term = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -218,8 +269,11 @@ namespace KBS.Portals.Calculator.Models
             get { return _totalCost; }
             set
             {
-                _totalCost = value;
-                OnPropertyChanged();
+                if (_totalCost != value)
+                {
+                    _totalCost = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -230,8 +284,26 @@ namespace KBS.Portals.Calculator.Models
             get { return _totalSchedule; }
             set
             {
-                _totalSchedule = value;
-                OnPropertyChanged();
+                if (_totalSchedule != value)
+                {
+                    _totalSchedule = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private bool _isDirty;
+
+        public bool IsDirty
+        {
+            get { return _isDirty; }
+            set
+            {
+                if (_isDirty != value)
+                {
+                    _isDirty = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -239,6 +311,10 @@ namespace KBS.Portals.Calculator.Models
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
+            if (propertyName != null && !propertyName.Equals(nameof(IsDirty)))
+            {
+                IsDirty = true;
+            }
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }

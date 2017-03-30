@@ -44,6 +44,9 @@ namespace KBS.Portals.Calculator.Logic.Models
         public decimal TotalCost { get; set; }
         public decimal TotalSchedule { get; set; }
 
+        public int Term => Convert.ToInt32( NoOfInstallments * (int)Frequency);
+        public decimal LoanOverPayment { get; set; } // Value return in term Calculation
+
         public void AddSchedule(int serial, ScheduleType type, int counts, Frequency frequency, decimal amount, DateTime nextDate)
         {
             AddSchedule(new Schedule(serial, type, counts, frequency,amount, nextDate));

@@ -45,6 +45,9 @@ namespace KBS.Portals.Web
                     new ApplicationRoleManager(new ApplicationRoleStore(new Models.ApplicationDbContext())));
                 await aims.InitialiseAdmin();
             });
+
+            IdentityManagerConfig.SetUpIdentityManager(app);
+            IdentityServerConfig.SetUpIdentityServer(app);
         }
     }
 }

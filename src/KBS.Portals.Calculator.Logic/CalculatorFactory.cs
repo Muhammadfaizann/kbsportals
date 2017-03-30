@@ -16,17 +16,22 @@ namespace KBS.Portals.Calculator.Logic
         {
             //TODO replace with DI code
 
-            if (type == CalculationType.APRInstallment)
+            switch (type)
             {
-                return new InstallmentApr(input);
-            }
-            if (type == CalculationType.IRRInstallment)
-            {
-                return new InstallmentIrr(input);
-            }
-            if (type == CalculationType.Rate)
-            {
-                return new Rate(input);
+                case CalculationType.APRInstallment:
+                    return new InstallmentApr(input);
+                case CalculationType.IRRInstallment:
+                    return new InstallmentIrr(input);
+                case CalculationType.Rate:
+                    return new Rate(input);
+                case CalculationType.FinanceAmount:
+                    return new FinanceAmount(input);
+                case CalculationType.Term:
+                    return new Term(input);
+                case CalculationType.BalRes:
+                    return new BalRes(input);
+                case CalculationType.Commission:
+                    return new Commission(input);
             }
 
             throw new ArgumentException($"Type {type} is not supported");
