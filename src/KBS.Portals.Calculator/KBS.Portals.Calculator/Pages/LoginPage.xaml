@@ -1,20 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KBS.Portals.Calculator.Pages.LoginPage"
-             Title="Log in">
-    <StackLayout>
-        <Label Text="Logo comes here"></Label>
-        <Label Text="Username"/>
-        <Entry x:Name="UsernameEntry" Text="{Binding Username}"/>
-        <Label Text="Password"/>
-        <Entry x:Name="PasswordEntry" Text="{Binding Password}" IsPassword="True"/>
-        <Label Text="Remember Me"/>
-        <Switch x:Name="RememberUserSwitch" IsToggled="{Binding RememberCredentials}"/>
-        <StackLayout>
-            <Button x:Name="ForgetCredentialsButton" Text="Forgot my password"/>
-            <Button x:Name="LoginButton" Command="{Binding Login}" Text="LOG IN"/>
+             Title="Log in"
+             Padding="20,20,20,20"
+             BackgroundColor="White">
+    <StackLayout VerticalOptions="CenterAndExpand" BackgroundColor="White">
+        <Image Source="kbs_banner.png" HorizontalOptions="Center" Margin="0,0,0,20"/>
+        <Entry x:Name="UsernameEntry" Text="{Binding Username}" Placeholder="Username" />
+        <Entry x:Name="PasswordEntry" Text="{Binding Password}" IsPassword="True" Placeholder="Password" />
+        <StackLayout Orientation="Horizontal">
+            <Button x:Name="ForgetCredentialsButton" Text="Forgot my password" HorizontalOptions="Start" VerticalOptions="Center" />
+            <Label Text="Remember Me" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+            <Switch x:Name="RememberUserSwitch" IsToggled="{Binding RememberCredentials}"  VerticalOptions="Center" />
         </StackLayout>
+        <Button x:Name="LoginButton" Command="{Binding Login}" Text="Log in" HorizontalOptions="FillAndExpand" />
         <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="True" />
     </StackLayout>
 </ContentPage>
