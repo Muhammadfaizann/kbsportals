@@ -1,6 +1,7 @@
-﻿using IdentityServer3.Core.Configuration;
-using IdentityServer3.Core.Services;
+﻿using System.Web.Mvc;
+using System.Web.Routing;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
 using Owin;
 
 [assembly: OwinStartup(typeof(KBS.Portals.Web.Startup))]
@@ -10,21 +11,20 @@ namespace KBS.Portals.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            var factory = new IdentityServerServiceFactory()
-                .UseInMemoryClients(Clients.Get())
-                .UseInMemoryScopes(Scopes.Get())
-                .UseInMemoryUsers(Users.Get());
+            AreaRegistration.RegisterAllAreas();
+            GlobalFilters.Filters.Add(new HandleErrorAttribute());
+            RouteTable.Routes.MapRoute("Default", "{controller}/{action}/{id}",
+                new {controller = "Home", action = "Index", id = UrlParameter.Optional}
+                );
 
-            var options = new IdentityServerOptions
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                //SigningCertificate = Certificate.Load(),
-                Factory = factory,
-            };
-
-            app.Map("/core", idsrvApp =>
-            {
-                idsrvApp.UseIdentityServer(options);
+                AuthenticationType = "Cookies",
+                LoginPath = new PathString("/Home/Login")
             });
+
+            IdentityManagerConfig.SetUpIdentityManager(app);
+            IdentityServerConfig.SetUpIdentityServer(app);
         }
     }
 }

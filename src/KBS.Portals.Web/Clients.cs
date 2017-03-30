@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using IdentityServer3.Core;
 using IdentityServer3.Core.Models;
@@ -13,32 +14,22 @@ namespace KBS.Portals.Web
             {
                 new Client
                 {
-                    ClientName = "Client Credentials Flow Client",
-                    Enabled = true,
-                    ClientId = "clientcredentials.client",
-                    Flow = Flows.ClientCredentials,
+                    ClientName = "KBS Calculator",
+                    ClientId = "KBS.Calculator",
+                    Flow = Flows.ResourceOwner,
 
                     ClientSecrets = new List<Secret>
                     {
-                        new Secret("secret".Sha256()),
-                        //new Secret
-                        //{
-                        //    Value = "", // TODO: Thumbprint here
-                        //    Type = Constants.SecretTypes.X509CertificateThumbprint,
-                        //    Description = "Client Certificate"
-                        //},
+                        new Secret("3ZufOIEYhWT#!duEN8mB".Sha256())
                     },
 
-                    AllowedScopes = new List<string>
+                    AllowedScopes = new List<Scope>
                     {
-                        "KBS.Portals.Calculator"
-                    },
-
-                    Claims = new List<Claim>
-                    {
-                        new Claim("location", "datacenter")
-                    }
+                        StandardScopes.OpenId,
+                        StandardScopes.AllClaims
+                    }.Select(x => x.Name).ToList(),
                 }
+                
             };
         }
     }

@@ -1,0 +1,20 @@
+﻿@using System.Web.Mvc.Html
+@inherits System.Web.Mvc.WebViewPage 
+<title>Login to KBS Portals</title>
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.Label("Username")
+        @Html.TextBox("Username")
+    </div>
+    <div>
+        @Html.Label("Password")
+        @Html.TextBox("Password")
+    </div>
+    <div>
+        <button>Login</button>
+    </div>
+}
