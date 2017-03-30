@@ -23,7 +23,8 @@ namespace KBS.Portals.Web
                 identityManagerServiceFactory.Register(new Registration<ApplicationRoleManager>());
                 identityManagerServiceFactory.Register(new Registration<ApplicationRoleStore>());
                 identityManagerServiceFactory.Register(new Registration<ApplicationUserStore>());
-                identityManagerServiceFactory.Register(new Registration<ApplicationDbContext>());
+                // this is registered as a factory
+                identityManagerServiceFactory.Register(new Registration<ApplicationDbContext>(resolver => new ApplicationDbContext()));
                 idm.UseIdentityManager(new IdentityManagerOptions
                 {
                     Factory = identityManagerServiceFactory,
