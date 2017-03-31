@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KBS.Portals.Calculator.Pages.FeedbackPage"
+             Title="Leave Feedback"
+             BackgroundColor="White">
+    <StackLayout>
+        <Editor x:Name="UserInput" VerticalOptions="FillAndExpand" Margin="30,30,30,5" BackgroundColor="#F5F5F5"/>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="30,5,30,15">
+            <Label Text="Include the current calculator data" HorizontalOptions="End" VerticalOptions="Center" />
+            <Switch x:Name="IncludeModel" HorizontalOptions="End" VerticalOptions="Center" />
+        </StackLayout>
+        <Button Text="Send feedback to KBS" BackgroundColor="#cf6733" TextColor="White" BorderRadius="0" FontSize="17" />
+    </StackLayout>
+</ContentPage>

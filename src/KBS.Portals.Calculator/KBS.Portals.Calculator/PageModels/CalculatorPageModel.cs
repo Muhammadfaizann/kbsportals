@@ -13,6 +13,7 @@ using KBS.Portals.Calculator.Pages;
 using KBS.Portals.Calculator.Services;
 using Xamarin.Forms;
 using AutoMapper;
+using KBS.Portals.Calculator.Views;
 
 namespace KBS.Portals.Calculator.PageModels
 {
@@ -55,6 +56,11 @@ namespace KBS.Portals.Calculator.PageModels
                 new CalculatorCarouselModel(CalculationType.Rate, CalculatorModel)
             };
             Title = PageModels[0].CalculationType;
+            NavContainer nav = FreshIOC.Container.Resolve<NavContainer>();
+            nav.FeedbackItem.Clicked += (sender, args) =>
+            {
+                CoreMethods.PushPageModel<FeedbackPageModel>(CalculatorModel);
+            };
         }
 
         public Command Calculate
