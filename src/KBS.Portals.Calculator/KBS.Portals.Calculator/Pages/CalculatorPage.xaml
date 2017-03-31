@@ -6,7 +6,7 @@
              xmlns:views="clr-namespace:KBS.Portals.Calculator.Views;assembly=KBS.Portals.Calculator"
              xmlns:valueConverters="clr-namespace:KBS.Portals.Calculator.ValueConverters;assembly=KBS.Portals.Calculator"
              x:Class="KBS.Portals.Calculator.Pages.CalculatorPage"
-             Title="{Binding Title, Converter={StaticResource EnumDescriptionConverter}">
+             Title="{Binding Title, Converter={StaticResource EnumDescriptionConverter}}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <valueConverters:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
@@ -40,6 +40,6 @@
             x:Name="CalculateButton"
             Text="Calculate"
             IsEnabled="{Binding CalculatorModel.IsDirty}"
-            Command="{Binding Calculate}" Style="{StaticResource PageButton}" />
+            Command="{Binding Calculate}" />
     </Grid>
 </ContentPage>

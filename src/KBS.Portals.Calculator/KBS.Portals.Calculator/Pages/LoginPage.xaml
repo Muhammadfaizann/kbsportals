@@ -17,6 +17,6 @@
             <Switch x:Name="RememberUserSwitch" IsToggled="{Binding RememberCredentials}" VerticalOptions="Center" />
         </StackLayout>
         <Button x:Name="LoginButton" Command="{Binding Login}" Text="Log in" WidthRequest="150" Margin="0, 40, 0, 0"
-                HorizontalOptions="Center" BackgroundColor="#cf6733" TextColor="White" BorderRadius="2"/>
+                HorizontalOptions="Center" FontSize="15" BorderRadius="2"/>
     </StackLayout>
 </ContentPage>

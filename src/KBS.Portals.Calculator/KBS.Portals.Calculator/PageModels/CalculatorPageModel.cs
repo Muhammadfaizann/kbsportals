@@ -59,7 +59,7 @@ namespace KBS.Portals.Calculator.PageModels
             NavContainer nav = FreshIOC.Container.Resolve<NavContainer>();
             nav.FeedbackItem.Clicked += (sender, args) =>
             {
-                CoreMethods.PushPageModel<FeedbackPageModel>(CalculatorModel);
+                CoreMethods.PushPageModelWithNewNavigation<FeedbackPageModel>(CalculatorModel);
             };
         }
 

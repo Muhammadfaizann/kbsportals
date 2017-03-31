@@ -11,6 +11,6 @@
             <Label Text="Include the current calculator data" HorizontalOptions="End" VerticalOptions="Center" />
             <Switch x:Name="IncludeModel" HorizontalOptions="End" VerticalOptions="Center" />
         </StackLayout>
-        <Button Text="Send feedback to KBS" BackgroundColor="#cf6733" TextColor="White" BorderRadius="0" FontSize="17" />
+        <Button Text="Send feedback to KBS" x:Name="SubmitButton"/>
     </StackLayout>
 </ContentPage>

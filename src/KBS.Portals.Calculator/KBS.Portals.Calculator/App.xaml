@@ -5,7 +5,9 @@
              x:Class="KBS.Portals.Calculator.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Style x:Key="PageButton" TargetType="Button">
+            <x:String x:Key="EntryColour">#5e5e5e</x:String>
+            <x:String x:Key="CurrencySymbol">€</x:String>
+            <Style TargetType="Button">
                 <Setter Property="BackgroundColor" Value="#cf6733" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="BorderRadius" Value="0" />

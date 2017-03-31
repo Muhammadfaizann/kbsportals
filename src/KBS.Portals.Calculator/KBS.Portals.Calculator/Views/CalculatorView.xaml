@@ -9,8 +9,6 @@
         <ResourceDictionary>
             <valueConverters:IsPositiveConverter x:Key="IsPositiveConverter" />
             <valueConverters:PercentageConverter x:Key="PercentageConverter" />
-            <x:String x:Key="EntryColour">#5e5e5e</x:String>
-            <x:String x:Key="CurrencySymbol">€</x:String>
             <valueConverters:CurrencyConverter x:Key="CurrencyConverter" CurrencySymbol="{StaticResource CurrencySymbol}" />
             <Style TargetType="Label">
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
