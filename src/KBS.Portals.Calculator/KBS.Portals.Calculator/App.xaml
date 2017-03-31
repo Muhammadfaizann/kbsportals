@@ -4,5 +4,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KBS.Portals.Calculator.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PageButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#cf6733" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="FontSize" Value="17" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

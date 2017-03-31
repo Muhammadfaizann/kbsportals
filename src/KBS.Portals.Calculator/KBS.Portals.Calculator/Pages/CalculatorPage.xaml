@@ -40,6 +40,6 @@
             x:Name="CalculateButton"
             Text="Calculate"
             IsEnabled="{Binding CalculatorModel.IsDirty}"
-            Command="{Binding Calculate}" BackgroundColor="#cf6733" TextColor="White" BorderRadius="0" FontSize="17" />
+            Command="{Binding Calculate}" Style="{StaticResource PageButton}" />
     </Grid>
 </ContentPage>

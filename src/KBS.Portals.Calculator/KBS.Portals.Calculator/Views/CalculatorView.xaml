@@ -7,7 +7,7 @@
              xmlns:behaviors="clr-namespace:KBS.Portals.Calculator.Behaviours;assembly=KBS.Portals.Calculator"
              xmlns:customViews="clr-namespace:KBS.Portals.Calculator.CustomViews;assembly=KBS.Portals.Calculator"
              x:Class="KBS.Portals.Calculator.Views.CalculatorView">
-    <ContentPage.Resources>
+    <ContentView.Resources>
         <ResourceDictionary>
             <valueConverters:IsPositiveConverter x:Key="IsPositiveConverter" />
             <valueConverters:PercentageConverter x:Key="PercentageConverter" />
@@ -31,7 +31,7 @@
                 <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
             </Style>
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </ContentView.Resources>
     <ContentView.Content>
         <ScrollView>
             <Grid Padding="15" Margin="30, 0, 30, 20">

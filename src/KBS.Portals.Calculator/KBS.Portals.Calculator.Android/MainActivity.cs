@@ -18,7 +18,6 @@ namespace KBS.Portals.Calculator.Droid
         {
             FreshIOC.Container.Register<IQuitApplicationService, QuitApplicationService>();
             base.OnCreate(bundle);
-            
             ActionBar.SetIcon(null);
             SetupHockeyApp();
             Forms.Init(this, bundle);

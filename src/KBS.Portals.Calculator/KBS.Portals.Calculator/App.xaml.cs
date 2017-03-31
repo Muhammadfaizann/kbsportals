@@ -11,6 +11,7 @@ namespace KBS.Portals.Calculator
     {
         public App()
         {
+            InitializeComponent();
             SetupIOC();
             var page = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
             MainPage = page;
