@@ -20,7 +20,8 @@ namespace KBS.Portals.Web
                 new Registration<IUserService>(typeof (ApplicationUserService));
             factory.Register(new Registration<UserManager<ApplicationUser, string>>());
             factory.Register(new Registration<ApplicationUserStore>());
-            factory.Register(new Registration<ApplicationDbContext>());
+            // this is registered as a factory
+            factory.Register(new Registration<ApplicationDbContext>(resolver => new ApplicationDbContext()));
             factory.Register(
                 new Registration<IUserStore<ApplicationUser, string>>(
                     resolver => resolver.Resolve<ApplicationUserStore>()));
@@ -28,6 +29,7 @@ namespace KBS.Portals.Web
             var options = new IdentityServerOptions
             {
                 Factory = factory,
+                SigningCertificate = Certificate.Get()
             };
             app.Map("/core", idsrvApp => { idsrvApp.UseIdentityServer(options); });
         }

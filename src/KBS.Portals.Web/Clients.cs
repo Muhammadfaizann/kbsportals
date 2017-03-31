@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using IdentityServer3.Core;
 using IdentityServer3.Core.Models;
+using System.Web.Configuration;
 
 namespace KBS.Portals.Web
 {
@@ -28,8 +29,23 @@ namespace KBS.Portals.Web
                         StandardScopes.OpenId,
                         StandardScopes.AllClaims
                     }.Select(x => x.Name).ToList(),
+                },
+                new Client
+                {
+                    ClientName = "KBS Portal Admin",
+                    ClientId = "idmgr",
+                    Flow = Flows.Implicit,
+                    Enabled = true,
+                    RedirectUris = new List<string>
+                    {
+                        WebConfigurationManager.AppSettings["IdentityManagerUri"],
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        StandardScopes.OpenId.Name,
+                        "idmgr"
+                    }
                 }
-                
             };
         }
     }
