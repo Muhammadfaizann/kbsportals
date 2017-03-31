@@ -7,18 +7,34 @@
              xmlns:behaviors="clr-namespace:KBS.Portals.Calculator.Behaviours;assembly=KBS.Portals.Calculator"
              xmlns:customViews="clr-namespace:KBS.Portals.Calculator.CustomViews;assembly=KBS.Portals.Calculator"
              x:Class="KBS.Portals.Calculator.Views.CalculatorView">
-    <ContentPage.Resources>
+    <ContentView.Resources>
         <ResourceDictionary>
             <valueConverters:IsPositiveConverter x:Key="IsPositiveConverter" />
             <valueConverters:PercentageConverter x:Key="PercentageConverter" />
+            <x:String x:Key="EntryColour">#5e5e5e</x:String>
             <x:String x:Key="CurrencySymbol">€</x:String>
             <valueConverters:CurrencyConverter x:Key="CurrencyConverter" CurrencySymbol="{StaticResource CurrencySymbol}" />
+            <Style TargetType="Label">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="TextColor" Value="#8e8e8e" />
+            </Style>
+            <Style TargetType="customViews:FormattedEntry">
+                <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
+            </Style>
+            <Style TargetType="customViews:BindablePicker">
+                <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
+            </Style>
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </ContentView.Resources>
     <ContentView.Content>
         <ScrollView>
-            <Label Text="{Binding CalculationType}" />
-            <Grid Padding="15">
+            <Grid Padding="15" Margin="30, 0, 30, 20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="2*" />

@@ -67,6 +67,7 @@
     <Compile Include="Services\ISettingsService.cs" />
     <Compile Include="Services\IQuitApplicationService.cs" />
     <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="ValueConverters\EnumDescriptionConverter.cs" />
     <Compile Include="ValueConverters\IsPositiveConverter.cs" />
     <Compile Include="ValueConverters\PercentageConverter.cs" />
     <Compile Include="ValueConverters\CurrencyConverter.cs" />

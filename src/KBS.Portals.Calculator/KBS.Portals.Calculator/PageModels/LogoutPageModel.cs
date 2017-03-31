@@ -21,9 +21,6 @@ namespace KBS.Portals.Calculator.PageModels
 
         protected override void ViewIsAppearing(object sender, EventArgs e)
         {
-            _settingsService.Username = "";
-            _settingsService.Password = "";
-            
             CoreMethods.PushPageModelWithNewNavigation<LoginPageModel>(null);
         }
     }

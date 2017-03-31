@@ -47,7 +47,19 @@ namespace KBS.Portals.Calculator.PageModels
             }
         }
 
-        public bool RememberCredentials { get; set; }
+        private bool _rememberCredentials;
+
+        public bool RememberCredentials
+        {
+            get { return _rememberCredentials; }
+            set
+            {
+                _rememberCredentials = value;
+                _settingsService.RememberMe = value;
+                OnPropertyChanged();
+            }
+        }
+        
         public bool LoggedIn { get; set; }
         private readonly ISettingsService _settingsService;
         private readonly IQuitApplicationService _quitApplicationService;
@@ -60,6 +72,7 @@ namespace KBS.Portals.Calculator.PageModels
             _quitApplicationService = quitApplicationService;
             Username = _settingsService.Username;
             Password = _settingsService.Password;
+            RememberCredentials = _settingsService.RememberMe;
         }
 
         public void Quit()
@@ -93,13 +106,39 @@ namespace KBS.Portals.Calculator.PageModels
         private void LoginSuccess()
         {
             LoggedIn = true;
-            _settingsService.Username = Username;
-            _settingsService.Password = Password;
+            if (RememberCredentials)
+            {
+                _settingsService.Username = Username;
+                _settingsService.Password = Password;
+            }
+            else
+            {
+                _settingsService.Username = "";
+                _settingsService.Password = "";
+            }
             var mainContainer = new FreshMasterDetailNavigationContainer(NavigationContainerNames.MainContainer);
             mainContainer.AddPage<CalculatorPageModel>("Calculate");
             mainContainer.AddPage<LogoutPageModel>("Log out");
+            ((NavigationPage)mainContainer.Detail).Style = MainContainerStyle();
             mainContainer.Init("Menu");
             Application.Current.MainPage = mainContainer;
+        }
+
+        private Style MainContainerStyle()
+        {
+            Style style = new Style(typeof(NavigationPage));
+            style.Setters.Add(new Setter()
+            {
+                Property = NavigationPage.BarBackgroundColorProperty,
+                Value = Color.FromHex("#FFFFFF")
+            });
+            style.Setters.Add(new Setter()
+            {
+                Property = NavigationPage.BarTextColorProperty,
+                Value = Color.FromHex("#FF00FF")
+            });
+
+            return style;
         }
 
         public new event PropertyChangedEventHandler PropertyChanged;

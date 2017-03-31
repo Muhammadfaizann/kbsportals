@@ -10,6 +10,7 @@ namespace KBS.Portals.Calculator.Services
     {
         string Username { get; set; }
         string Password { get; set; }
+        bool RememberMe { get; set; }
         decimal APR { get; set; }
         decimal IRR { get; set; }
         decimal DocFee { get; set; }
