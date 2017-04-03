@@ -63,15 +63,15 @@ namespace KBS.Portals.Calculator.PageModels
 
         public bool LoggedIn { get; set; }
         private readonly ISettingsService _settingsService;
-        private readonly IQuitApplicationService _quitApplicationService;
+        private readonly IApplicationService _applicationService;
         private readonly IAuthenticationService _authenticationService;
 
-        public LoginPageModel(ISettingsService settingsService, IQuitApplicationService quitApplicationService,
+        public LoginPageModel(ISettingsService settingsService, IApplicationService applicationService,
             IAuthenticationService authenticationService)
         {
             _settingsService = settingsService;
             _authenticationService = authenticationService;
-            _quitApplicationService = quitApplicationService;
+            _applicationService = applicationService;
             Username = _settingsService.Username;
             Password = _settingsService.Password;
             RememberCredentials = _settingsService.RememberMe;
@@ -79,7 +79,7 @@ namespace KBS.Portals.Calculator.PageModels
 
         public void Quit()
         {
-            _quitApplicationService.Quit();
+            _applicationService.Quit();
         }
 
         public Command Login =>

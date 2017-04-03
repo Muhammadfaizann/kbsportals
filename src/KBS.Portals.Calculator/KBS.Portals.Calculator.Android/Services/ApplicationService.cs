@@ -14,12 +14,14 @@ using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator.Droid.Services
 {
-    public class QuitApplicationService : IQuitApplicationService
+    public class ApplicationService : IApplicationService
     {
         public void Quit()
         {
             var activity = (Activity) Forms.Context;
             activity.FinishAffinity();
         }
+
+        public string AppId => MainActivity.AppId;
     }
 }

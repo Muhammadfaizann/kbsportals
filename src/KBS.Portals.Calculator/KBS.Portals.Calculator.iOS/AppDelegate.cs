@@ -14,7 +14,7 @@ namespace KBS.Portals.Calculator.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
-        private readonly string APP_ID = "51ca719b4b6341808160babab9fa819c";
+        public static readonly string AppId = "51ca719b4b6341808160babab9fa819c";
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
         // method you should instantiate the window, load the UI into it and then make the window
@@ -35,7 +35,7 @@ namespace KBS.Portals.Calculator.iOS
         private void SetupHockeyApp()
         {
             var manager = BITHockeyManager.SharedHockeyManager;
-            manager.Configure(APP_ID);
+            manager.Configure(AppId);
             manager.StartManager();
             manager.Authenticator.AuthenticateInstallation(); // This line is obsolete in crash only builds
         }

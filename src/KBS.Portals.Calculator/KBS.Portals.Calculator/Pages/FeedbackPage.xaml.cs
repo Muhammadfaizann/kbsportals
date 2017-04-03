@@ -1,4 +1,10 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
+using KBS.Portals.Calculator.Models;
+using KBS.Portals.Calculator.PageModels;
+using KBS.Portals.Calculator.Services;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace KBS.Portals.Calculator.Pages
@@ -9,6 +15,12 @@ namespace KBS.Portals.Calculator.Pages
         public FeedbackPage()
         {
             InitializeComponent();
+            SubmitButton.Clicked += SubmitButtonOnClicked;
+        }
+
+        private async void SubmitButtonOnClicked(object sender, EventArgs eventArgs)
+        {
+            await (BindingContext as FeedbackPageModel)?.SubmitFeedback(UserInput.Text);
         }
     }
 }
