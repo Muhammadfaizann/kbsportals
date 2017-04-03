@@ -14,16 +14,10 @@ namespace KBS.Portals.Calculator.PageModels
     public class FeedbackPageModel : FreshBasePageModel
     {
         private readonly IFeedbackService _feedbackService;
-        public CalculatorModel CalculatorModel { get; set; }
 
         public FeedbackPageModel(IFeedbackService feedbackService)
         {
             _feedbackService = feedbackService;
-        }
-
-        public override void Init(object initData)
-        {
-            CalculatorModel = (CalculatorModel) initData;
         }
 
         public async Task SubmitFeedback(string userFeedback, bool includeModel)
@@ -31,7 +25,8 @@ namespace KBS.Portals.Calculator.PageModels
             HttpResponseMessage httpResponseMessage;
             if (includeModel)
             {
-                httpResponseMessage = await _feedbackService.SendFeedback(userFeedback, CalculatorModel);
+                CalculatorModel calculatorModel = FreshIOC.Container.Resolve<CalculatorModel>();
+                httpResponseMessage = await _feedbackService.SendFeedback(userFeedback, calculatorModel);
             }
             else
             {

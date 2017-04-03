@@ -11,23 +11,20 @@ namespace KBS.Portals.Calculator.Views
 {
     public class NavContainer : FreshMasterDetailNavigationContainer
     {
-        public ToolbarItem FeedbackItem { get; set; }
-
         public NavContainer(string navigationServiceName) : base(navigationServiceName)
         {
             FreshIOC.Container.Register(this);
-            FeedbackItem = new ToolbarItem("Feedback", "feedback_icon", () => { });
             AddPage<CalculatorPageModel>("Calculate");
+            AddPage<FeedbackPageModel>("Feedback");
             AddPage<LogoutPageModel>("Log out");
             ((NavigationPage)Detail).Style = MainContainerStyle();
             Init("Menu");
-            Master.ToolbarItems.Add(FeedbackItem);
         }
 
         private Style MainContainerStyle()
         {
             Style style = new Style(typeof(NavigationPage));
-            style.Setters.Add(new Setter()
+            style.Setters.Add(new Setter
             {
                 Property = NavigationPage.BarBackgroundColorProperty,
                 Value = Color.FromHex("#FFFFFF")

@@ -48,6 +48,7 @@ namespace KBS.Portals.Calculator.PageModels
                 PurFee = _settingsService.PurFee,
                 Term = _settingsService.Term
             };
+            FreshIOC.Container.Register(CalculatorModel);
 
             PageModels = new List<CalculatorCarouselModel>
             {
@@ -56,11 +57,6 @@ namespace KBS.Portals.Calculator.PageModels
                 new CalculatorCarouselModel(CalculationType.Rate, CalculatorModel)
             };
             Title = PageModels[0].CalculationType;
-            NavContainer nav = FreshIOC.Container.Resolve<NavContainer>();
-            nav.FeedbackItem.Clicked += (sender, args) =>
-            {
-                CoreMethods.PushPageModelWithNewNavigation<FeedbackPageModel>(CalculatorModel);
-            };
         }
 
         public Command Calculate

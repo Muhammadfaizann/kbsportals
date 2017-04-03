@@ -18,13 +18,14 @@ namespace KBS.Portals.Calculator.Services
         public async Task<HttpResponseMessage> SendFeedback(string message, CalculatorModel calculatorModel = null)
         {
             var modelJson = JsonConvert.SerializeObject(calculatorModel, Formatting.Indented);
+            ISettingsService settingsService = FreshIOC.Container.Resolve<ISettingsService>();
             IApplicationService applicationService = FreshIOC.Container.Resolve<IApplicationService>();
             var appId = applicationService.AppId;
-            string uri = String.Format(FEEDBACK_API, appId);
+            string uri = string.Format(FEEDBACK_API, appId);
             HttpClient client = new HttpClient();
             Dictionary<string, string> form = new Dictionary<string, string>
             {
-                ["name"] = Device.OS + " User",
+                ["name"] = string.Format("{0} (Platform: {1})", settingsService.Username, Device.OS),
                 ["subject"] = "In-app feedback" + (calculatorModel == null ? "" : " - includes calculator data"),
                 ["text"] = message + (calculatorModel == null ? "" : "\n\n---------------\n\nCalculator data:\n\n" + modelJson)
             };
