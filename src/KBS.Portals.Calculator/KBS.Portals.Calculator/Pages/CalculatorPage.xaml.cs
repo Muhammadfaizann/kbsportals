@@ -19,14 +19,39 @@ namespace KBS.Portals.Calculator.Pages
         public CalculatorPage()
         {
             InitializeComponent();
+        }
+
+        private void ReinitialiseCarousel()
+        {
+            var binding = new Binding(nameof(CalculatorPageModel.PageModels));
+            if (CalculatorCarousel != null) MainGrid.Children.Remove(CalculatorCarousel);
+            CalculatorCarousel = new CarouselViewControl
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                AnimateTransition = true,
+                Orientation = Orientation.Horizontal,
+                ShowIndicators = true,
+                ItemTemplate = new DataTemplate(typeof(CalculatorView))
+            };
+            CalculatorCarousel.SetBinding(CarouselViewControl.ItemsSourceProperty, binding);
             CalculatorCarousel.Position = 0;
             CalculatorCarousel.PositionSelected += PositionSelected;
+            MainGrid.Children.Add(CalculatorCarousel, 0, 0);
         }
+
+        public CarouselViewControl CalculatorCarousel { get; set; }
 
         private void PositionSelected(object sender, EventArgs eventArgs)
         {
             var calculatorPageModel = (BindingContext as CalculatorPageModel);
             calculatorPageModel?.OnPositionSelected(sender, eventArgs);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ReinitialiseCarousel();
         }
     }
 }
