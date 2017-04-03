@@ -19,6 +19,8 @@ namespace KBS.Portals.Calculator.Pages
         public CalculatorPage()
         {
             InitializeComponent();
+            if (Device.OS == TargetPlatform.Android)
+                ReinitialiseCarousel();
         }
 
         private void ReinitialiseCarousel()
@@ -51,7 +53,8 @@ namespace KBS.Portals.Calculator.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ReinitialiseCarousel();
+            if (Device.OS == TargetPlatform.iOS)
+                ReinitialiseCarousel();
         }
     }
 }
