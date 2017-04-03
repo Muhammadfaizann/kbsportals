@@ -20,7 +20,7 @@ namespace KBS.Portals.Calculator.Pages
 
         private async void SubmitButtonOnClicked(object sender, EventArgs eventArgs)
         {
-            await (BindingContext as FeedbackPageModel)?.SubmitFeedback(UserInput.Text);
+            await (BindingContext as FeedbackPageModel)?.SubmitFeedback(UserInput.Text, IncludeModel.IsToggled);
         }
     }
 }
