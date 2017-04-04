@@ -78,7 +78,21 @@ namespace KBS.Portals.Calculator.CustomViews
 
         private void ToggleCollapse()
         {
-            Children.ToList().FindAll(v => v != _titleBar).ForEach(v => v.IsVisible = !v.IsVisible);
+            Children.ToList().FindAll(v => v != _titleBar).ForEach(async v =>
+            {
+                if (v.IsVisible)
+                {
+                    v.Opacity = 1;
+                    await v.FadeTo(0, 300);
+                    v.IsVisible = false;
+                }
+                else
+                {
+                    v.Opacity = 0;
+                    v.IsVisible = true;
+                    await v.FadeTo(1, 300);
+                }
+            });
             _expandIcon.Source = IsCollapsed ? EXPAND_IMAGE_SOURCE : COLLAPSE_IMAGE_SOURCE;
         }
     }
