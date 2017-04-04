@@ -23,10 +23,13 @@ namespace KBS.Portals.Calculator.CustomViews
         {
             _titleLabel = new Label
             {
-                VerticalOptions = LayoutOptions.StartAndExpand,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                FontSize = 30
+                VerticalOptions = LayoutOptions.Start,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                HorizontalTextAlignment = TextAlignment.Center,
+                FontSize = 15
             };
+            VerticalOptions = LayoutOptions.Start;
+            HorizontalOptions = LayoutOptions.FillAndExpand;
             Children.Add(_titleLabel);
             var tapGestureRecognizer = new TapGestureRecognizer {Command = TapCommand};
             _titleLabel.GestureRecognizers.Add(tapGestureRecognizer);

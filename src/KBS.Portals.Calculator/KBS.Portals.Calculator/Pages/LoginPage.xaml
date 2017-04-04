@@ -7,7 +7,7 @@
              Title="Log in"
              Padding="40,0"
              BackgroundColor="White">
-    <customViews:CollapsibleLayout VerticalOptions="CenterAndExpand" BackgroundColor="White" Title="Login form">
+    <StackLayout VerticalOptions="CenterAndExpand" BackgroundColor="White">
         <Image Source="kbs_banner.png" HorizontalOptions="Center" Margin="0,0,0,20" />
         <Entry x:Name="UsernameEntry" Text="{Binding Username}" Placeholder="Username" Margin="0,10" />
         <Entry x:Name="PasswordEntry" Text="{Binding Password}" IsPassword="True" Placeholder="Password"
@@ -19,5 +19,5 @@
         </StackLayout>
         <Button x:Name="LoginButton" Command="{Binding Login}" Text="Log in" WidthRequest="150" Margin="0, 40, 0, 0"
                 HorizontalOptions="Center" FontSize="15" BorderRadius="2"/>
-    </customViews:CollapsibleLayout>
+    </StackLayout>
 </ContentPage>
