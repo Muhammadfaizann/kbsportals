@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -15,7 +16,7 @@ namespace KBS.Portals.Calculator.Services
         private static readonly string FEEDBACK_API = "https://rink.hockeyapp.net/api/2/apps/{0}/feedback";
 
         // API Doc: https://support.hockeyapp.net/kb/api/api-feedback
-        public async Task<HttpResponseMessage> SendFeedback(string message, CalculatorModel calculatorModel = null)
+        public async Task<bool> SendFeedback(string message, CalculatorModel calculatorModel = null)
         {
             var modelJson = JsonConvert.SerializeObject(calculatorModel, Formatting.Indented);
             ISettingsService settingsService = FreshIOC.Container.Resolve<ISettingsService>();
@@ -29,7 +30,8 @@ namespace KBS.Portals.Calculator.Services
                 ["subject"] = "In-app feedback" + (calculatorModel == null ? "" : " - includes calculator data"),
                 ["text"] = message + (calculatorModel == null ? "" : "\n\n---------------\n\nCalculator data:\n\n" + modelJson)
             };
-            return await client.PostAsync(uri, new FormUrlEncodedContent(form));
+            var httpResponseMessage = await client.PostAsync(uri, new FormUrlEncodedContent(form));
+            return httpResponseMessage.StatusCode == HttpStatusCode.Created;
         }
     }
 }

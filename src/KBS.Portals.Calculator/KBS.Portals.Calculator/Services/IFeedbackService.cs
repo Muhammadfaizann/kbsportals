@@ -10,6 +10,6 @@ namespace KBS.Portals.Calculator.Services
 {
     public interface IFeedbackService
     {
-        Task<HttpResponseMessage> SendFeedback(string message, CalculatorModel calculatorModel = null);
+        Task<bool> SendFeedback(string message, CalculatorModel calculatorModel = null);
     }
 }

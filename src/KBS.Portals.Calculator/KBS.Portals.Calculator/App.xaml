@@ -5,8 +5,8 @@
              x:Class="KBS.Portals.Calculator.App">
     <Application.Resources>
         <ResourceDictionary>
-            <x:String x:Key="EntryColour">#5e5e5e</x:String>
             <x:String x:Key="CurrencySymbol">€</x:String>
+            <Color x:Key="EntryColour">#5e5e5e</Color>
             <Style TargetType="Button">
                 <Setter Property="BackgroundColor" Value="#cf6733" />
                 <Setter Property="TextColor" Value="White" />

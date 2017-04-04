@@ -22,18 +22,10 @@ namespace KBS.Portals.Calculator.PageModels
 
         public async Task SubmitFeedback(string userFeedback, bool includeModel)
         {
-            HttpResponseMessage httpResponseMessage;
-            if (includeModel)
-            {
-                CalculatorModel calculatorModel = FreshIOC.Container.Resolve<CalculatorModel>();
-                httpResponseMessage = await _feedbackService.SendFeedback(userFeedback, calculatorModel);
-            }
-            else
-            {
-                httpResponseMessage = await _feedbackService.SendFeedback(userFeedback);
-            }
+            var calculatorModel = includeModel ? FreshIOC.Container.Resolve<CalculatorModel>() : null;
+            var success = await _feedbackService.SendFeedback(userFeedback, calculatorModel);
 
-            if (httpResponseMessage.StatusCode == HttpStatusCode.Created)
+            if (success)
             {
                 await CoreMethods.DisplayAlert("Successfully submitted feedback", "Thanks for the feedback. Your message has been submitted to KBS for review.", "Okay");
             }
