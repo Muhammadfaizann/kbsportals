@@ -43,6 +43,7 @@
     <Compile Include="Behaviours\PositiveNumberBehavior.cs" />
     <Compile Include="Config\AutoMapperConfig.cs" />
     <Compile Include="CustomViews\BindablePicker.cs" />
+    <Compile Include="CustomViews\CollapsibleLayout.cs" />
     <Compile Include="CustomViews\FormattedEntry.cs" />
     <Compile Include="Enums\EnumerableExtensions.cs" />
     <Compile Include="Enums\NavigationContainerNames.cs" />
