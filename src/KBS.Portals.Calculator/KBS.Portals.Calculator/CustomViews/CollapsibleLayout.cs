@@ -17,29 +17,69 @@ namespace KBS.Portals.Calculator.CustomViews
             set { _titleLabel.Text = value; }
         }
 
+        private bool _isCollapsed;
+
+        public bool IsCollapsed
+        {
+            get { return _isCollapsed; }
+            set
+            {
+                _isCollapsed = value;
+                ToggleCollapse();
+            }
+        }
+
+        private static readonly string EXPAND_IMAGE_SOURCE = "expand.png";
+        private static readonly string COLLAPSE_IMAGE_SOURCE = "collapse.png";
+        private readonly StackLayout _titleBar;
+        private readonly Image _expandIcon;
         private readonly Label _titleLabel;
 
         public CollapsibleLayout()
         {
+            _expandIcon = new Image
+            {
+                Source = COLLAPSE_IMAGE_SOURCE,
+                HorizontalOptions = LayoutOptions.EndAndExpand,
+                VerticalOptions = LayoutOptions.Center,
+                HeightRequest = 20,
+                WidthRequest = 20
+            };
             _titleLabel = new Label
             {
+                FontSize = 16,
+                FontAttributes = FontAttributes.Bold,
+                TextColor = Color.FromHex("#cf6733")
+            };
+            _titleBar = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
                 VerticalOptions = LayoutOptions.Start,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                HorizontalTextAlignment = TextAlignment.Center,
-                FontSize = 15
+                Children = { _titleLabel, _expandIcon }
             };
             VerticalOptions = LayoutOptions.Start;
             HorizontalOptions = LayoutOptions.FillAndExpand;
-            Children.Add(_titleLabel);
-            var tapGestureRecognizer = new TapGestureRecognizer {Command = TapCommand};
-            _titleLabel.GestureRecognizers.Add(tapGestureRecognizer);
+            Children.Add(_titleBar);
+            var tapGestureRecognizer = new TapGestureRecognizer {Command = new Command(OnTitleClicked)};
+            _titleBar.GestureRecognizers.Add(tapGestureRecognizer);
         }
 
-        private ICommand TapCommand => new Command(OnTitleClicked);
-
-        public void OnTitleClicked()
+        protected override void OnChildAdded(Element child)
         {
-            Children.ToList().FindAll(v => v != _titleLabel).ForEach(v => v.IsVisible = !v.IsVisible);
+            base.OnChildAdded(child);
+            ((VisualElement) child).IsVisible = !IsCollapsed;
+        }
+
+        private void OnTitleClicked()
+        {
+            IsCollapsed = !IsCollapsed;
+        }
+
+        private void ToggleCollapse()
+        {
+            Children.ToList().FindAll(v => v != _titleBar).ForEach(v => v.IsVisible = !v.IsVisible);
+            _expandIcon.Source = IsCollapsed ? EXPAND_IMAGE_SOURCE : COLLAPSE_IMAGE_SOURCE;
         }
     }
 }

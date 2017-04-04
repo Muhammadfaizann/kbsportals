@@ -121,7 +121,7 @@ namespace KBS.Portals.Calculator.PageModels
             var mainContainer = new NavContainer(NavigationContainerNames.MainContainer);
             Application.Current.MainPage = mainContainer;
         }
-
+        
         public new event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
