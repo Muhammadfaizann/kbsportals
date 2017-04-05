@@ -6,13 +6,13 @@
              xmlns:views="clr-namespace:KBS.Portals.Calculator.Views;assembly=KBS.Portals.Calculator"
              xmlns:valueConverters="clr-namespace:KBS.Portals.Calculator.ValueConverters;assembly=KBS.Portals.Calculator"
              x:Class="KBS.Portals.Calculator.Pages.CalculatorPage"
-             Title="{Binding Title, Converter={StaticResource EnumDescriptionConverter}">
+             Title="{Binding Title, Converter={StaticResource EnumDescriptionConverter}}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <valueConverters:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -20,26 +20,11 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <abstractions:CarouselViewControl
-            Grid.Row="0" Grid.Column="0"
-            x:Name="CalculatorCarousel"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand"
-            AnimateTransition="true"
-            Orientation="Horizontal"
-            ItemsSource="{Binding PageModels}"
-            ShowIndicators="true">
-            <abstractions:CarouselViewControl.ItemTemplate>
-                <DataTemplate>
-                    <views:CalculatorView />
-                </DataTemplate>
-            </abstractions:CarouselViewControl.ItemTemplate>
-        </abstractions:CarouselViewControl>
         <Button
             Grid.Row="1" Grid.Column="0"
             x:Name="CalculateButton"
             Text="Calculate"
             IsEnabled="{Binding CalculatorModel.IsDirty}"
-            Command="{Binding Calculate}" Style="{StaticResource PageButton}" />
+            Command="{Binding Calculate}" />
     </Grid>
 </ContentPage>

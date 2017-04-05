@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.Mappers;
 using KBS.Portals.Calculator.Logic.Models;
 using KBS.Portals.Calculator.Models;
 
@@ -24,6 +25,8 @@ namespace KBS.Portals.Calculator.Config
                 cfg.CreateMap<CalculatorData, CalculatorModel>()
                     .ForMember(dest => dest.PurFee,
                         opts => opts.MapFrom(src => src.PurchaseFee));
+
+                cfg.CreateMap<CalculatorModel, Dictionary<string, string>>();
 
                 cfg.CreateMap<CalculatorModel, CalculatorModel>();
             });

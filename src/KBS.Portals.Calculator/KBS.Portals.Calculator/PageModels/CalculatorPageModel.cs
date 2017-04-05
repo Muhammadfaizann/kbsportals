@@ -13,6 +13,7 @@ using KBS.Portals.Calculator.Pages;
 using KBS.Portals.Calculator.Services;
 using Xamarin.Forms;
 using AutoMapper;
+using KBS.Portals.Calculator.Views;
 
 namespace KBS.Portals.Calculator.PageModels
 {
@@ -47,6 +48,7 @@ namespace KBS.Portals.Calculator.PageModels
                 PurFee = _settingsService.PurFee,
                 Term = _settingsService.Term
             };
+            FreshIOC.Container.Register(CalculatorModel);
 
             PageModels = new List<CalculatorCarouselModel>
             {

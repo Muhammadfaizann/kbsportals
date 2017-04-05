@@ -9,11 +9,13 @@ using UIKit;
 
 namespace KBS.Portals.Calculator.iOS.Services
 {
-    class QuitApplicationService : IQuitApplicationService
+    class ApplicationService : IApplicationService
     {
         public void Quit()
         {
             Thread.CurrentThread.Abort();
         }
+
+        public string AppId => AppDelegate.AppId;
     }
 }

@@ -1,5 +1,9 @@
-﻿namespace KBS.Portals.Calculator.Logic.Enums
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace KBS.Portals.Calculator.Logic.Enums
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Frequency
     {
         Monthly = 1,

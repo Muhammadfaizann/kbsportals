@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace KBS.Portals.Calculator.Services
 {
-    public interface IQuitApplicationService
+    public interface IApplicationService
     {
         void Quit();
+        string AppId { get; }
     }
 }

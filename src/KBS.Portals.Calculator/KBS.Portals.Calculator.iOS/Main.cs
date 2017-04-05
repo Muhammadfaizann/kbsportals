@@ -16,7 +16,7 @@ namespace KBS.Portals.Calculator.iOS
         // This is the main entry point of the application.
         static void Main(string[] args)
         {
-            FreshIOC.Container.Register<IQuitApplicationService, QuitApplicationService>();
+            FreshIOC.Container.Register<IApplicationService, ApplicationService>();
 
             // if you want to use a different Application Delegate class from "AppDelegate"
             // you can specify it here.

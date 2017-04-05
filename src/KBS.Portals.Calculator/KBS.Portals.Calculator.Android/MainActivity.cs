@@ -13,10 +13,11 @@ namespace KBS.Portals.Calculator.Droid
     [Activity(Theme = "@style/MainTheme", NoHistory = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
-        private readonly string APP_ID = "73871aab6c0c4b64be0eec934803394a";
+        public static readonly string AppId = "73871aab6c0c4b64be0eec934803394a";
+        public static readonly string FeedbackEvent = "feedback";
         protected override void OnCreate(Bundle bundle)
         {
-            FreshIOC.Container.Register<IQuitApplicationService, QuitApplicationService>();
+            FreshIOC.Container.Register<IApplicationService, ApplicationService>();
             base.OnCreate(bundle);
             ActionBar.SetIcon(null);
             SetupHockeyApp();
@@ -32,15 +33,16 @@ namespace KBS.Portals.Calculator.Droid
 
         private void SetupHockeyApp()
         {
-            CrashManager.Register(this, APP_ID);
-            MetricsManager.Register(Application, APP_ID);
+            CrashManager.Register(this, AppId);
+            MetricsManager.Register(Application, AppId);
             CheckForUpdates();
+            HockeyApp.MetricsManager.TrackEvent(FeedbackEvent);
         }
 
         private void CheckForUpdates()
         {
             // Remove this for store builds!
-            UpdateManager.Register(this, APP_ID);
+            UpdateManager.Register(this, AppId);
         }
 
         private void UnregisterManagers()
