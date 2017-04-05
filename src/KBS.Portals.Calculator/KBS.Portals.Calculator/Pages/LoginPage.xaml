@@ -2,6 +2,7 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customViews="clr-namespace:KBS.Portals.Calculator.CustomViews;assembly=KBS.Portals.Calculator"
              x:Class="KBS.Portals.Calculator.Pages.LoginPage"
              Title="Log in"
              Padding="40,0"
