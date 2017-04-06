@@ -12,11 +12,11 @@ namespace KBS.Portals.Calculator.Services
     {
         private static ISettings Settings => CrossSettings.Current;
 
+        private readonly string AccessTokenKey = "accesstoken";
+        private readonly string AccessTokenDefaultValue = string.Empty;
+
         private readonly string UsernameKey = "username";
         private readonly string UsernameDefaultValue = string.Empty;
-
-        private readonly string PasswordKey = "password";
-        private readonly string PasswordDefaultValue = string.Empty;
 
         private readonly string RememberMeKey = "rememberMe";
         private readonly bool RememberMeDefaultValue = false;
@@ -36,16 +36,16 @@ namespace KBS.Portals.Calculator.Services
         private readonly string TermKey = "term";
         private readonly int TermDefaultValue = 0;
 
+        public string AccessToken
+        {
+            get { return Settings.GetValueOrDefault(AccessTokenKey, AccessTokenDefaultValue); }
+            set { Settings.AddOrUpdateValue(AccessTokenKey, value); }
+        }
+
         public string Username
         {
             get { return Settings.GetValueOrDefault(UsernameKey, UsernameDefaultValue); }
             set { Settings.AddOrUpdateValue(UsernameKey, value); }
-        }
-
-        public string Password
-        {
-            get { return Settings.GetValueOrDefault(PasswordKey, PasswordDefaultValue); }
-            set { Settings.AddOrUpdateValue(PasswordKey, value); }
         }
 
         public bool RememberMe

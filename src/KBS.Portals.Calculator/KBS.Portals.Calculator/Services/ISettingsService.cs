@@ -8,8 +8,8 @@ namespace KBS.Portals.Calculator.Services
 {
     public interface ISettingsService
     {
+        string AccessToken { get; set; }
         string Username { get; set; }
-        string Password { get; set; }
         bool RememberMe { get; set; }
         decimal APR { get; set; }
         decimal IRR { get; set; }

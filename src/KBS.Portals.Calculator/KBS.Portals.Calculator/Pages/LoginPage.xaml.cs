@@ -22,9 +22,9 @@ namespace KBS.Portals.Calculator.Pages
             return base.OnBackButtonPressed();
         }
 
-        public void DisplayLoginFailed()
+        public void DisplayLoginFailed(string errorMessage)
         {
-            DisplayAlert("Log In Failed", "Your username or password wasn't accepted by the server.", "Okay");
+            DisplayAlert("Log In Failed", errorMessage, "Okay");
         }
     }
 }

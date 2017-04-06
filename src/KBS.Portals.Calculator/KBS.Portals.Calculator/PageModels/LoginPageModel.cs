@@ -60,8 +60,7 @@ namespace KBS.Portals.Calculator.PageModels
                 OnPropertyChanged();
             }
         }
-
-        public bool LoggedIn { get; set; }
+        
         private readonly ISettingsService _settingsService;
         private readonly IApplicationService _applicationService;
         private readonly IAuthenticationService _authenticationService;
@@ -72,9 +71,12 @@ namespace KBS.Portals.Calculator.PageModels
             _settingsService = settingsService;
             _authenticationService = authenticationService;
             _applicationService = applicationService;
-            Username = _settingsService.Username;
-            Password = _settingsService.Password;
             RememberCredentials = _settingsService.RememberMe;
+            if (RememberCredentials)
+            {
+                Username = _settingsService.Username;
+                if (!string.IsNullOrEmpty(_settingsService.AccessToken)) TryTokenLogin();
+            }
         }
 
         public void Quit()
@@ -82,42 +84,46 @@ namespace KBS.Portals.Calculator.PageModels
             _applicationService.Quit();
         }
 
+        private async void TryTokenLogin()
+        {
+            IsBusy = true;
+            bool tokenIsValid = await _authenticationService.ValidateToken(_settingsService.AccessToken);
+            IsBusy = false;
+            if (tokenIsValid)
+            {
+                LoginSuccess();
+            }
+            else
+            {
+                LoginFailure("The persisted access token has expired. Please re-enter your credentials.");
+            }
+        }
+
         public Command Login =>
             new Command(async () =>
             {
                 IsBusy = true;
-                LoggedIn = await _authenticationService.LogIn(Username, Password);
+                string accessToken = await _authenticationService.LogIn(Username, Password);
                 IsBusy = false;
-                if (LoggedIn)
+                if (!string.IsNullOrEmpty(accessToken))
                 {
+                    _settingsService.AccessToken = RememberCredentials ? accessToken : null;
                     LoginSuccess();
                 }
                 else
                 {
-                    LoginFailure();
+                    LoginFailure("Your username or password wasn't accepted by the server.");
                 }
             });
 
 
-        private void LoginFailure()
+        private void LoginFailure(string errorMsg)
         {
-            LoggedIn = false;
-            (CurrentPage as LoginPage)?.DisplayLoginFailed();
+            (CurrentPage as LoginPage)?.DisplayLoginFailed(errorMsg);
         }
 
         private void LoginSuccess()
         {
-            LoggedIn = true;
-            if (RememberCredentials)
-            {
-                _settingsService.Username = Username;
-                _settingsService.Password = Password;
-            }
-            else
-            {
-                _settingsService.Username = "";
-                _settingsService.Password = "";
-            }
             var mainContainer = new NavContainer(NavigationContainerNames.MainContainer);
             Application.Current.MainPage = mainContainer;
         }
