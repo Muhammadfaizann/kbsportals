@@ -14,7 +14,7 @@
                         <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yd7-JS-zBw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="title.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" misplaced="YES">
@@ -22,7 +22,7 @@
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0" height="0.0"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" customColorSpace="sRGB" colorSpace="calibratedRGB" red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1"/>
+                        <color key="backgroundColor" customColorSpace="sRGB" colorSpace="calibratedRGB" red="0.81176470588235294" green="0.403921568627451" blue="0.2" alpha="1"/>
                         <constraints>
                             <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
                             <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
@@ -38,7 +38,7 @@
                             <mask key="constraints">
                                 <include reference="48"/>
                             </mask>
-                            <color key="backgroundColor" colorSpace="calibratedRGB" red="0.72156862745098038" green="0.72156862745098038" blue="0.72156862745098038" alpha="1"/>
+                            <color key="backgroundColor" colorSpace="calibratedRGB" red="0.81176470588235294" green="0.403921568627451" blue="0.2" alpha="1"/>
                         </variation>
                     </view>
                 </viewController>
@@ -55,7 +55,10 @@
         <image name="Icon-76.png" width="76" height="76"/>
         <image name="Icon-Small-40.png" width="40" height="40"/>
         <image name="Icon-Small.png" width="29" height="29"/>
-        <image name="title.png" width="640" height="500"/>
+        <image name="title.png" width="95" height="54"/>
+        <image name="collapse.png" width="128" height="128"/>
+        <image name="expand.png" width="128" height="128"/>
+        <image name="kbs_banner.png" width="278" height="54"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedScreenMetrics key="destination" type="retina4"/>

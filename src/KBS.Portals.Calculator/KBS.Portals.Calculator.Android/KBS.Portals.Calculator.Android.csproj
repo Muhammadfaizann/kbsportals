@@ -197,9 +197,6 @@
     <AndroidResource Include="Resources\drawable\title.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\title.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\ic_menu.png" />
   </ItemGroup>
   <ItemGroup>
