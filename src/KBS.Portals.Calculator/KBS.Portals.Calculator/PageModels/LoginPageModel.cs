@@ -124,6 +124,7 @@ namespace KBS.Portals.Calculator.PageModels
 
         private void LoginSuccess()
         {
+            _settingsService.Username = Username;
             var mainContainer = new NavContainer(NavigationContainerNames.MainContainer);
             Application.Current.MainPage = mainContainer;
         }
