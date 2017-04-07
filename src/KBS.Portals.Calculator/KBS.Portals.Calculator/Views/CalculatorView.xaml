@@ -179,7 +179,7 @@
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Commission" />
-                        <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="3" Grid.Column="1"
+                        <customViews:FormattedEntry x:Name="Commission" Keyboard="Numeric" Grid.Row="3" Grid.Column="1"
                                                     Value="{Binding CalculatorModel.Commission}"
                                                     Text="{Binding CalculatorModel.Commission, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                                     IsEnabled="True">

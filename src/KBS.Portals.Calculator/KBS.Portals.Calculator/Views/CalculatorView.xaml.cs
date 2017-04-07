@@ -113,6 +113,7 @@ namespace KBS.Portals.Calculator.Views
                 IRR.IsEnabled = !(calcType == CalculationType.Rate || calcType == CalculationType.APRInstallment);
                 Installment.IsEnabled = !(calcType == CalculationType.IRRInstallment || calcType == CalculationType.APRInstallment);
                 Charges.IsEnabled = calcType == CalculationType.BalRes || calcType == CalculationType.Commission;
+                Commission.IsEnabled = calcType != CalculationType.Commission;
             }
             base.OnBindingContextChanged();
         }
