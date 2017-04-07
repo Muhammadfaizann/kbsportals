@@ -48,7 +48,7 @@ namespace KBS.Portals.Calculator.Views
                 if (calculatorCarouselModel != null && CalculationTypesToDisableAPRIRRFor.Contains(calculatorCarouselModel.CalculationType))
                 {
                     decimal aprPercentage = ((FormattedEntry) sender).Value;
-                    IRR.IsEnabled = aprPercentage == 0m;
+                    IRR.IsEnabled = aprPercentage <= 0m;
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace KBS.Portals.Calculator.Views
                 if (calculatorCarouselModel != null && CalculationTypesToDisableAPRIRRFor.Contains(calculatorCarouselModel.CalculationType))
                 {
                     decimal irrPercentage = ((FormattedEntry)sender).Value;
-                    APR.IsEnabled = irrPercentage == 0m;
+                    APR.IsEnabled = irrPercentage <= 0m;
                 }
             }
         }
