@@ -37,8 +37,19 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <ScrollView>
-            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="30, 0, 30, 20" Padding="15">
+        <ScrollView Margin="0,0,0,30">
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="15">
+                <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.iOS>
+                            10, 0, 10, 20
+                        </OnPlatform.iOS>
+                        <OnPlatform.Android>
+                            30, 0, 30, 20
+                        </OnPlatform.Android>
+                    </OnPlatform>
+                </StackLayout.Margin>
+
                 <customViews:CollapsibleLayout Title="Amounts and Rates">
                     <Grid>
                         <Grid.ColumnDefinitions>

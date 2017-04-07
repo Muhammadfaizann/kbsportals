@@ -22,7 +22,7 @@
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0" height="0.0"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" customColorSpace="sRGB" colorSpace="calibratedRGB" red="0.81176470588235294" green="0.403921568627451" blue="0.2" alpha="1"/>
+                        <color key="backgroundColor" customColorSpace="sRGB" colorSpace="calibratedRGB" red="0.77647058823529413" green="0.32156862745098042" blue="0.11372549019607843" alpha="1"/>
                         <constraints>
                             <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
                             <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
@@ -38,7 +38,7 @@
                             <mask key="constraints">
                                 <include reference="48"/>
                             </mask>
-                            <color key="backgroundColor" colorSpace="calibratedRGB" red="0.81176470588235294" green="0.403921568627451" blue="0.2" alpha="1"/>
+                            <color key="backgroundColor" colorSpace="calibratedRGB" red="0.77647058823529413" green="0.32156862745098042" blue="0.11372549019607843" alpha="1"/>
                         </variation>
                     </view>
                 </viewController>
