@@ -24,6 +24,11 @@ namespace KBS.Portals.Calculator.CustomViews
             set { SetValue(ValueProperty, value); }
         }
 
+        public void ValueChanged(object sender, TextChangedEventArgs args)
+        {
+            // override with custom behaviour
+        }
+
         public IValueConverter Converter { get; set; }
 
         public FormattedEntry(IValueConverter converter)

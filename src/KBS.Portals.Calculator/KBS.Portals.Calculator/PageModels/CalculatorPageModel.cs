@@ -54,7 +54,11 @@ namespace KBS.Portals.Calculator.PageModels
             {
                 new CalculatorCarouselModel(CalculationType.APRInstallment, CalculatorModel),
                 new CalculatorCarouselModel(CalculationType.IRRInstallment, CalculatorModel),
-                new CalculatorCarouselModel(CalculationType.Rate, CalculatorModel)
+                new CalculatorCarouselModel(CalculationType.Rate, CalculatorModel),
+                new CalculatorCarouselModel(CalculationType.FinanceAmount, CalculatorModel),
+                new CalculatorCarouselModel(CalculationType.Term, CalculatorModel),
+                new CalculatorCarouselModel(CalculationType.BalRes, CalculatorModel),
+                new CalculatorCarouselModel(CalculationType.Commission, CalculatorModel),
             };
             Title = PageModels[0].CalculationType;
         }
