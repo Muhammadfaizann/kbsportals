@@ -8,6 +8,7 @@ namespace KBS.Portals.Calculator.Services
 {
     public interface IAuthenticationService
     {
-        Task<bool> LogIn(string username, string password);
+        Task<string> LogIn(string username, string password);
+        Task<bool> ValidateToken(string token);
     }
 }

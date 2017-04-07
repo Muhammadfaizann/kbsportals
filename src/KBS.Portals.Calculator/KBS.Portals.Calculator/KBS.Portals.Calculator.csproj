@@ -75,6 +75,7 @@
     <Compile Include="Services\IApplicationService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="ValueConverters\EnumDescriptionConverter.cs" />
+    <Compile Include="ValueConverters\InvertBooleanConverter.cs" />
     <Compile Include="ValueConverters\IsPositiveConverter.cs" />
     <Compile Include="ValueConverters\PercentageConverter.cs" />
     <Compile Include="ValueConverters\CurrencyConverter.cs" />
