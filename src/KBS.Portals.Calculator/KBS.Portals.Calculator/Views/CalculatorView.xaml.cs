@@ -25,6 +25,9 @@ namespace KBS.Portals.Calculator.Views
         private static readonly IList<CalculationType> CalculationTypesToDisableAPRIRRFor = new[]
         {CalculationType.FinanceAmount, CalculationType.Term, CalculationType.BalRes, CalculationType.Commission};
 
+        private static readonly IList<CalculationType> CalculationTypesToTogglePurFeeOnHirePurchaseFor = new[]
+        {CalculationType.APRInstallment, CalculationType.IRRInstallment, CalculationType.Rate};
+
         public CalculatorView()
         {
             InitializeComponent();
@@ -76,16 +79,24 @@ namespace KBS.Portals.Calculator.Views
 
         private void ProductPickerOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            Product product = (Product) ProductPicker.SelectedItem;
-            if (product == Product.HirePurchase)
+            var calculatorCarouselModel = BindingContext as CalculatorCarouselModel;
+            if (calculatorCarouselModel != null)
             {
-                PurFee.Behaviors.Add(_positiveNumberBehavior);
-                _positiveNumberBehavior.CheckEntryIsValid(PurFee, null);
-            }
-            else
-            {
-                PurFee.Behaviors.Remove(_positiveNumberBehavior);
-                _positiveNumberBehavior.Validate(PurFee);
+                var calcType = calculatorCarouselModel.CalculationType;
+                if (CalculationTypesToTogglePurFeeOnHirePurchaseFor.Contains(calcType))
+                {
+                    Product product = (Product) ProductPicker.SelectedItem;
+                    if (product == Product.HirePurchase)
+                    {
+                        PurFee.Behaviors.Add(_positiveNumberBehavior);
+                        _positiveNumberBehavior.CheckEntryIsValid(PurFee, null);
+                    }
+                    else
+                    {
+                        PurFee.Behaviors.Remove(_positiveNumberBehavior);
+                        _positiveNumberBehavior.Validate(PurFee);
+                    }
+                }
             }
         }
 
