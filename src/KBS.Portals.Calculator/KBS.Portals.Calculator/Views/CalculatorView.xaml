@@ -76,7 +76,7 @@
                                                     SelectedItem="{Binding CalculatorModel.Frequency}" />
 
                         <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Term" />
-                        <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding CalculatorModel.Term}"
+                        <Entry x:Name="Term" Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="{Binding CalculatorModel.Term}"
                                IsEnabled="True" />
 
                         <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="APR" />
@@ -233,7 +233,7 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Charges" />
-                        <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="0" Grid.Column="1"
+                        <customViews:FormattedEntry x:Name="Charges" Keyboard="Numeric" Grid.Row="0" Grid.Column="1"
                                                 Value="{Binding CalculatorModel.Charges}"
                                                 Text="{Binding CalculatorModel.Charges, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                                 IsEnabled="False">
