@@ -47,7 +47,7 @@ namespace KBS.Portals.Calculator.CustomViews
 
         private void OnFocused(object sender, FocusEventArgs e)
         {
-            Text = Value.ToString();
+            Text = Value == 0.0m ? "" : Value.ToString();
         }
     }
 }

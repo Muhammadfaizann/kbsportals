@@ -16,13 +16,18 @@ namespace KBS.Portals.Calculator.ValueConverters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             decimal? modelValue = (value as decimal?);
-            return modelValue == null ? "" : string.Format(CurrencySymbol + "{0:0,0.00}", modelValue);
+            if (modelValue == null)
+            {
+                return "";
+            }
+
+            return modelValue >= 1000 ? $"{CurrencySymbol}{modelValue:0,0.00}" : $"{CurrencySymbol}{modelValue:0.00}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string money = (value as string);
-            if (money == null || money.Equals(""))
+            if (string.IsNullOrEmpty(money))
             {
                 return 0.00m;
             }
