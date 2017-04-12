@@ -208,9 +208,10 @@
     <Compile Include="Services\ApplicationUserService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\KBSPortal - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\KBSPortal.pubxml" />
+    <None Include="Properties\PublishProfiles\kbscalculatorportals - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\kbscalculatorportals - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
