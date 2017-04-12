@@ -12,7 +12,7 @@ namespace KBS.Portals.Calculator.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private const string BaseAddress = "https://kbsportal.azurewebsites.net/core";
+        private const string BaseAddress = "https://kbscalculatorportals.azurewebsites.net/core";
         private const string TokenEndpoint = BaseAddress + "/connect/token";
         private const string TokenValidationEndpoint = BaseAddress + "/connect/accesstokenvalidation?token=";
 

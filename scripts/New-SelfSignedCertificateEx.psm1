@@ -390,5 +390,3 @@ function New-SelfSignedCertificateEx {
 		}
 	}
 }
-
-New-SelfsignedCertificateEx -Subject "CN=app.web.client" -KeyUsage "KeyEncipherment, DigitalSignature"   -StoreLocation "LocalMachine" -KeyLength 4096 -Exportable -NotAfter $([DateTime]::Now.AddYears(100))
