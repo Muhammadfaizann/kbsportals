@@ -21,6 +21,7 @@ namespace KBS.Portals.Calculator.Logic
             double lastDays = 0;
             var bFindUpfront = false;
 
+
             var lastKey = new SortKey(default(DateTime), 0);
             //no need to run swaps as Dictionary should be sorted
 
@@ -88,14 +89,16 @@ namespace KBS.Portals.Calculator.Logic
                         if (entry.Value.AffectYield)
                         {
                             sNpv += Math.Round(sNpv*Input.IRR*((entry.Value.Days - lastDays)/(AccountDays*100)), 4);
-                            if (entry.Value.Amount.Equals(0) && entry.Value.Type.Equals(ScheduleType.INS))
-                            {
+
+                            //On Swipe Installment is populated this cal so Amount never equals 0 this is only required for multiple INS lines
+                            //if (entry.Value.Amount.Equals(0) && entry.Value.Type.Equals(ScheduleType.INS))
+                            //{
                                 sNpv += amount;
-                            }
-                            else
-                            {
-                                sNpv = sNpv + Convert.ToDouble(entry.Value.Amount);
-                            }
+                            //}
+                            //else
+                            //{
+                            //    sNpv = sNpv + Convert.ToDouble(entry.Value.Amount);
+                            //}
                             lastDays = entry.Value.Days;
                         }
                     }

@@ -34,6 +34,7 @@ namespace KBS.Portals.Calculator.Logic
         public CalculatorData Calculate()
         {
             var i = 0;
+            Input.Schedules.Clear();
             if (Input.DocFee > 0)
             {
                 Input.AddSchedule(i, ScheduleType.DOC, 1, Input.Frequency, Input.DocFee, Input.NextDate);

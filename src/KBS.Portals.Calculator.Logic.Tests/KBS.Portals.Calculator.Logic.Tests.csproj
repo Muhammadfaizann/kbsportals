@@ -103,6 +103,7 @@
     <Compile Include="RateTests.cs" />
     <Compile Include="SortKeyTests.cs" />
     <Compile Include="FinanceAmountTests.cs" />
+    <Compile Include="SwipeTests.cs" />
     <Compile Include="TermTests.cs" />
   </ItemGroup>
   <ItemGroup>
