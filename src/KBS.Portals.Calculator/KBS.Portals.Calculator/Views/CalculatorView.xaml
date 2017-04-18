@@ -264,9 +264,13 @@
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Total Schedule" />
-                        <Entry Keyboard="Numeric" Grid.Row="2" Grid.Column="1"
-                           Text="{Binding CalculatorModel.TotalSchedule}"
-                           IsEnabled="False" />
+                        <customViews:FormattedEntry Keyboard="Numeric" Grid.Row="2" Grid.Column="1"
+                           Text="{Binding CalculatorModel.TotalSchedule, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
+                           IsEnabled="False">
+                            <x:Arguments>
+                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                            </x:Arguments>
+                        </customViews:FormattedEntry>
                     </Grid>
                 </customViews:CollapsibleLayout>
             </StackLayout>
