@@ -102,10 +102,11 @@ namespace KBS.Portals.Calculator.Logic.Tests
         {
             CalculatorData cd = new CalculatorData()
             {
-                FinanceAmount = 36900,
+                // Added Frig to get upfront value in 
+                FinanceAmount = 36900 - 15900,
                 NoOfInstallments = 24,
-                UpFrontNo = 1,
-                UpFrontValue = 15900,
+                UpFrontNo = 0,
+//                UpFrontValue = 15900,
                 Commission = 650,
                 DocFee = 0,
                 Installment = Convert.ToDecimal(1006.80),
@@ -126,10 +127,11 @@ namespace KBS.Portals.Calculator.Logic.Tests
         {
             CalculatorData cd = new CalculatorData()
             {
-                FinanceAmount = 30750,
+                // Added Frig to get upfront value in 
+                FinanceAmount = 30750 - 16750,
                 NoOfInstallments = 24,
-                UpFrontNo = 1,
-                UpFrontValue = 16750,
+                UpFrontNo = 0,
+//                UpFrontValue = 16750,
                 Commission = 350,
                 DocFee = 0,
                 Installment = Convert.ToDecimal(671.20),
@@ -151,7 +153,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             {
                 FinanceAmount = 16250,
                 UpFrontNo = 3,
-                UpFrontValue = 518,
+//                UpFrontValue = 518,
                 Commission = 0,
                 DocFee = 0,
                 NoOfInstallments = 33,
@@ -172,9 +174,10 @@ namespace KBS.Portals.Calculator.Logic.Tests
         {
             CalculatorData cd = new CalculatorData()
             {
-                FinanceAmount = 68000,
-                UpFrontNo = 1,
-                UpFrontValue = 6800,
+                // Added Frig to get upfront value in 
+                FinanceAmount = 68000 - 6800,
+                UpFrontNo = 0,
+//                UpFrontValue = 6800,
                 Commission = 0,
                 DocFee = 250,
                 NoOfInstallments = 30,

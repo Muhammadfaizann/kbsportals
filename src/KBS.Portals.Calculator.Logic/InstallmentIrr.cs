@@ -27,7 +27,8 @@ namespace KBS.Portals.Calculator.Logic
 
             double inc;
             double amount;
-            if (Input.UpFrontNo > 0 && Input.UpFrontValue == 0)
+            //GC Removed second condition as Upfront Value is ALWAYS computed - RK confirm 28/4/17 upf is only ever NoOfIns
+            if (Input.UpFrontNo > 0 )//&& Input.UpFrontValue == 0)
             {
                 bFindUpfront = true;
             }
@@ -130,10 +131,6 @@ namespace KBS.Portals.Calculator.Logic
             else
             {
                 Input.Installment = Math.Round(Convert.ToDecimal(amount), 2);
-                if (Input.UpFrontNo > 0)
-                {
-                    Input.UpFrontValue = (Input.Installment*Input.UpFrontNo);
-                }
 
                 // Update Schedule with Instalment
                 foreach (var schedule in Input.Schedules)

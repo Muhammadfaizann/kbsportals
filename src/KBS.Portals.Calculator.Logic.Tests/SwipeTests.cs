@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using KBS.Portals.Calculator.Logic.Enums;
 using KBS.Portals.Calculator.Logic.Models;
 using NUnit.Framework;
@@ -26,6 +27,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             var result = calc.Calculate();
 
             Assert.AreEqual(205.83, result.Installment);
+            Debug.Print(result.Summary);
 
             cd.IRR = 9;
 //            cd.Installment = 0;
@@ -33,6 +35,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             var result2 = calcIRR.Calculate();
             Assert.AreEqual(207.53, result2.Installment);
+            Debug.Print(result.Summary);
         }
     }
 }

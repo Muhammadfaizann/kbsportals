@@ -106,8 +106,8 @@ namespace KBS.Portals.Calculator.Logic.Tests
 //                FinanceAmount = 36900,
                 IRR = 11.191345,
                 NoOfInstallments = 24,
-                UpFrontNo = 1,
-                UpFrontValue = 15900,
+                UpFrontNo = 0,
+//                UpFrontValue = 15900,
                 Commission = 650,
                 DocFee = 0,
                 Installment = Convert.ToDecimal(1006.80),
@@ -119,7 +119,8 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(36900, result.FinanceAmount);
+            // Added Frig to get upfront value in 
+            Assert.AreEqual((36900 - 15900), result.FinanceAmount);
         }
 
         [Test]
@@ -130,8 +131,8 @@ namespace KBS.Portals.Calculator.Logic.Tests
 //                FinanceAmount = 30750,
                 IRR = 11.796204,
                 NoOfInstallments = 24,
-                UpFrontNo = 1,
-                UpFrontValue = 16750,
+                UpFrontNo = 0,
+//                UpFrontValue = 16750,
                 Commission = 350,
                 DocFee = 0,
                 Installment = Convert.ToDecimal(671.20),
@@ -142,7 +143,8 @@ namespace KBS.Portals.Calculator.Logic.Tests
             ICalculator calc = CalculatorFactory.Create(CalculationType.FinanceAmount, cd);
 
             var result = calc.Calculate();
-            Assert.AreEqual(30750, result.FinanceAmount);
+            // Added Frig to get upfront value in 
+            Assert.AreEqual((30750 - 16750), result.FinanceAmount);
 
         }
 
@@ -154,7 +156,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
 //                FinanceAmount = 16250,
                 IRR = 11.167938,
                 UpFrontNo = 3,
-                UpFrontValue = 518,
+//                UpFrontValue = 518,
                 Commission = 0,
                 DocFee = 0,
                 NoOfInstallments = 33,
@@ -178,8 +180,8 @@ namespace KBS.Portals.Calculator.Logic.Tests
             {
 //                FinanceAmount = 68000,
                 IRR = 11.000107,
-                UpFrontNo = 1,
-                UpFrontValue = 6800,
+                UpFrontNo = 0,
+//                UpFrontValue = 6800,
                 Commission = 0,
                 DocFee = 250,
                 NoOfInstallments = 30,
@@ -192,8 +194,9 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             var result = calc.Calculate();
 
-//            Assert.AreEqual(68000, result.FinanceAmount);
-            Assert.AreEqual(68000.03, result.FinanceAmount);
+            //            Assert.AreEqual(68000, result.FinanceAmount);
+            // Added Frig to get upfront value in 
+            Assert.AreEqual((68000.03 - 6800), result.FinanceAmount);
         }
     }
 }

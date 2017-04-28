@@ -17,7 +17,7 @@ namespace KBS.Portals.Calculator.Logic
         {
             DateTime lastDate = Input.StartDate,
                 workDate = Input.NextDate;
-            var sNpv = Convert.ToDouble(Input.FinanceAmount - (Input.UpFrontNo * Input.UpFrontValue) + Input.Commission);
+            var sNpv = Convert.ToDouble(Input.FinanceAmount - (Input.UpFrontNo * Input.Installment) + Input.Commission);
             var loopCount = 0;
             var docFee = Input.DocFee;
 

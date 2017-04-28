@@ -32,7 +32,7 @@ namespace KBS.Portals.Calculator.Logic.Models
         public decimal PurchaseFee { get; set; } // Create a Purchase Fee Schedule Line
         public decimal Commission { get; set; }
         public int UpFrontNo { get; set; }
-        public decimal UpFrontValue { get; set; }
+        public decimal UpFrontValue => UpFrontNo * Installment;
         public decimal Ballon { get; set; } // Create a Ballon Payment Schedule Line
         public decimal Residual { get; set; } // Create a Residual Payment Schedule Line
         public DateTime StartDate { get; set; }
@@ -40,13 +40,81 @@ namespace KBS.Portals.Calculator.Logic.Models
         public Frequency Frequency { get; set; }
         public List<Schedule> Schedules { get; private set; } // Here for future useage by KBS to allow scheduels to be added
 
-        public decimal Charges { get; set; }
+//        public decimal Charges { get; set; }
+        public decimal Charges => TotalSchedule - TotalCost - Commission - DocFee - PurchaseFee;
+
         public decimal TotalCost { get; set; }
         public decimal TotalSchedule { get; set; }
 
         public int Term => Convert.ToInt32( NoOfInstallments * (int)Frequency);
         public decimal LoanOverPayment { get; set; } // Value return in term Calculation
 
+        public string Summary
+        {
+            get
+            {
+                var boldMe = "<b>";
+                var unBoldMe = "</b>";
+                //Switch off for now until we can confirm summary can be html
+                boldMe = "";
+                unBoldMe = "";
+                var summary = "Finance Amount".PadRight(15) + boldMe + FinanceAmount.ToString("C") + unBoldMe + "\n";
+                summary += "APR".PadRight(15) + boldMe + (APR /100).ToString("p") + unBoldMe + "\n";
+                summary += "IRR".PadRight(15) + boldMe + (IRR /100).ToString("p") + unBoldMe + "\n";
+                summary += "Installment".PadRight(15) + boldMe + Installment.ToString("C") + unBoldMe + "\n";
+                summary += "No of Ins".PadRight(15) + boldMe + NoOfInstallments.ToString("G") + unBoldMe + "\n";
+                summary += "Start Date".PadRight(15) + boldMe + StartDate.ToString("d") + unBoldMe + "\n";
+                summary += "Next Date".PadRight(15) + boldMe + NextDate.ToString("d") + unBoldMe + "\n";
+                summary += "Frequency".PadRight(15) + boldMe + Frequency + unBoldMe + "\n";
+                summary += "Term".PadRight(15) + boldMe + Term.ToString("G") + " Months" + unBoldMe + "\n";
+
+                if (UpFrontNo != 0)
+                {
+                    summary += "No of Up Fronts".PadRight(15) + boldMe + UpFrontNo.ToString("G") + unBoldMe + "\n";
+                    summary += "Upfront Ins".PadRight(15) + boldMe + UpFrontValue.ToString("C") + unBoldMe + "\n";
+                }
+
+                if (DocFee != 0)
+                {
+                    summary += "Doc Fee".PadRight(15) + boldMe + DocFee.ToString("C") + unBoldMe + "\n";
+                }
+                if (PurchaseFee != 0)
+                {
+                    summary += "Purchase Fee".PadRight(15) + boldMe + PurchaseFee.ToString("C") + unBoldMe + "\n";
+                }
+                if (Commission != 0)
+                {
+                    summary += "Commission".PadRight(15) + boldMe + Commission.ToString("C") + unBoldMe + "\n";
+                }
+                if (Ballon != 0)
+                {
+                    summary += "Ballon".PadRight(15) + boldMe + Ballon.ToString("C") + unBoldMe + "\n";
+                }
+                if (Residual != 0)
+                {
+                    summary += "Residual".PadRight(15) + boldMe + Residual.ToString("C") + unBoldMe + "\n";
+                }
+                if (Charges != 0)
+                {
+                    summary += "Charges".PadRight(15) + boldMe + Charges.ToString("C") + unBoldMe + "\n";
+                }
+                if (TotalCost != 0)
+                {
+                    summary += "TotalCost".PadRight(15) + boldMe + TotalCost.ToString("C") + unBoldMe + "\n";
+                }
+                if (TotalSchedule != 0)
+                {
+                    summary += "TotalSchedule".PadRight(15) + boldMe + TotalSchedule.ToString("C") + unBoldMe + "\n";
+                }
+                if (LoanOverPayment != 0)
+                {
+                    summary += "LoanOverPayment".PadRight(15) + boldMe + LoanOverPayment.ToString("C") + unBoldMe + "\n";
+                }
+
+                return summary;
+            }
+        }
+ 
         public void AddSchedule(int serial, ScheduleType type, int counts, Frequency frequency, decimal amount, DateTime nextDate)
         {
             AddSchedule(new Schedule(serial, type, counts, frequency,amount, nextDate));
@@ -61,7 +129,6 @@ namespace KBS.Portals.Calculator.Logic.Models
 
             Schedules.Add(schedule);
         }
-
         
     }
 }

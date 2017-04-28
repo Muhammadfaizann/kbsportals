@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using KBS.Portals.Calculator.Logic.Enums;
 using KBS.Portals.Calculator.Logic.Models;
 using NUnit.Framework;
@@ -33,6 +34,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             var result = calc.Calculate();
 
             Assert.AreEqual(205.83, result.Installment );
+            Debug.Print(result.Summary);
         }
         [Test]
         public void CalculateAPRInstallmentForQuarterly()
@@ -98,13 +100,14 @@ namespace KBS.Portals.Calculator.Logic.Tests
         {
             CalculatorData cd = new CalculatorData()
             {
-                FinanceAmount = 36900,
+                // Added Frig to get upfront value in 
+                FinanceAmount = 36900 - 15900,
                 NoOfInstallments = 24,
                 APR = 15.381418,
                 StartDate = Convert.ToDateTime("22 Nov 2016"),
                 NextDate = Convert.ToDateTime("09 Dec 2016"),
-                UpFrontNo = 1,
-                UpFrontValue = 15900,
+                UpFrontNo = 0,
+//                UpFrontValue = 15900,
                 Commission = 650,
                 DocFee = 0
             };
@@ -121,13 +124,14 @@ namespace KBS.Portals.Calculator.Logic.Tests
         {
             CalculatorData cd = new CalculatorData()
             {
-                FinanceAmount = 30750,
+                // Added Frig to get upfront value in 
+                FinanceAmount = 30750 - 16750,
                 NoOfInstallments = 24,
                 APR = 15.381418,
                 StartDate = Convert.ToDateTime("22 Nov 2016"),
                 NextDate = Convert.ToDateTime("09 Dec 2016"),
-                UpFrontNo = 1,
-                UpFrontValue = 16750,
+                UpFrontNo = 0,
+//                UpFrontValue = 16750,
                 Commission = 350,
                 DocFee = 0
             };

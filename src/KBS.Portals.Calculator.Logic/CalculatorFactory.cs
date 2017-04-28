@@ -16,6 +16,7 @@ namespace KBS.Portals.Calculator.Logic
         {
             //TODO replace with DI code
 
+            input.CalculationType = type;
             switch (type)
             {
                 case CalculationType.APRInstallment:

@@ -35,6 +35,26 @@ namespace KBS.Portals.Calculator.Logic
         {
             var i = 0;
             Input.Schedules.Clear();
+            //Clear other Variables to be calculated
+            //TODO GAVIN Check this are the correct variable to clear for each calculation
+            if (Input.CalculationType == CalculationType.APRInstallment)
+            {
+                Input.Installment = 0;
+                Input.IRR = 0;
+            }
+            if (Input.CalculationType == CalculationType.IRRInstallment)
+            {
+                Input.Installment = 0;
+                Input.APR = 0;
+            }
+
+            if (Input.CalculationType == CalculationType.Rate)
+            {
+                Input.APR = 0;
+                Input.IRR = 0;
+            }
+
+
             if (Input.DocFee > 0)
             {
                 Input.AddSchedule(i, ScheduleType.DOC, 1, Input.Frequency, Input.DocFee, Input.NextDate);
@@ -86,7 +106,12 @@ namespace KBS.Portals.Calculator.Logic
             {
                 SetTotals();
                 YieldCalcChron.Clear();
-                var amount = -((Input.TotalSchedule) - (Input.Charges));
+                //TODO GAvin can you check this out I have changed ths calculation of this start point
+                //var amount = -((Input.TotalSchedule) - (Input.Charges));
+
+                //GC Copied thuis from below Input.Charges = Input.TotalSchedule - Input.TotalCost;
+                //GC Should be but fails tests                var amount = -(Input.TotalCost);
+                var amount = -((Input.TotalSchedule) - (Input.TotalSchedule - Input.TotalCost));
 
                 YieldCalcChron.Add(new SortKey(Input.StartDate, serial), new YieldCalc(amount, Input.StartDate, true, ScheduleType.FIN));
                 serial++;
@@ -154,8 +179,8 @@ namespace KBS.Portals.Calculator.Logic
                 }
             }
             Input.TotalSchedule = total;
-            Input.TotalCost = Input.FinanceAmount + Input.Commission - (Input.UpFrontValue * Input.UpFrontNo);
-            Input.Charges = Input.TotalSchedule - Input.TotalCost;
+            Input.TotalCost = Input.FinanceAmount + Input.Commission - (Input.UpFrontValue);
+            //Input.Charges = Input.TotalSchedule - Input.TotalCost;
         }
     }
 }

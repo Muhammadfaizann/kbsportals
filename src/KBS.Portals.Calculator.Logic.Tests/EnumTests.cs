@@ -24,7 +24,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
         [Test]
         public void TestEnumberationWithoutCustomDisplayText()
         {
-            var expected = "APRInstallment";
+            var expected = "APR Installment";
             var actual = CalculationType.APRInstallment.GetDescription();
 
             Assert.AreEqual(expected, actual);
