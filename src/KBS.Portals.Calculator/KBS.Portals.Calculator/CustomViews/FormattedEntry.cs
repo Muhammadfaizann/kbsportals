@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 
 namespace KBS.Portals.Calculator.CustomViews
 {
-    class FormattedEntry : Entry
+    public class FormattedEntry : NumericEntry
     {
         public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(decimal),
             typeof(FormattedEntry), 0.0m, BindingMode.TwoWay);
@@ -31,7 +31,7 @@ namespace KBS.Portals.Calculator.CustomViews
 
         public IValueConverter Converter { get; set; }
 
-        public FormattedEntry(IValueConverter converter)
+        public FormattedEntry(IValueConverter converter) : base()
         {
             Converter = converter;
             Text = (string) Converter.Convert(Value, null, null, null);
