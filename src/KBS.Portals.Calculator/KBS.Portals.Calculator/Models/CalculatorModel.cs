@@ -292,29 +292,10 @@ namespace KBS.Portals.Calculator.Models
             }
         }
 
-        private bool _isDirty;
-
-        public bool IsDirty
-        {
-            get { return _isDirty; }
-            set
-            {
-                if (_isDirty != value)
-                {
-                    _isDirty = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (propertyName != null && !propertyName.Equals(nameof(IsDirty)))
-            {
-                IsDirty = true;
-            }
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
