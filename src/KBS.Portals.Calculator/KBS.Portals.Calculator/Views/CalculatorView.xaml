@@ -16,42 +16,37 @@
             <Style TargetType="Label">
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="TextColor" Value="#8e8e8e" />
-                <Setter Property="Margin" Value="0, 5"/>
             </Style>
             <Style TargetType="customViews:FormattedEntry">
                 <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
-                <Setter Property="Margin" Value="0, 5"/>
             </Style>
             <Style TargetType="DatePicker">
                 <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
-                <Setter Property="Margin" Value="0, 5"/>
             </Style>
             <Style TargetType="customViews:BindablePicker">
                 <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
-                <Setter Property="Margin" Value="0, 5"/>
             </Style>
             <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
-                <Setter Property="Margin" Value="0, 5"/>
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
         <ScrollView Margin="0,0,0,30">
-            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="15">
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="5" Spacing="0">
                 <StackLayout.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
                         <OnPlatform.iOS>
                             10, 0, 10, 20
                         </OnPlatform.iOS>
                         <OnPlatform.Android>
-                            30, 0, 30, 20
+                            10, 0, 10, 20
                         </OnPlatform.Android>
                     </OnPlatform>
                 </StackLayout.Margin>
 
                 <customViews:CollapsibleLayout Title="Amounts and Rates">
-                    <Grid>
+                    <Grid RowSpacing="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="2*" />
