@@ -24,7 +24,6 @@
             Grid.Row="1" Grid.Column="0"
             x:Name="CalculateButton"
             Text="Calculate"
-            IsEnabled="{Binding CalculatorModel.IsDirty}"
             Command="{Binding Calculate}" />
     </Grid>
 </ContentPage>
