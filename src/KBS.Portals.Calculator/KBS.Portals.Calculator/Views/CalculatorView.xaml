@@ -86,7 +86,7 @@
                         <customViews:BindablePicker x:Name="FrequencyPicker" Grid.Row="2" Grid.Column="1"
                                                     SelectedItem="{Binding CalculatorModel.Frequency}" />
 
-                        <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Term" />
+                        <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="No. of Ins." />
                         <customViews:NumericEntry x:Name="Term" Grid.Row="3" Grid.Column="1" Text="{Binding CalculatorModel.Term}"
                                IsEnabled="True" />
 
