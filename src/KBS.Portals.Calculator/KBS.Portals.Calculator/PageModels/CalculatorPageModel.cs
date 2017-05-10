@@ -75,7 +75,6 @@ namespace KBS.Portals.Calculator.PageModels
                     var resultData = calculator.Calculate();
                     CalculatorModel resultModel = Mapper.Map<CalculatorModel>(resultData);
                     Mapper.Map(resultModel, CalculatorModel); // Call the set methods to trigger bindings
-                    CalculatorModel.IsDirty = false;
                 });
             }
         }
