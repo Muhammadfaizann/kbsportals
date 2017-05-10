@@ -9,9 +9,9 @@ using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator.Behaviours
 {
-    class PositiveNumberBehavior : BaseEntryBehavior<FormattedEntry>
+    class PositiveNumberBehavior : BaseEntryBehavior<NumericEntry>
     {
-        protected override bool IsValid(FormattedEntry entry)
+        protected override bool IsValid(NumericEntry entry)
         {
             return entry.Value > 0;
         }
