@@ -71,6 +71,7 @@
                             </x:Arguments>
                             <Entry.Behaviors>
                                 <behaviors:PositiveNumberBehavior />
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="99999999.99" />
                             </Entry.Behaviors>
                         </customViews:FormattedEntry>
 
@@ -80,7 +81,12 @@
 
                         <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="No. of Ins." />
                         <customViews:NumericEntry x:Name="Term" Grid.Row="3" Grid.Column="1" Text="{Binding CalculatorModel.Term}"
-                               IsEnabled="True" />
+                               IsEnabled="True">
+                            <Entry.Behaviors>
+                                <behaviors:PositiveNumberBehavior />
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="180" />
+                            </Entry.Behaviors>
+                        </customViews:NumericEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="APR" />
                         <customViews:FormattedEntry x:Name="APR" Grid.Row="4" Grid.Column="1"
@@ -88,6 +94,10 @@
                             <x:Arguments>
                                 <valueConverters:PercentageConverter />
                             </x:Arguments>
+                            <Entry.Behaviors>
+                                <behaviors:PositiveNumberBehavior />
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="50" />
+                            </Entry.Behaviors>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="5" Grid.Column="0" Text="IRR" />
@@ -97,6 +107,10 @@
                             <x:Arguments>
                                 <valueConverters:PercentageConverter />
                             </x:Arguments>
+                            <Entry.Behaviors>
+                                <behaviors:PositiveNumberBehavior />
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="50" />
+                            </Entry.Behaviors>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="6" Grid.Column="0" Text="Installment" />
@@ -125,12 +139,12 @@
 
                         <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Start Date" />
                         <DatePicker Grid.Row="0" Grid.Column="1"
-                                    Date="{Binding CalculatorModel.StartDate}">
+                                    Date="{Binding CalculatorModel.StartDate}" MaximumDate="{Binding CalculatorModel.NextDate}">
                             <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                         </DatePicker>
                         <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Next Date" />
                         <DatePicker Grid.Row="1" Grid.Column="1"
-                                    Date="{Binding CalculatorModel.NextDate}">
+                                    Date="{Binding CalculatorModel.NextDate}" MinimumDate="{Binding CalculatorModel.StartDate}">
                             <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                         </DatePicker>
                     </Grid>

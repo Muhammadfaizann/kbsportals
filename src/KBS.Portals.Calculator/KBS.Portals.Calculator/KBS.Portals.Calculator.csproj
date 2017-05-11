@@ -40,6 +40,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviours\BaseEntryBehavior.cs" />
+    <Compile Include="Behaviours\CustomLimitBehavior.cs" />
     <Compile Include="Behaviours\PositiveNumberBehavior.cs" />
     <Compile Include="Config\AutoMapperConfig.cs" />
     <Compile Include="CustomViews\BindablePicker.cs" />
