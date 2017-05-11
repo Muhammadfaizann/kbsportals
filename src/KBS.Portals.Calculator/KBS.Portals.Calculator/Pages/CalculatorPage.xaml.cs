@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarouselView.FormsPlugin.Abstractions;
+using FreshMvvm;
 using KBS.Portals.Calculator.Logic.Enums;
 using KBS.Portals.Calculator.Models;
 using KBS.Portals.Calculator.PageModels;
+using KBS.Portals.Calculator.Services;
 using KBS.Portals.Calculator.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,6 +23,18 @@ namespace KBS.Portals.Calculator.Pages
             InitializeComponent();
             if (Device.OS == TargetPlatform.Android)
                 ReinitialiseCarousel();
+            ToolbarItems.Add(new ToolbarItem("Reset Calculator", "reset_calculator", () =>
+            {
+                var settingsService = FreshIOC.Container.Resolve<ISettingsService>();
+                settingsService.PurFee = 0;
+                settingsService.APR = 0;
+                settingsService.DocFee = 0;
+                settingsService.IRR = 0;
+                settingsService.Term = 0;
+
+                var calculatorModel = FreshIOC.Container.Resolve<CalculatorModel>();
+                calculatorModel.Init();
+            }));
         }
 
         private void ReinitialiseCarousel()

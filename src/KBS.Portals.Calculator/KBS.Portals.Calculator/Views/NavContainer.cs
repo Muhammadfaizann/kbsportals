@@ -25,36 +25,7 @@ namespace KBS.Portals.Calculator.Views
 
             var innerListView = ((Master as NavigationPage)?.CurrentPage as ContentPage)?.Content as ListView;
             innerListView.SeparatorVisibility = SeparatorVisibility.None;
-            innerListView.Header = BuildHeader();
         }
-
-        private View BuildHeader()
-        {
-            var header = new StackLayout()
-            {
-                Orientation = StackOrientation.Horizontal
-            };
-            var resetLabel = new Button()
-            {
-                Text = "Reset Calculator",
-                Command = _resetModel
-            };
-            header.Children.Add(resetLabel);
-            return header;
-        }
-
-        private readonly ICommand _resetModel = new Command(() =>
-        {
-            var settingsService = FreshIOC.Container.Resolve<ISettingsService>();
-            settingsService.PurFee = 0;
-            settingsService.APR = 0;
-            settingsService.DocFee = 0;
-            settingsService.IRR = 0;
-            settingsService.Term = 0;
-
-            var calculatorModel = FreshIOC.Container.Resolve<CalculatorModel>();
-            calculatorModel.Init();
-        });
 
         private Style MainContainerStyle()
         {
