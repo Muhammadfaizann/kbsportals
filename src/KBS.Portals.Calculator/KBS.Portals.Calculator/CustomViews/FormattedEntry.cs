@@ -15,7 +15,13 @@ namespace KBS.Portals.Calculator.CustomViews
     public class FormattedEntry : NumericEntry
     {
         public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(decimal),
-            typeof(FormattedEntry), 0.0m, BindingMode.TwoWay);
+            typeof(FormattedEntry), 0.0m, BindingMode.TwoWay, propertyChanged: ValueChanged);
+
+        private static void ValueChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var formattedEntry = (FormattedEntry) bindable;
+            formattedEntry.Text = (string) formattedEntry.Converter.Convert(newValue, typeof(string), null, null);
+        }
 
 
         public decimal Value

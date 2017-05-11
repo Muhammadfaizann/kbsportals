@@ -28,6 +28,8 @@ namespace KBS.Portals.Calculator.iOS
             CarouselViewRenderer.Init();
             LoadApplication(new App());
             SetupHockeyApp();
+            
+            UINavigationBar.Appearance.TintColor = UIColor.FromRGB(0xCF, 0x67, 0x33);
 
             return base.FinishedLaunching(app, options);
         }
