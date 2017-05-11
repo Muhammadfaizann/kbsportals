@@ -7,6 +7,7 @@ using System.Windows.Input;
 using FreshMvvm;
 using KBS.Portals.Calculator.Models;
 using KBS.Portals.Calculator.PageModels;
+using KBS.Portals.Calculator.Services;
 using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator.Views
@@ -44,6 +45,13 @@ namespace KBS.Portals.Calculator.Views
 
         private readonly ICommand _resetModel = new Command(() =>
         {
+            var settingsService = FreshIOC.Container.Resolve<ISettingsService>();
+            settingsService.PurFee = 0;
+            settingsService.APR = 0;
+            settingsService.DocFee = 0;
+            settingsService.IRR = 0;
+            settingsService.Term = 0;
+
             var calculatorModel = FreshIOC.Container.Resolve<CalculatorModel>();
             calculatorModel.Init();
         });
