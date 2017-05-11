@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using CoreGraphics;
@@ -29,8 +30,16 @@ namespace KBS.Portals.Calculator.iOS.Renderers
                 }
             };
 
+            e.NewElement.PropertyChanged += ElementOnPropertyChanged;
 
             this.Control.InputAccessoryView = toolbar;
+        }
+
+        private void ElementOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var textColor = Element.TextColor.ToUIColor();
+            Control.TextColor = Element.IsEnabled ? textColor : textColor.ColorWithAlpha(0.6f);
+            Control.BackgroundColor = Element.IsEnabled ? UIColor.Clear : UIColor.Black.ColorWithAlpha(0.025f);
         }
     }
 }

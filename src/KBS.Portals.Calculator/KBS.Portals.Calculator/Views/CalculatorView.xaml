@@ -18,6 +18,9 @@
             <Style TargetType="customViews:FormattedEntry">
                 <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
             </Style>
+            <Style TargetType="customViews:NumericEntry">
+                <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
+            </Style>
             <Style TargetType="DatePicker">
                 <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
             </Style>
