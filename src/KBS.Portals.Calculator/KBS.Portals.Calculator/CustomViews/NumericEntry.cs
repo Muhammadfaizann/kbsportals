@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,9 +15,15 @@ namespace KBS.Portals.Calculator.CustomViews
             Keyboard = Keyboard.Numeric;
             TextChanged += (sender, args) =>
             {
-                decimal newVal;
-                var couldParse = decimal.TryParse(args.NewTextValue, out newVal);
-                Value = couldParse ? newVal : 0;
+                if (string.IsNullOrEmpty(args.NewTextValue))
+                {
+                    Value = 0.00m;
+                }
+                else
+                {
+                    string validDecimal = Regex.Replace(args.NewTextValue, "[,€%]", "");
+                    Value = decimal.Parse(validDecimal);
+                }
             };
         }
 
@@ -26,7 +33,7 @@ namespace KBS.Portals.Calculator.CustomViews
 
         public decimal Value
         {
-            get { return (decimal)GetValue(ValueProperty); }
+            get { return (decimal) GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
     }
