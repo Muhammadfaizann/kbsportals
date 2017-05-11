@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using FreshMvvm;
+using KBS.Portals.Calculator.Models;
 using KBS.Portals.Calculator.PageModels;
 using Xamarin.Forms;
 
@@ -19,7 +21,32 @@ namespace KBS.Portals.Calculator.Views
             AddPage<LogoutPageModel>("Log out");
             ((NavigationPage)Detail).Style = MainContainerStyle();
             Init("Menu");
+
+            var innerListView = ((Master as NavigationPage)?.CurrentPage as ContentPage)?.Content as ListView;
+            innerListView.SeparatorVisibility = SeparatorVisibility.None;
+            innerListView.Header = BuildHeader();
         }
+
+        private View BuildHeader()
+        {
+            var header = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal
+            };
+            var resetLabel = new Button()
+            {
+                Text = "Reset Calculator",
+                Command = _resetModel
+            };
+            header.Children.Add(resetLabel);
+            return header;
+        }
+
+        private readonly ICommand _resetModel = new Command(() =>
+        {
+            var calculatorModel = FreshIOC.Container.Resolve<CalculatorModel>();
+            calculatorModel.Init();
+        });
 
         private Style MainContainerStyle()
         {

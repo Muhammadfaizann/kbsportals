@@ -21,7 +21,7 @@ namespace KBS.Portals.Calculator.ValueConverters
                 return "";
             }
 
-            return modelValue >= 1000 ? $"{CurrencySymbol}{modelValue:0,0.00}" : $"{CurrencySymbol}{modelValue:0.00}";
+            return modelValue >= 1000 ? $"€{CurrencySymbol}{modelValue:0,0.00}" : $"€{CurrencySymbol}{modelValue:0.00}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

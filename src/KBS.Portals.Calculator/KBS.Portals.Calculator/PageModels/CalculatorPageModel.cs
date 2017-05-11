@@ -36,19 +36,8 @@ namespace KBS.Portals.Calculator.PageModels
         public CalculatorPageModel(ISettingsService settingsService)
         {
             _settingsService = settingsService;
-            CalculatorModel = new CalculatorModel()
-            {
-                Product = Product.Lease,
-                Frequency = Frequency.Monthly,
-                StartDate = DateTime.Today,
-                NextDate = DateTime.Today.AddMonths(1),
-                APR = _settingsService.APR,
-                IRR = _settingsService.IRR,
-                DocFee = _settingsService.DocFee,
-                PurFee = _settingsService.PurFee,
-                Term = _settingsService.Term
-            };
-            FreshIOC.Container.Register(CalculatorModel);
+            CalculatorModel = new CalculatorModel();
+            FreshIOC.Container.Register<CalculatorModel>(CalculatorModel);
 
             PageModels = new List<CalculatorCarouselModel>
             {
