@@ -10,20 +10,140 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <valueConverters:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
+            <Color x:Key="DarkGreyOpaque">#33666666</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid x:Name="MainGrid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Button
-            Grid.Row="1" Grid.Column="0"
-            x:Name="CalculateButton"
-            Text="Calculate"
-            Command="{Binding Calculate}" />
-    </Grid>
+    <AbsoluteLayout>
+        <Grid x:Name="MainGrid" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Button
+                Grid.Row="1" Grid.Column="0"
+                x:Name="CalculateButton"
+                Text="Calculate"
+                Clicked="CalculateButtonClicked" />
+        </Grid>
+        <StackLayout x:Name="SummaryPopup" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                     BackgroundColor="{StaticResource DarkGreyOpaque}" IsVisible="False">
+            <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="20"
+                   BackgroundColor="White">
+                <StackLayout>
+                    <Label Text="Calculation Results" FontAttributes="Bold" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
+                    <ScrollView>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition>*</ColumnDefinition>
+                                <ColumnDefinition>*</ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                                <RowDefinition>*</RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="Product:" />
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.Product, StringFormat='{0}'}" />
+
+                            <Label Grid.Row="1" Grid.Column="0" Text="Finance Amount:" />
+                            <Label Grid.Row="1" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.FinanceAmount, StringFormat='€{0}'}" />
+
+                            <Label Grid.Row="2" Grid.Column="0" Text="Frequency:" />
+                            <Label Grid.Row="2" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.Frequency, StringFormat='{0}'}" />
+
+                            <Label Grid.Row="3" Grid.Column="0" Text="No. of Ins.:" />
+                            <Label Grid.Row="3" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.Term, StringFormat='{0}'}" />
+
+                            <Label Grid.Row="4" Grid.Column="0" Text="APR:" />
+                            <Label Grid.Row="4" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.APR, StringFormat='{0}%'}" />
+
+                            <Label Grid.Row="5" Grid.Column="0" Text="IRR:" />
+                            <Label Grid.Row="5" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.IRR, StringFormat='{0}%'}" />
+
+                            <Label Grid.Row="6" Grid.Column="0" Text="Installment:" />
+                            <Label Grid.Row="6" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.Installment, StringFormat='€{0}'}" />
+
+                            <Label Grid.Row="7" Grid.Column="0" Text="Start Date:" />
+                            <Label Grid.Row="7" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.StartDate, StringFormat='{0:yyyy-MM-dd}'}" />
+
+                            <Label Grid.Row="8" Grid.Column="0" Text="Next Date:" />
+                            <Label Grid.Row="8" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.NextDate, StringFormat='{0:yyyy-MM-dd}'}" />
+
+                            <Label Grid.Row="9" Grid.Column="0" Text="Up Front No:" />
+                            <Label Grid.Row="9" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.UpFrontNo, StringFormat='{0}'}" />
+
+                            <Label Grid.Row="10" Grid.Column="0" Text="Up Front Value:" />
+                            <Label Grid.Row="10" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.UpFrontValue, StringFormat='€{0}'}" />
+
+                            <Label Grid.Row="11" Grid.Column="0" Text="Doc Fee:" />
+                            <Label Grid.Row="11" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.DocFee, StringFormat='€{0}'}" />
+
+                            <Label Grid.Row="12" Grid.Column="0" Text="Commission:" />
+                            <Label Grid.Row="12" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.Commission, StringFormat='€{0}'}" />
+
+                            <Label Grid.Row="13" Grid.Column="0" Text="Pur Fee:" />
+                            <Label Grid.Row="13" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.PurFee, StringFormat='€{0}'}" />
+
+                            <Label Grid.Row="14" Grid.Column="0" Text="Ballon:" />
+                            <Label Grid.Row="14" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.Ballon, StringFormat='€{0}'}" />
+
+                            <Label Grid.Row="15" Grid.Column="0" Text="Residual:" />
+                            <Label Grid.Row="15" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.Residual, StringFormat='€{0}'}" />
+
+                            <Label Grid.Row="16" Grid.Column="0" Text="Charges:" />
+                            <Label Grid.Row="16" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.Charges, StringFormat='€{0}'}" />
+
+                            <Label Grid.Row="17" Grid.Column="0" Text="Total Cost:" />
+                            <Label Grid.Row="17" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.TotalCost, StringFormat='€{0}'}" />
+
+                            <Label Grid.Row="18" Grid.Column="0" Text="Total Schedule:" />
+                            <Label Grid.Row="18" Grid.Column="1"
+                                   Text="{Binding CalculatorModel.TotalSchedule, StringFormat='€{0}'}" />
+                        </Grid>
+                    </ScrollView>
+                    <Button Text="Okay" Clicked="DismissSummary" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>
