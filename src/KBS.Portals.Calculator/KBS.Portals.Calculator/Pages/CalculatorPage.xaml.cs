@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using CarouselView.FormsPlugin.Abstractions;
 using FreshMvvm;
 using KBS.Portals.Calculator.Logic.Enums;
@@ -64,11 +65,28 @@ namespace KBS.Portals.Calculator.Pages
             calculatorPageModel?.OnPositionSelected(sender, eventArgs);
         }
 
+        private void CalculateButtonClicked(object sender, EventArgs eventArgs)
+        {
+            var pageModel = BindingContext as CalculatorPageModel;
+            pageModel.Calculate.Execute(null);
+            SetSummaryVisibility(true);
+        }
+
+        private void SetSummaryVisibility(bool isVisible)
+        {
+            SummaryPopup.IsVisible = isVisible;
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
             if (Device.OS == TargetPlatform.iOS)
                 ReinitialiseCarousel();
+        }
+
+        private void DismissSummary(object sender, EventArgs e)
+        {
+            SetSummaryVisibility(false);
         }
     }
 }
