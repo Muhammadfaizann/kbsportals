@@ -28,7 +28,12 @@ namespace KBS.Portals.Calculator.CustomViews
             this.Focused += OnFocused;
             this.Unfocused += OnUnfocused;
         }
-        
+
+        protected override string FormatValue(decimal value)
+        {
+            return (string) Converter.Convert(value, typeof(string), null, null);
+        }
+
         private void OnUnfocused(object sender, FocusEventArgs focusEventArgs)
         {
             Value = (decimal) Converter.ConvertBack(Text, null, null, null);
