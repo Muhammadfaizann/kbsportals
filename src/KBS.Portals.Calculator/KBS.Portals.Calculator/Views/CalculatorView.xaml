@@ -71,12 +71,7 @@
                             </x:Arguments>
                             <Entry.Behaviors>
                                 <behaviors:PositiveNumberBehavior />
-                                <behaviors:CustomLimitBehavior>
-                                    <x:Arguments>
-                                        <x:Decimal>0</x:Decimal>
-                                        <x:Decimal>99999999.99</x:Decimal>
-                                    </x:Arguments>
-                                </behaviors:CustomLimitBehavior>
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="99999999.99" />
                             </Entry.Behaviors>
                         </customViews:FormattedEntry>
 
@@ -89,12 +84,7 @@
                                IsEnabled="True">
                             <Entry.Behaviors>
                                 <behaviors:PositiveNumberBehavior />
-                                <behaviors:CustomLimitBehavior>
-                                    <x:Arguments>
-                                        <x:Decimal>0</x:Decimal>
-                                        <x:Decimal>180</x:Decimal>
-                                    </x:Arguments>
-                                </behaviors:CustomLimitBehavior>
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="180" />
                             </Entry.Behaviors>
                         </customViews:NumericEntry>
 
@@ -106,12 +96,7 @@
                             </x:Arguments>
                             <Entry.Behaviors>
                                 <behaviors:PositiveNumberBehavior />
-                                <behaviors:CustomLimitBehavior>
-                                    <x:Arguments>
-                                        <x:Decimal>0</x:Decimal>
-                                        <x:Decimal>50</x:Decimal>
-                                    </x:Arguments>
-                                </behaviors:CustomLimitBehavior>
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="50" />
                             </Entry.Behaviors>
                         </customViews:FormattedEntry>
 
@@ -124,12 +109,7 @@
                             </x:Arguments>
                             <Entry.Behaviors>
                                 <behaviors:PositiveNumberBehavior />
-                                <behaviors:CustomLimitBehavior>
-                                    <x:Arguments>
-                                        <x:Decimal>0</x:Decimal>
-                                        <x:Decimal>50</x:Decimal>
-                                    </x:Arguments>
-                                </behaviors:CustomLimitBehavior>
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="50" />
                             </Entry.Behaviors>
                         </customViews:FormattedEntry>
 

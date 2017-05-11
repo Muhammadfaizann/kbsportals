@@ -10,18 +10,41 @@ namespace KBS.Portals.Calculator.Behaviours
 {
     class CustomLimitBehavior : BaseEntryBehavior<NumericEntry>
     {
-        private readonly decimal _lowerLimit;
-        private readonly decimal _upperLimit;
+        private decimal? _lowerLimit;
 
-        public CustomLimitBehavior(decimal lowerLimit, decimal upperLimit)
+        public string LowerLimit
         {
-            _lowerLimit = lowerLimit;
-            _upperLimit = upperLimit;
+            get { return _lowerLimit?.ToString(); }
+            set
+            {
+                if (value != _lowerLimit?.ToString())
+                {
+                    decimal decimalValue;
+                    _lowerLimit = decimal.TryParse(value, out decimalValue) ? decimalValue : (decimal?) null;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private decimal? _upperLimit;
+
+        public string UpperLimit
+        {
+            get { return _upperLimit?.ToString(); }
+            set
+            {
+                if (value != _upperLimit?.ToString())
+                {
+                    decimal decimalValue;
+                    _upperLimit = decimal.TryParse(value, out decimalValue) ? decimalValue : (decimal?) null;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         protected override bool IsValid(NumericEntry entry)
         {
-            return (entry.Value >= _lowerLimit) && (entry.Value <= _upperLimit);
+            return (_lowerLimit == null || entry.Value >= _lowerLimit) && (_upperLimit == null || entry.Value <= _upperLimit);
         }
     }
 }

@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator.Behaviours
 {
-    abstract class BaseEntryBehavior<T> : Behavior<T> where T: Entry
+    public abstract class BaseEntryBehavior<T> : Behavior<T> where T: Entry
     {
         protected Color InvalidColor = Color.FromHex("#FFEDED");
         protected Color ValidColor = Color.White;
