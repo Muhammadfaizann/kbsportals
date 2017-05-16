@@ -11,47 +11,43 @@
             <valueConverters:PercentageConverter x:Key="PercentageConverter" />
             <x:String x:Key="EntryColour">#5e5e5e</x:String>
             <x:String x:Key="CurrencySymbol">€</x:String>
-            <valueConverters:CurrencyConverter x:Key="CurrencyConverter"
-                                               CurrencySymbol="{StaticResource CurrencySymbol}" />
             <Style TargetType="Label">
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="TextColor" Value="#8e8e8e" />
-                <Setter Property="Margin" Value="0, 5"/>
             </Style>
             <Style TargetType="customViews:FormattedEntry">
                 <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
-                <Setter Property="Margin" Value="0, 5"/>
+            </Style>
+            <Style TargetType="customViews:NumericEntry">
+                <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
             </Style>
             <Style TargetType="DatePicker">
                 <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
-                <Setter Property="Margin" Value="0, 5"/>
             </Style>
             <Style TargetType="customViews:BindablePicker">
                 <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
-                <Setter Property="Margin" Value="0, 5"/>
             </Style>
             <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="{StaticResource EntryColour}" />
-                <Setter Property="Margin" Value="0, 5"/>
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
         <ScrollView Margin="0,0,0,30">
-            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="15">
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="5" Spacing="0">
                 <StackLayout.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
                         <OnPlatform.iOS>
                             10, 0, 10, 20
                         </OnPlatform.iOS>
                         <OnPlatform.Android>
-                            30, 0, 30, 20
+                            10, 0, 10, 20
                         </OnPlatform.Android>
                     </OnPlatform>
                 </StackLayout.Margin>
 
                 <customViews:CollapsibleLayout Title="Amounts and Rates">
-                    <Grid>
+                    <Grid RowSpacing="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="2*" />
@@ -72,13 +68,13 @@
                         <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Finance Amount" />
                         <customViews:FormattedEntry x:Name="FinanceAmount" Grid.Row="1" Grid.Column="1"
                                                     Value="{Binding CalculatorModel.FinanceAmount}"
-                                                    Text="{Binding CalculatorModel.FinanceAmount, Mode=OneWay, Converter={StaticResource CurrencyConverter}, ConverterParameter={StaticResource CurrencySymbol}}"
                                                     IsEnabled="True">
                             <x:Arguments>
-                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                                <valueConverters:CurrencyConverter />
                             </x:Arguments>
                             <Entry.Behaviors>
                                 <behaviors:PositiveNumberBehavior />
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="99999999.99" />
                             </Entry.Behaviors>
                         </customViews:FormattedEntry>
 
@@ -86,36 +82,46 @@
                         <customViews:BindablePicker x:Name="FrequencyPicker" Grid.Row="2" Grid.Column="1"
                                                     SelectedItem="{Binding CalculatorModel.Frequency}" />
 
-                        <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Term" />
+                        <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="No. of Ins." />
                         <customViews:NumericEntry x:Name="Term" Grid.Row="3" Grid.Column="1" Text="{Binding CalculatorModel.Term}"
-                               IsEnabled="True" />
+                               IsEnabled="True">
+                            <Entry.Behaviors>
+                                <behaviors:PositiveNumberBehavior />
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="180" />
+                            </Entry.Behaviors>
+                        </customViews:NumericEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="APR" />
                         <customViews:FormattedEntry x:Name="APR" Grid.Row="4" Grid.Column="1"
-                                                    Value="{Binding CalculatorModel.APR}"
-                                                    Text="{Binding CalculatorModel.APR, Mode=OneWay, Converter={StaticResource PercentageConverter}}">
+                                                    Value="{Binding CalculatorModel.APR}">
                             <x:Arguments>
                                 <valueConverters:PercentageConverter />
                             </x:Arguments>
+                            <Entry.Behaviors>
+                                <behaviors:PositiveNumberBehavior />
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="50" />
+                            </Entry.Behaviors>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="5" Grid.Column="0" Text="IRR" />
                         <customViews:FormattedEntry Grid.Row="5" Grid.Column="1"
                                                     Value="{Binding CalculatorModel.IRR}"
-                                                    Text="{Binding CalculatorModel.IRR, Mode=OneWay, Converter={StaticResource PercentageConverter}}"
                                                     x:Name="IRR">
                             <x:Arguments>
                                 <valueConverters:PercentageConverter />
                             </x:Arguments>
+                            <Entry.Behaviors>
+                                <behaviors:PositiveNumberBehavior />
+                                <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="50" />
+                            </Entry.Behaviors>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="6" Grid.Column="0" Text="Installment" />
                         <customViews:FormattedEntry Grid.Row="6" Grid.Column="1" x:Name="Installment"
                                                     Value="{Binding CalculatorModel.Installment}"
-                                                    Text="{Binding CalculatorModel.Installment, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                                     IsEnabled="False">
                             <x:Arguments>
-                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                                <valueConverters:CurrencyConverter />
                             </x:Arguments>
                         </customViews:FormattedEntry>
                     </Grid>
@@ -136,12 +142,12 @@
 
                         <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Start Date" />
                         <DatePicker Grid.Row="0" Grid.Column="1"
-                                    Date="{Binding CalculatorModel.StartDate}">
+                                    Date="{Binding CalculatorModel.StartDate}" MaximumDate="{Binding CalculatorModel.NextDate}">
                             <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                         </DatePicker>
                         <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Next Date" />
                         <DatePicker Grid.Row="1" Grid.Column="1"
-                                    Date="{Binding CalculatorModel.NextDate}">
+                                    Date="{Binding CalculatorModel.NextDate}" MinimumDate="{Binding CalculatorModel.StartDate}">
                             <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                         </DatePicker>
                     </Grid>
@@ -172,59 +178,53 @@
                         <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Up Front Value" />
                         <customViews:FormattedEntry Grid.Row="1" Grid.Column="1" x:Name="UpFrontValue"
                                                     Value="{Binding CalculatorModel.UpFrontValue}"
-                                                    Text="{Binding CalculatorModel.UpFrontValue, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                                     IsEnabled="{Binding CalculatorModel.UpFrontNo, Converter={StaticResource IsPositiveConverter}}">
                             <x:Arguments>
-                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                                <valueConverters:CurrencyConverter />
                             </x:Arguments>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Doc Fee" />
                         <customViews:FormattedEntry Grid.Row="2" Grid.Column="1"
                                                     Value="{Binding CalculatorModel.DocFee}"
-                                                    Text="{Binding CalculatorModel.DocFee, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                                     IsEnabled="True">
                             <x:Arguments>
-                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                                <valueConverters:CurrencyConverter />
                             </x:Arguments>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Commission" />
                         <customViews:FormattedEntry x:Name="Commission" Grid.Row="3" Grid.Column="1"
                                                     Value="{Binding CalculatorModel.Commission}"
-                                                    Text="{Binding CalculatorModel.Commission, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                                     IsEnabled="True">
                             <x:Arguments>
-                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                                <valueConverters:CurrencyConverter />
                             </x:Arguments>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="4" Grid.Column="0" Text="Pur Fee" />
                         <customViews:FormattedEntry x:Name="PurFee" Grid.Row="4" Grid.Column="1"
-                                                    Value="{Binding CalculatorModel.PurFee}"
-                                                    Text="{Binding CalculatorModel.PurFee, Mode=OneWay, Converter={StaticResource CurrencyConverter}}">
+                                                    Value="{Binding CalculatorModel.PurFee}">
                             <x:Arguments>
-                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                                <valueConverters:CurrencyConverter />
                             </x:Arguments>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="5" Grid.Column="0" Text="Ballon" />
                         <customViews:FormattedEntry Grid.Row="5" Grid.Column="1"
                                                     Value="{Binding CalculatorModel.Ballon}"
-                                                    Text="{Binding CalculatorModel.Ballon, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                                     IsEnabled="True">
                             <x:Arguments>
-                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                                <valueConverters:CurrencyConverter />
                             </x:Arguments>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="6" Grid.Column="0" Text="Residual" />
                         <customViews:FormattedEntry Grid.Row="6" Grid.Column="1"
                                                     Value="{Binding CalculatorModel.Residual}"
-                                                    Text="{Binding CalculatorModel.Residual, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                                     IsEnabled="True">
                             <x:Arguments>
-                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                                <valueConverters:CurrencyConverter />
                             </x:Arguments>
                         </customViews:FormattedEntry>
 
@@ -246,29 +246,26 @@
                         <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Charges" />
                         <customViews:FormattedEntry x:Name="Charges" Grid.Row="0" Grid.Column="1"
                                                 Value="{Binding CalculatorModel.Charges}"
-                                                Text="{Binding CalculatorModel.Charges, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                                 IsEnabled="False">
                             <x:Arguments>
-                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                                <valueConverters:CurrencyConverter />
                             </x:Arguments>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Total Cost" />
                         <customViews:FormattedEntry Grid.Row="1" Grid.Column="1"
                                                 Value="{Binding CalculatorModel.TotalCost}"
-                                                Text="{Binding CalculatorModel.TotalCost, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                                                 IsEnabled="False">
                             <x:Arguments>
-                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                                <valueConverters:CurrencyConverter />
                             </x:Arguments>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Total Schedule" />
                         <customViews:FormattedEntry Grid.Row="2" Grid.Column="1"
-                           Text="{Binding CalculatorModel.TotalSchedule, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
                            IsEnabled="False">
                             <x:Arguments>
-                                <valueConverters:CurrencyConverter CurrencySymbol="{StaticResource CurrencySymbol}" />
+                                <valueConverters:CurrencyConverter />
                             </x:Arguments>
                         </customViews:FormattedEntry>
                     </Grid>

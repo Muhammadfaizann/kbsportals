@@ -1,12 +1,47 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using FreshMvvm;
 using KBS.Portals.Calculator.Logic.Enums;
+using KBS.Portals.Calculator.Services;
 
 namespace KBS.Portals.Calculator.Models
 {
     public class CalculatorModel : INotifyPropertyChanged
     {
+        public void Init()
+        {
+            var settingsService = FreshIOC.Container.Resolve<ISettingsService>();
+
+            Product = Product.Lease;
+            FinanceAmount = 0;
+            Frequency = Frequency.Monthly;
+            Term = settingsService.Term;
+            APR = settingsService.APR;
+            IRR = settingsService.IRR;
+            Installment = 0;
+
+            StartDate = DateTime.Today;
+            NextDate = DateTime.Today.AddMonths(1);
+
+            UpFrontNo = 0;
+            UpFrontValue = 0;
+            DocFee = settingsService.DocFee;
+            Commission = 0;
+            PurFee = settingsService.PurFee;
+            Ballon = 0;
+            Residual = 0;
+
+            Charges = 0;
+            TotalCost = 0;
+            TotalSchedule = 0;
+        }
+
+        public CalculatorModel()
+        {
+            Init();
+        }
+
         private Product _product;
 
         public Product Product
@@ -292,29 +327,10 @@ namespace KBS.Portals.Calculator.Models
             }
         }
 
-        private bool _isDirty;
-
-        public bool IsDirty
-        {
-            get { return _isDirty; }
-            set
-            {
-                if (_isDirty != value)
-                {
-                    _isDirty = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (propertyName != null && !propertyName.Equals(nameof(IsDirty)))
-            {
-                IsDirty = true;
-            }
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }

@@ -14,16 +14,6 @@ namespace KBS.Portals.Calculator.CustomViews
 {
     public class FormattedEntry : NumericEntry
     {
-        public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(decimal),
-            typeof(FormattedEntry), 0.0m, BindingMode.TwoWay);
-
-
-        public decimal Value
-        {
-            get { return (decimal) GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
-        }
-
         public void ValueChanged(object sender, TextChangedEventArgs args)
         {
             // override with custom behaviour
@@ -38,7 +28,12 @@ namespace KBS.Portals.Calculator.CustomViews
             this.Focused += OnFocused;
             this.Unfocused += OnUnfocused;
         }
-        
+
+        protected override string FormatValue(decimal value)
+        {
+            return (string) Converter.Convert(value, typeof(string), null, null);
+        }
+
         private void OnUnfocused(object sender, FocusEventArgs focusEventArgs)
         {
             Value = (decimal) Converter.ConvertBack(Text, null, null, null);
