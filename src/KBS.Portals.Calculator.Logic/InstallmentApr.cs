@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
+using System.Reflection.Emit;
 using KBS.Portals.Calculator.Logic.Enums;
 using KBS.Portals.Calculator.Logic.Models;
 
@@ -13,34 +15,127 @@ namespace KBS.Portals.Calculator.Logic
 
         internal override void CalculateImplementation()
         {
-            var nextDate = Input.NextDate;
-            var frequency = (int)Input.Frequency;
+            double sNpv = 0;
+            var date = default(DateTime);
+            var loopCount = 0;
+            double lastDays = 0;
+            var bFindUpfront = false;
+            double rate = (Math.Pow((1+(Input.APR/100)),(1.0/12))-1)*1200;
 
-            double interim = (nextDate - Input.StartDate).TotalDays,
-                dtk = Math.Round(interim / AccountDays, 9),
-                dSumOfPayments = 0,
-                dModifyDocFee = 0;
 
-            if (Input.DocFee > 0)
+
+            var lastKey = new SortKey(default(DateTime), 0);
+            //no need to run swaps as Dictionary should be sorted
+
+            double inc;
+            double amount;
+            //GC Removed second condition as Upfront Value is ALWAYS computed - RK confirm 28/4/17 upf is only ever NoOfIns
+            if (Input.UpFrontNo > 0)//&& Input.UpFrontValue == 0)
             {
-                dModifyDocFee = Math.Round(Convert.ToDouble(Input.DocFee) / Math.Pow((1 + Input.APR / 100), dtk), 9); 
+                bFindUpfront = true;
             }
-            
-            //TODO GAVIN Add logic for RES,BAL and PUR -- COMMISSION  AND UPFRONTS!!!!!
 
-            for (var i = 1; i <= Input.NoOfInstallments; i++)
+            foreach (var entry in YieldCalcChron)
             {
-                interim = (nextDate - Input.StartDate).TotalDays;
-                dtk = Math.Round(interim / AccountDays, 9);
-                dSumOfPayments = Math.Round(dSumOfPayments + 1 / Math.Pow((1 + Input.APR / 100), dtk), 9);// vb.Net dSumOfPayments = dSumOfPayments + 1 / (1 + dAPR / 100) ^ dTK
-                nextDate = nextDate.AddMonths(frequency);
+                    sNpv = Convert.ToDouble(entry.Value.Amount);
+                    date = entry.Value.EntryDate;
+                    break;
             }
-            if (dSumOfPayments > 0)
+
+            foreach (var entry in YieldCalcChron)
             {
-                //TODO GAVIN should we add commission to deal Cost to get get full calculation????
-                var dealCost = Convert.ToDouble(Input.FinanceAmount) - Convert.ToDouble(Input.UpFrontValue);//GC + Convert.ToDouble(Input.Commission);
-                Input.Installment = Math.Round(Convert.ToDecimal((dealCost - dModifyDocFee) / dSumOfPayments), 2);
-                Input.TotalSchedule = Input.TotalSchedule + (Input.Installment * Input.NoOfInstallments);
+                entry.Value.Days = (entry.Value.EntryDate - date).TotalDays;
+            }
+
+            if (bFindUpfront)
+            {
+                amount = Convert.ToDouble(Input.TotalCost / (Input.NoOfInstallments + Input.UpFrontNo));
+            }
+            else
+            {
+                amount = Convert.ToDouble(Input.TotalCost / Input.NoOfInstallments);
+            }
+            inc = amount / 2;
+            do
+            {
+                //look for the first yield affecting entry
+                foreach (var entry in YieldCalcChron)
+                {
+                        sNpv = Convert.ToDouble(entry.Value.Amount);
+                        lastDays = entry.Value.Days;
+                        lastKey = entry.Key;
+                        break;
+                }
+
+                if (bFindUpfront)
+                {
+                    if (sNpv > 0)
+                    {
+                        sNpv -= (amount * Input.UpFrontNo);
+                    }
+                    else
+                    {
+                        sNpv += (amount * Input.UpFrontNo);
+                    }
+                }
+
+                foreach (var entry in YieldCalcChron)
+                {
+                   if (!entry.Key.Equals(lastKey)) // Skip first record for some reason - Gavin?
+                    {
+                        sNpv += Math.Round(sNpv * rate * ((entry.Value.Days - lastDays) / (AccountDays * 100)), 4);
+
+                        //On Swipe Installment is populated this cal so Amount never equals 0 this is only required for multiple INS lines
+                        //if (entry.Value.Amount.Equals(0) && entry.Value.Type.Equals(ScheduleType.INS))
+                        //{
+
+                        if (entry.Value.Type == ScheduleType.INS || entry.Value.Type == ScheduleType.UPF)
+                        {
+                            sNpv += amount;
+                        }
+                        else
+                        {
+                            sNpv += Convert.ToDouble(entry.Value.Amount);
+                        }
+                            lastDays = entry.Value.Days;
+                    }
+                }
+                if (sNpv > 0.005 || sNpv < -0.005)
+                {
+                    if (sNpv > 0)
+                    {
+                        amount = amount - inc;
+                    }
+                    if (sNpv < 0)
+                    {
+                        amount = amount + inc;
+                    }
+                }
+                if (amount <= 0)
+                {
+                    amount = 0.01;
+                }
+                inc = inc / 2;
+                loopCount++;
+
+            } while (!((sNpv <= 0.005 && sNpv >= -0.005) || loopCount > 9999));
+
+            if (loopCount > 9999)
+            {
+                Input.Installment = -9999;
+            }
+            else
+            {
+                Input.Installment = Math.Round(Convert.ToDecimal(amount), 2);
+
+                // Update Schedule with Instalment
+                foreach (var schedule in Input.Schedules)
+                {
+                    if (schedule.Type.Equals(ScheduleType.INS))
+                    {
+                        schedule.Amount = Input.Installment;
+                    }
+                }
             }
         }
     }

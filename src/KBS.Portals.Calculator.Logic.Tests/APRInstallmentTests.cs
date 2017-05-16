@@ -34,7 +34,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             var result = calc.Calculate();
 
             Assert.AreEqual(205.83, result.Installment );
-            Debug.Print(result.Summary);
+            Debug.Print(result.ToString);
         }
         [Test]
         public void CalculateAPRInstallmentForQuarterly()
@@ -43,7 +43,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             {
                 FinanceAmount = 10000,
                 NoOfInstallments = 60,
-                APR = 9,
+                APR = 9.066625,
                 StartDate = Convert.ToDateTime("14 Feb 2017"),
                 NextDate = Convert.ToDateTime("14 Mar 2017"),
                 Frequency = Frequency.Quarterly
@@ -62,7 +62,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             {
                 FinanceAmount = 10000,
                 NoOfInstallments = 6,
-                APR = 9,
+                APR = 9.367173,
                 StartDate = Convert.ToDateTime("14 Feb 2017"),
                 NextDate = Convert.ToDateTime("14 Mar 2017"),
                 Frequency = Frequency.Annual
@@ -81,7 +81,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             {
                 FinanceAmount = 10000,
                 NoOfInstallments = 60,
-                APR = 9,
+                APR = 8.999852,
                 StartDate = Convert.ToDateTime("14 Feb 2017"),
                 NextDate = Convert.ToDateTime("14 Mar 2017"),
                 DocFee =  250
@@ -103,7 +103,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 // Added Frig to get upfront value in 
                 FinanceAmount = 36900 - 15900,
                 NoOfInstallments = 24,
-                APR = 15.381418,
+                APR = 15.379017,
                 StartDate = Convert.ToDateTime("22 Nov 2016"),
                 NextDate = Convert.ToDateTime("09 Dec 2016"),
                 UpFrontNo = 0,
@@ -127,7 +127,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 // Added Frig to get upfront value in 
                 FinanceAmount = 30750 - 16750,
                 NoOfInstallments = 24,
-                APR = 15.381418,
+                APR = 15.379608,
                 StartDate = Convert.ToDateTime("22 Nov 2016"),
                 NextDate = Convert.ToDateTime("09 Dec 2016"),
                 UpFrontNo = 0,
@@ -142,5 +142,36 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             Assert.AreEqual(671.19, result.Installment);
         }
+
+
+        [Test]
+        public void APR_Upfront()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                // Added upfront ( 24 instalments in total of which 3 are upfront gives 21)/
+                FinanceAmount = 15000,
+                NoOfInstallments = 21,
+                APR = 9.905589,
+                StartDate = Convert.ToDateTime("22 Nov 2016"),
+                NextDate = Convert.ToDateTime("09 Dec 2016"),
+                UpFrontNo = 3,
+                //                UpFrontValue = 16750,
+                Commission = 0,
+                DocFee = 0
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.APRInstallment, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(671.19, result.Installment);
+        }
+
+
+
+
+
+
     }
 }

@@ -77,6 +77,31 @@ namespace KBS.Portals.Calculator.Logic.Tests
             Assert.AreEqual(9.380723, result.APR);
         }
         [Test]
+        public void CalculateRateWithPur()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                FinanceAmount = 100000,
+                DocFee = 250,
+                PurchaseFee = 250,
+                NoOfInstallments = 36,
+                Installment = Convert.ToDecimal(3298.11),
+                StartDate = Convert.ToDateTime("11 May 2017"),
+                NextDate = Convert.ToDateTime("18 Jun 2017"),
+                Frequency = Frequency.Monthly
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.Rate, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(11.341389, result.IRR);
+           // Assert.AreEqual(12.271689, result.APR);
+        }
+
+
+
+        [Test]
         public void CalculateIRRWithDocFee()
         {
             CalculatorData cd = new CalculatorData()

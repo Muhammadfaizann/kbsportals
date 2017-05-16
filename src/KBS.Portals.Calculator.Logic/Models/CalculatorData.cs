@@ -49,7 +49,7 @@ namespace KBS.Portals.Calculator.Logic.Models
         public int Term => Convert.ToInt32( NoOfInstallments * (int)Frequency);
         public decimal LoanOverPayment { get; set; } // Value return in term Calculation
 
-        public string Summary
+        public new string ToString
         {
             get
             {
@@ -59,8 +59,8 @@ namespace KBS.Portals.Calculator.Logic.Models
                 boldMe = "";
                 unBoldMe = "";
                 var summary = "Finance Amount".PadRight(15) + boldMe + FinanceAmount.ToString("C") + unBoldMe + "\n";
-                summary += "APR".PadRight(15) + boldMe + (APR /100).ToString("p") + unBoldMe + "\n";
-                summary += "IRR".PadRight(15) + boldMe + (IRR /100).ToString("p") + unBoldMe + "\n";
+                summary += "APR".PadRight(15) + boldMe + (APR / 100).ToString("p") + unBoldMe + "\n";
+                summary += "IRR".PadRight(15) + boldMe + (IRR / 100).ToString("p") + unBoldMe + "\n";
                 summary += "Installment".PadRight(15) + boldMe + Installment.ToString("C") + unBoldMe + "\n";
                 summary += "No of Ins".PadRight(15) + boldMe + NoOfInstallments.ToString("G") + unBoldMe + "\n";
                 summary += "Start Date".PadRight(15) + boldMe + StartDate.ToString("d") + unBoldMe + "\n";
@@ -114,7 +114,7 @@ namespace KBS.Portals.Calculator.Logic.Models
                 return summary;
             }
         }
- 
+
         public void AddSchedule(int serial, ScheduleType type, int counts, Frequency frequency, decimal amount, DateTime nextDate)
         {
             AddSchedule(new Schedule(serial, type, counts, frequency,amount, nextDate));

@@ -80,8 +80,7 @@ namespace KBS.Portals.Calculator.Logic
                 Input.AddSchedule(i,ScheduleType.PUR, 1, Input.Frequency, Input.PurchaseFee, Input.NextDate);
             }
 
-            //TODO Gavin This is NOT used in APR Calc
-            BuildChron();
+          BuildChron();
 
             CalculateImplementation();
 
@@ -111,7 +110,10 @@ namespace KBS.Portals.Calculator.Logic
 
                 //GC Copied thuis from below Input.Charges = Input.TotalSchedule - Input.TotalCost;
                 //GC Should be but fails tests                var amount = -(Input.TotalCost);
-                var amount = -((Input.TotalSchedule) - (Input.TotalSchedule - Input.TotalCost));
+                //var amount = -((Input.TotalSchedule) - (Input.TotalSchedule - Input.TotalCost));
+                var amount = -( Input.TotalCost);
+
+
 
                 YieldCalcChron.Add(new SortKey(Input.StartDate, serial), new YieldCalc(amount, Input.StartDate, true, ScheduleType.FIN));
                 serial++;
@@ -129,23 +131,34 @@ namespace KBS.Portals.Calculator.Logic
                         schedule.NextDate = nextDate;
                     }
 
-                    if (schedule.Type.Equals(ScheduleType.FEE) || schedule.Type.Equals(ScheduleType.DOC) || schedule.Type.Equals(ScheduleType.PUR))
+                    if (schedule.Type.Equals(ScheduleType.FEE) || schedule.Type.Equals(ScheduleType.DOC) )
                     {
                         YieldCalcChron.Add(new SortKey(Input.NextDate, serial), new YieldCalc(schedule.Amount, Input.NextDate, false, schedule.Type));
                         serial++;
                         //                    if (schedule.Type.Equals("FEE"))  { iMonths += schedule.Counts; };
                     }
                     //                if (schedule.Type.Equals("HOL")) { iMonths += schedule.Counts; };
+
+
+
                     if (schedule.Type.Equals(ScheduleType.INS) || schedule.Type.Equals(ScheduleType.BAL))
                     {
                         for (int i = 0; i <= schedule.Counts - 1; i++)
                         {
                             nextDate = schedule.NextDate.AddMonths(i * (int)schedule.Frequency);
-                            YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, nextDate, true, schedule.Type));
+                            YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, nextDate,  true, schedule.Type));
                             serial++;
                         }
                         //                    iMonths += schedule.Counts;
                         //                        NumOfInstalments += schedule.Counts;
+                    }
+
+                    if (schedule.Type.Equals(ScheduleType.PUR))
+                    {
+                        // Always Collect Purchase fee on last Nextdate from INS
+                        YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, Input.NextDate, false, schedule.Type));
+                        serial++;
+                        //                    if (schedule.Type.Equals("FEE"))  { iMonths += schedule.Counts; };
                     }
                     if (schedule.Type.Equals(ScheduleType.RES))
                     {

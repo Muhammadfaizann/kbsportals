@@ -36,6 +36,49 @@ namespace KBS.Portals.Calculator.Logic.Tests
             Assert.AreEqual(207.53, result.Installment);
         }
         [Test]
+        public void CalculateIrrInstallmentForUpfronts()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                DocFee = 250,
+                FinanceAmount = 10000,
+                NoOfInstallments = 10,
+                IRR = 5.192139,
+                UpFrontNo = 2,
+                StartDate = Convert.ToDateTime("28 Mar 2017"),
+                NextDate = Convert.ToDateTime("28 Apr 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.IRRInstallment, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(850.00, result.Installment);
+        }
+        [Test]
+        public void CalculateIrrInstallmentForCommission()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                DocFee = 250,
+                FinanceAmount = 10000,
+                Commission = 200,
+                NoOfInstallments = 10,
+                IRR = 12.177734,
+                UpFrontNo = 2,
+                StartDate = Convert.ToDateTime("28 Mar 2017"),
+                NextDate = Convert.ToDateTime("28 Apr 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.IRRInstallment, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(890.00, result.Installment);
+        }
+
+
+        [Test]
         public void CalculateIRRInstallmentForQuarterly()
         {
             CalculatorData cd = new CalculatorData()

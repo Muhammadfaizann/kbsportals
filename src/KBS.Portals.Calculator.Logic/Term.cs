@@ -34,7 +34,7 @@ namespace KBS.Portals.Calculator.Logic
                     {
                         loopCount++;                    
                         var days = ( workDate - lastDate).TotalDays;
-                        sNpv = sNpv + (sNpv * (int)schedule.Frequency * ((Input.IRR * days) / (AccountDays * 100)) - Convert.ToDouble(schedule.Amount + docFee));
+                        sNpv = sNpv + (sNpv * ((Input.IRR * days) / (AccountDays * 100)) - Convert.ToDouble(schedule.Amount + docFee));
 //                        sNpv = Math.Round(sNpv, 2);
                         lastDate = workDate;
                         workDate = schedule.NextDate.AddMonths(loopCount * (int)schedule.Frequency);
