@@ -38,7 +38,6 @@ namespace KBS.Portals.Calculator.Logic.Tests
             Assert.AreEqual(61, result.NoOfInstallments);
             //Assert.AreEqual(-207.50, result.LoanOverPayment);
         }
-        //TODO GAVIN Non Mothly tests fail as second iteration results in posotive sNPV
         [Test]
         public void CalculateTermForQuarterly()
         {

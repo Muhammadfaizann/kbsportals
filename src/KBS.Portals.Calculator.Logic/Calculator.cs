@@ -36,7 +36,6 @@ namespace KBS.Portals.Calculator.Logic
             var i = 0;
             Input.Schedules.Clear();
             //Clear other Variables to be calculated
-            //TODO GAVIN Check this are the correct variable to clear for each calculation
             if (Input.CalculationType == CalculationType.APRInstallment)
             {
                 Input.Installment = 0;
@@ -52,6 +51,25 @@ namespace KBS.Portals.Calculator.Logic
             {
                 Input.APR = 0;
                 Input.IRR = 0;
+            }
+
+            if (Input.CalculationType == CalculationType.FinanceAmount)
+            {
+                Input.APR = 0;
+                Input.FinanceAmount = 0;
+            }
+
+            if (Input.CalculationType == CalculationType.BalRes)
+            {
+                Input.APR = 0;
+                Input.Ballon = 0;
+                Input.Residual = 0;
+            }
+
+            if (Input.CalculationType == CalculationType.Commission)
+            {
+                Input.APR = 0;
+                Input.Commission = 0;
             }
 
 
@@ -83,7 +101,7 @@ namespace KBS.Portals.Calculator.Logic
           BuildChron();
 
             CalculateImplementation();
-
+            SetTotals();
             return Input;
         }
 
@@ -105,8 +123,7 @@ namespace KBS.Portals.Calculator.Logic
             {
                 SetTotals();
                 YieldCalcChron.Clear();
-                //TODO GAvin can you check this out I have changed ths calculation of this start point
-                //var amount = -((Input.TotalSchedule) - (Input.Charges));
+               //var amount = -((Input.TotalSchedule) - (Input.Charges));
 
                 //GC Copied thuis from below Input.Charges = Input.TotalSchedule - Input.TotalCost;
                 //GC Should be but fails tests                var amount = -(Input.TotalCost);
@@ -156,14 +173,15 @@ namespace KBS.Portals.Calculator.Logic
                     if (schedule.Type.Equals(ScheduleType.PUR))
                     {
                         // Always Collect Purchase fee on last Nextdate from INS
-                        YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, Input.NextDate, false, schedule.Type));
+                        YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, nextDate, false, schedule.Type));
                         serial++;
                         //                    if (schedule.Type.Equals("FEE"))  { iMonths += schedule.Counts; };
                     }
                     if (schedule.Type.Equals(ScheduleType.RES))
                     {
                         // Always Collect Residual on last Nextdate from INS
-                        YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, Input.NextDate, true, schedule.Type));
+                        //schedule.NextDate.AddMonths(i * (int)schedule.Frequency)
+                        YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, nextDate, true, schedule.Type));
                         serial++;
                         //                    iMonths += schedule.Counts;
                     }

@@ -22,7 +22,7 @@ namespace KBS.Portals.Calculator.Logic
             var bFindUpfront = false;
 
 
-            var lastKey = new SortKey(default(DateTime), 0);
+            
             //no need to run swaps as Dictionary should be sorted
 
             double inc;
@@ -48,25 +48,34 @@ namespace KBS.Portals.Calculator.Logic
                 entry.Value.Days = (entry.Value.EntryDate - date).TotalDays;
             }
 
-            if (bFindUpfront)
+            if (Input.NoOfInstallments > 0)
             {
-                amount = Convert.ToDouble(Input.TotalCost/(Input.NoOfInstallments + Input.UpFrontNo));
+                if (bFindUpfront)
+                {
+                    amount = Convert.ToDouble(Input.TotalCost / (Input.NoOfInstallments + Input.UpFrontNo));
+                }
+                else
+                {
+                    amount = Convert.ToDouble(Input.TotalCost / Input.NoOfInstallments);
+                }
             }
             else
             {
-                amount = Convert.ToDouble(Input.TotalCost/Input.NoOfInstallments);
+                amount = 0; // Should fail to calculate and reyturn 0
             }
             inc = amount/2;
             do
             {
                 //look for the first yield affecting entry
+                double oldsNpv = 0;
+                var skipCount = 0;
                 foreach (var entry in YieldCalcChron)
                 {
+                    skipCount++;
                     if (entry.Value.AffectYield)
                     {
                         sNpv = Convert.ToDouble(entry.Value.Amount);
                         lastDays = entry.Value.Days;
-                        lastKey = entry.Key;
                         break;
                     }
                 }
@@ -82,10 +91,10 @@ namespace KBS.Portals.Calculator.Logic
                         sNpv += (amount*Input.UpFrontNo);
                     }
                 }
-
+                oldsNpv = sNpv;
                 foreach (var entry in YieldCalcChron)
                 {
-                    if (!entry.Key.Equals(lastKey)) // Skip first record for some reason - Gavin?
+                    if (skipCount<=0) // Skip first record for some reason - it is the finance amount and already primed
                     {
                         if (entry.Value.AffectYield)
                         {
@@ -103,6 +112,7 @@ namespace KBS.Portals.Calculator.Logic
                             lastDays = entry.Value.Days;
                         }
                     }
+                    skipCount--;
                 }
                 if (sNpv > 0.005 || sNpv < -0.005)
                 {
@@ -119,7 +129,11 @@ namespace KBS.Portals.Calculator.Logic
                 {
                     amount = 0.01;
                 }
-                inc = inc/2;
+
+                if ((oldsNpv < 0 & sNpv > 0) || (oldsNpv > 0 & sNpv < 0))
+                { inc = inc / 2; }
+                oldsNpv = sNpv;
+
                 loopCount++;
 
             } while (!((sNpv <= 0.005 && sNpv >= -0.005) || loopCount > 9999));

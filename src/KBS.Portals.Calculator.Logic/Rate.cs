@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using KBS.Portals.Calculator.Logic.Enums;
 using KBS.Portals.Calculator.Logic.Models;
+using Newtonsoft.Json.Linq;
 
 namespace KBS.Portals.Calculator.Logic
 {
@@ -22,7 +23,7 @@ namespace KBS.Portals.Calculator.Logic
                 rate = 256,
                 inc = 128;
  
-            var lastKey = new SortKey(default(DateTime), 0);
+            
             //no need to run swaps as Dictionary should be sorted
 
 
@@ -44,21 +45,23 @@ namespace KBS.Portals.Calculator.Logic
 
             do
             {
+                var skipCount = 0;
                 //look for the first yield affecting entry
+                
                 foreach (var entry in YieldCalcChron)
                 {
+                    skipCount++;
                     if (entry.Value.AffectYield)
                     {
                         sNpv = Convert.ToDouble(entry.Value.Amount);
                         lastDays = entry.Value.Days;
-                        lastKey = entry.Key;
                         break;
                     }
                 }
 
                 foreach (var entry in YieldCalcChron)
                 {
-                    if (!entry.Key.Equals(lastKey)) // Skip first record for some reason - Gavin?
+                    if (skipCount<=0) // Skip first record for some reason - it is the finace amount so already primed
                     {
                         if (entry.Value.AffectYield)
                         {
@@ -67,6 +70,7 @@ namespace KBS.Portals.Calculator.Logic
                             lastDays = entry.Value.Days;
                         }
                     }
+                    skipCount--;
                 }
                 if (sNpv > 0.005 || sNpv < -0.005)
                 {
@@ -90,24 +94,25 @@ namespace KBS.Portals.Calculator.Logic
             loopCount = 0;
             do
             {
-
+                var skipped = 0;
                 //look for the first yield affecting entry
                 foreach (var entry in YieldCalcChron)
                 {
-                        sNpv = Convert.ToDouble(entry.Value.Amount);
-                        lastDays = entry.Value.Days;
-                        lastKey = entry.Key;
-                        break;
+                    sNpv = Convert.ToDouble(entry.Value.Amount);
+                    lastDays = entry.Value.Days;
+                    skipped++;
+                    break;
                 }
-
+                
                 foreach (var entry in YieldCalcChron)
                 {
-                    if (!entry.Key.Equals(lastKey)) // Skip first record for some reason - Gavin?
+                    if (skipped<=0)
                     {
                         sNpv += (sNpv * rate * ((entry.Value.Days - lastDays) / (AccountDays * 100)));
                         sNpv = sNpv + Convert.ToDouble(entry.Value.Amount);
                         lastDays = entry.Value.Days;
                     }
+                    skipped--;
                 }
                 if (sNpv > 0.005 || sNpv < -0.005)
                 {

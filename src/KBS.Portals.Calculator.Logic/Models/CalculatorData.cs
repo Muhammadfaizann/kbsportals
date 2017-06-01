@@ -40,11 +40,13 @@ namespace KBS.Portals.Calculator.Logic.Models
         public Frequency Frequency { get; set; }
         public List<Schedule> Schedules { get; private set; } // Here for future useage by KBS to allow scheduels to be added
 
-//        public decimal Charges { get; set; }
-        public decimal Charges => TotalSchedule - TotalCost - Commission - DocFee - PurchaseFee;
+        //        public decimal Charges { get; set; }
 
         public decimal TotalCost { get; set; }
         public decimal TotalSchedule { get; set; }
+
+        public decimal Charges => TotalSchedule - TotalCost - Commission - DocFee - PurchaseFee;
+
 
         public int Term => Convert.ToInt32( NoOfInstallments * (int)Frequency);
         public decimal LoanOverPayment { get; set; } // Value return in term Calculation

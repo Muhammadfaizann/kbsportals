@@ -32,9 +32,10 @@ namespace KBS.Portals.Calculator.Logic
                     break;
                 }
             }
-
+            var skipCount = 0;
             foreach (var entry in YieldCalcChron)
             {
+                skipCount++;
                 if (entry.Value.AffectYield)
                 {
                     entry.Value.Days = (entry.Value.EntryDate - workDate).TotalDays;

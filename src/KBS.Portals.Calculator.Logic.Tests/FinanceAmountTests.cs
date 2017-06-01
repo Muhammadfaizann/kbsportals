@@ -170,7 +170,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             var result = calc.Calculate();
 
 //            Assert.AreEqual(16250, result.FinanceAmount);
-            Assert.AreEqual(16250.03, result.FinanceAmount);
+            Assert.AreEqual(16250.00, result.FinanceAmount);
         }
 
         [Test]
@@ -196,7 +196,215 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             //            Assert.AreEqual(68000, result.FinanceAmount);
             // Added Frig to get upfront value in 
-            Assert.AreEqual((68000.03 - 6800), result.FinanceAmount);
+            Assert.AreEqual((68000-6800), result.FinanceAmount);
         }
+        [Test]
+        public void FAFFinanceAmount_M_33_3()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Installment = Convert.ToDecimal(350),
+                UpFrontNo = 3,
+                Commission = 0,
+                DocFee = 0,
+                IRR = 18.895447,
+                NoOfInstallments = 33,
+                StartDate = Convert.ToDateTime("12 May 2017"),
+                NextDate = Convert.ToDateTime("12 Jun 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.FinanceAmount, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(10000, result.FinanceAmount);
+        }
+
+        [Test]
+        public void FAFFinanceAmount_M_44_4()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Installment = Convert.ToDecimal(350),
+                UpFrontNo = 4,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 44,
+                IRR = 35.038177,
+                StartDate = Convert.ToDateTime("12 May 2017"),
+                NextDate = Convert.ToDateTime("12 Jun 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.FinanceAmount, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(10000, result.FinanceAmount);
+        }
+
+        [Test]
+        public void FAFFinanceAmount_M_55_5()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Installment = Convert.ToDecimal(350),
+                UpFrontNo = 5,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 55,
+                IRR = 43.753098,
+                StartDate = Convert.ToDateTime("12 May 2017"),
+                NextDate = Convert.ToDateTime("12 Jun 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.FinanceAmount, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(10000, result.FinanceAmount);
+        }
+        // Half Yearly
+        [Test]
+        public void FAFFinanceAmount_H_5_1()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.HalfYearly,
+                Installment = Convert.ToDecimal(1700),
+                UpFrontNo = 1,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 5,
+                IRR = 1.595337,
+                StartDate = Convert.ToDateTime("12 May 2017"),
+                NextDate = Convert.ToDateTime("12 Nov 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.FinanceAmount, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(10000, result.FinanceAmount);
+        }
+
+        [Test]
+        public void FAFFinanceAmount_H_7_1()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.HalfYearly,
+                Installment = Convert.ToDecimal(1700),
+                UpFrontNo = 1,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 7,
+                IRR = 19.794189,
+                StartDate = Convert.ToDateTime("12 May 2017"),
+                NextDate = Convert.ToDateTime("12 Nov 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.FinanceAmount, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(10000, result.FinanceAmount);
+
+        }
+
+        [Test]
+        public void FAFFinanceAmount_H_9_1()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.HalfYearly,
+                Installment = Convert.ToDecimal(1700),
+                UpFrontNo = 1,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 9,
+                IRR = 28.675659,
+                StartDate = Convert.ToDateTime("12 May 2017"),
+                NextDate = Convert.ToDateTime("12 Nov 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.FinanceAmount, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(10000, result.FinanceAmount);
+        }
+
+        // Quarterly
+        [Test]
+        public void FAFFinanceAmount_Q_11_1()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.Quarterly,
+                Installment = Convert.ToDecimal(1000),
+                UpFrontNo = 1,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 11,
+                IRR = 13.979797,
+                StartDate = Convert.ToDateTime("12 May 2017"),
+                NextDate = Convert.ToDateTime("12 Aug 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.FinanceAmount, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(10000, result.FinanceAmount);
+        }
+
+        [Test]
+        public void FAFFinanceAmount_Q_15_1()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.Quarterly,
+                Installment = Convert.ToDecimal(1000),
+                UpFrontNo = 1,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 15,
+                IRR = 28.694214,
+                StartDate = Convert.ToDateTime("12 May 2017"),
+                NextDate = Convert.ToDateTime("12 Aug 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.FinanceAmount, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(10000, result.FinanceAmount);
+        }
+        [Test]
+        public void FAFFinanceAmount_Q_19_1()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.Quarterly,
+                Installment = Convert.ToDecimal(1000),
+                UpFrontNo = 1,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 19,
+                IRR = 35.60614,
+                StartDate = Convert.ToDateTime("12 May 2017"),
+                NextDate = Convert.ToDateTime("12 Aug 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.FinanceAmount, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(10000, result.FinanceAmount);
+        }
+
+
+
+
     }
 }

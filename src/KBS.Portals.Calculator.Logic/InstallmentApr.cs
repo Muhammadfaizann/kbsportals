@@ -23,8 +23,6 @@ namespace KBS.Portals.Calculator.Logic
             double rate = (Math.Pow((1+(Input.APR/100)),(1.0/12))-1)*1200;
 
 
-
-            var lastKey = new SortKey(default(DateTime), 0);
             //no need to run swaps as Dictionary should be sorted
 
             double inc;
@@ -46,25 +44,34 @@ namespace KBS.Portals.Calculator.Logic
             {
                 entry.Value.Days = (entry.Value.EntryDate - date).TotalDays;
             }
-
-            if (bFindUpfront)
+            if (Input.NoOfInstallments > 0)
             {
-                amount = Convert.ToDouble(Input.TotalCost / (Input.NoOfInstallments + Input.UpFrontNo));
+                if (bFindUpfront)
+                {
+                    amount = Convert.ToDouble(Input.TotalCost / (Input.NoOfInstallments + Input.UpFrontNo));
+                }
+                else
+                {
+                    amount = Convert.ToDouble(Input.TotalCost / Input.NoOfInstallments);
+                }
             }
             else
             {
-                amount = Convert.ToDouble(Input.TotalCost / Input.NoOfInstallments);
+                amount = 0; // should fail to calcalate and return -9999
             }
+
             inc = amount / 2;
             do
             {
+                double oldsNpv = 0;
+                var skipCount = 0;
                 //look for the first yield affecting entry
                 foreach (var entry in YieldCalcChron)
                 {
-                        sNpv = Convert.ToDouble(entry.Value.Amount);
-                        lastDays = entry.Value.Days;
-                        lastKey = entry.Key;
-                        break;
+                    skipCount++;
+                    sNpv = Convert.ToDouble(entry.Value.Amount);
+                    lastDays = entry.Value.Days;
+                    break;
                 }
 
                 if (bFindUpfront)
@@ -79,9 +86,12 @@ namespace KBS.Portals.Calculator.Logic
                     }
                 }
 
-                foreach (var entry in YieldCalcChron)
+
+                oldsNpv = sNpv;
+
+                    foreach (var entry in YieldCalcChron)
                 {
-                   if (!entry.Key.Equals(lastKey)) // Skip first record for some reason - Gavin?
+                   if (skipCount <= 0) // Skip first record for some reason - first one is Finance amount and already primed
                     {
                         sNpv += Math.Round(sNpv * rate * ((entry.Value.Days - lastDays) / (AccountDays * 100)), 4);
 
@@ -99,6 +109,7 @@ namespace KBS.Portals.Calculator.Logic
                         }
                             lastDays = entry.Value.Days;
                     }
+                    skipCount--;
                 }
                 if (sNpv > 0.005 || sNpv < -0.005)
                 {
@@ -115,7 +126,11 @@ namespace KBS.Portals.Calculator.Logic
                 {
                     amount = 0.01;
                 }
-                inc = inc / 2;
+
+                if ((oldsNpv < 0 & sNpv > 0) || (oldsNpv > 0 & sNpv < 0))
+                { inc = inc / 2; }
+                oldsNpv = sNpv;        
+
                 loopCount++;
 
             } while (!((sNpv <= 0.005 && sNpv >= -0.005) || loopCount > 9999));
