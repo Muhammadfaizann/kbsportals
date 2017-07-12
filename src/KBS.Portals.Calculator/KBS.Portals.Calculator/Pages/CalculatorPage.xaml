@@ -78,7 +78,7 @@
 
                             <Label Grid.Row="3" Grid.Column="0" Text="No. of Ins.:" />
                             <Label Grid.Row="3" Grid.Column="1"
-                                   Text="{Binding CalculatorModel.Term, StringFormat='{0}'}" />
+                                   Text="{Binding CalculatorModel.NoOfInstallments, StringFormat='{0}'}" />
 
                             <Label Grid.Row="4" Grid.Column="0" Text="APR:" />
                             <Label Grid.Row="4" Grid.Column="1"

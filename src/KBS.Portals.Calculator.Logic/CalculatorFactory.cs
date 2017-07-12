@@ -27,7 +27,7 @@ namespace KBS.Portals.Calculator.Logic
                     return new Rate(input);
                 case CalculationType.FinanceAmount:
                     return new FinanceAmount(input);
-                case CalculationType.Term:
+                case CalculationType.NoOfInstallments:
                     return new Term(input);
                 case CalculationType.BalRes:
                     return new BalRes(input);

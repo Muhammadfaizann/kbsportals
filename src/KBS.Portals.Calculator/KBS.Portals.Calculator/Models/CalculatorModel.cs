@@ -16,7 +16,7 @@ namespace KBS.Portals.Calculator.Models
             Product = Product.Lease;
             FinanceAmount = 0;
             Frequency = Frequency.Monthly;
-            Term = settingsService.Term;
+            NoOfInstallments = settingsService.NoOfInstallments;
             APR = settingsService.APR;
             IRR = settingsService.IRR;
             Installment = 0;
@@ -282,16 +282,16 @@ namespace KBS.Portals.Calculator.Models
             }
         }
 
-        private int _term;
+        private int _noOfInstallments;
 
-        public int Term
+        public int NoOfInstallments
         {
-            get { return _term; }
+            get { return _noOfInstallments; }
             set
             {
-                if (_term != value)
+                if (_noOfInstallments != value)
                 {
-                    _term = value;
+                    _noOfInstallments = value;
                     OnPropertyChanged();
                 }
             }

@@ -20,7 +20,7 @@ namespace KBS.Portals.Calculator.Config
                     .ForMember(dest => dest.PurchaseFee,
                         opts => opts.MapFrom(src => src.PurFee))
                     .ForMember(dest => dest.NoOfInstallments,
-                        opts => opts.MapFrom(src => src.Term / (int)src.Frequency));
+                        opts => opts.MapFrom(src => src.NoOfInstallments));
 
                 cfg.CreateMap<CalculatorData, CalculatorModel>()
                     .ForMember(dest => dest.PurFee,

@@ -45,7 +45,7 @@ namespace KBS.Portals.Calculator.PageModels
                 new CalculatorCarouselModel(CalculationType.IRRInstallment, CalculatorModel),
                 new CalculatorCarouselModel(CalculationType.Rate, CalculatorModel),
                 new CalculatorCarouselModel(CalculationType.FinanceAmount, CalculatorModel),
-                new CalculatorCarouselModel(CalculationType.Term, CalculatorModel),
+                new CalculatorCarouselModel(CalculationType.NoOfInstallments, CalculatorModel),
                 new CalculatorCarouselModel(CalculationType.BalRes, CalculatorModel),
                 new CalculatorCarouselModel(CalculationType.Commission, CalculatorModel),
             };
@@ -74,7 +74,7 @@ namespace KBS.Portals.Calculator.PageModels
             _settingsService.IRR = CalculatorModel.IRR;
             _settingsService.DocFee = CalculatorModel.DocFee;
             _settingsService.PurFee = CalculatorModel.PurFee;
-            _settingsService.Term = CalculatorModel.Term;
+            _settingsService.NoOfInstallments = CalculatorModel.NoOfInstallments;
         }
 
         public void OnPositionSelected(object sender, EventArgs e)
