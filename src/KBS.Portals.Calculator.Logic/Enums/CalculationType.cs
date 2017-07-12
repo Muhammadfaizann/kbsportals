@@ -16,8 +16,8 @@ namespace KBS.Portals.Calculator.Logic.Enums
         Rate,
         [Display(Description = "Finance Amount")]
         FinanceAmount,
-        [Display(Description = "Term")]
-        Term,
+        [Display(Description = "No. of Ins.")]
+        NoOfInstallments,
         [Display(Description = "Balloon Residual")]
         BalRes,
         [Display(Description = "Commission")]

@@ -83,7 +83,7 @@
                                                     SelectedItem="{Binding CalculatorModel.Frequency}" />
 
                         <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="No. of Ins." />
-                        <customViews:NumericEntry x:Name="Term" Grid.Row="3" Grid.Column="1" Text="{Binding CalculatorModel.NoOfInstallments}"
+                        <customViews:NumericEntry x:Name="NoOfInstallments" Grid.Row="3" Grid.Column="1" Text="{Binding CalculatorModel.NoOfInstallments}"
                                IsEnabled="True">
                             <Entry.Behaviors>
                                 <behaviors:PositiveNumberBehavior />
