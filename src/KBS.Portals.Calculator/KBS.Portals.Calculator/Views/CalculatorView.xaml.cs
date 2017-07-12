@@ -20,10 +20,10 @@ namespace KBS.Portals.Calculator.Views
         private readonly PositiveNumberBehavior _positiveNumberBehavior;
 
         private static readonly IList<CalculationType> CalculationTypesToEnableUpFrontValueFor = new[]
-        {CalculationType.Rate, CalculationType.Term, CalculationType.BalRes, CalculationType.Commission};
+        {CalculationType.Rate, CalculationType.NoOfInstallments, CalculationType.BalRes, CalculationType.Commission};
 
         private static readonly IList<CalculationType> CalculationTypesToDisableAPRIRRFor = new[]
-        {CalculationType.FinanceAmount, CalculationType.Term, CalculationType.BalRes, CalculationType.Commission};
+        {CalculationType.FinanceAmount, CalculationType.NoOfInstallments, CalculationType.BalRes, CalculationType.Commission};
 
         private static readonly IList<CalculationType> CalculationTypesToTogglePurFeeOnHirePurchaseFor = new[]
         {CalculationType.APRInstallment, CalculationType.IRRInstallment, CalculationType.Rate};
@@ -48,7 +48,7 @@ namespace KBS.Portals.Calculator.Views
                 if (calculatorCarouselModel != null && CalculationTypesToDisableAPRIRRFor.Contains(calculatorCarouselModel.CalculationType))
                 {
                     decimal aprPercentage = ((FormattedEntry) sender).Value;
-                    IRR.IsEnabled = aprPercentage <= 0m;
+                    //IRR.IsEnabled = aprPercentage <= 0m;
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace KBS.Portals.Calculator.Views
                 if (calculatorCarouselModel != null && CalculationTypesToDisableAPRIRRFor.Contains(calculatorCarouselModel.CalculationType))
                 {
                     decimal irrPercentage = ((FormattedEntry)sender).Value;
-                    APR.IsEnabled = irrPercentage <= 0m;
+                    //APR.IsEnabled = irrPercentage <= 0m;
                 }
             }
         }
@@ -107,13 +107,13 @@ namespace KBS.Portals.Calculator.Views
             {
                 var calcType = calculatorCarouselModel.CalculationType;
                 FinanceAmount.IsEnabled = calcType != CalculationType.FinanceAmount;
-                Term.IsEnabled = calcType == CalculationType.APRInstallment ||
-                                 calcType == CalculationType.IRRInstallment || calcType == CalculationType.Rate;
-                APR.IsEnabled = !(calcType == CalculationType.Rate || calcType == CalculationType.IRRInstallment);
+                NoOfInstallments.IsEnabled = calcType != CalculationType.NoOfInstallments;
+                APR.IsEnabled = calcType == CalculationType.APRInstallment;
                 IRR.IsEnabled = !(calcType == CalculationType.Rate || calcType == CalculationType.APRInstallment);
                 Installment.IsEnabled = !(calcType == CalculationType.IRRInstallment || calcType == CalculationType.APRInstallment);
                 Charges.IsEnabled = calcType == CalculationType.BalRes || calcType == CalculationType.Commission;
-                Commission.IsEnabled = calcType != CalculationType.Commission;
+                Commission.IsEnabled = !(calcType == CalculationType.Commission || calcType == CalculationType.BalRes);
+                Balloon.IsEnabled = calcType != CalculationType.BalRes;
             }
             base.OnBindingContextChanged();
         }

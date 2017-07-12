@@ -76,7 +76,7 @@ namespace KBS.Portals.Calculator.Services
             get { return Settings.GetValueOrDefault(PurFeeKey, PurFeeDefaultValue); }
             set { Settings.AddOrUpdateValue(PurFeeKey, value); }
         }
-        public int Term
+        public int NoOfInstallments
         {
             get { return Settings.GetValueOrDefault(TermKey, TermDefaultValue); }
             set { Settings.AddOrUpdateValue(TermKey, value); }

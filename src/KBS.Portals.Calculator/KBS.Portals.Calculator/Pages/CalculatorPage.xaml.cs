@@ -31,7 +31,7 @@ namespace KBS.Portals.Calculator.Pages
                 settingsService.APR = 0;
                 settingsService.DocFee = 0;
                 settingsService.IRR = 0;
-                settingsService.Term = 0;
+                settingsService.NoOfInstallments = 0;
 
                 var calculatorModel = FreshIOC.Container.Resolve<CalculatorModel>();
                 calculatorModel.Init();

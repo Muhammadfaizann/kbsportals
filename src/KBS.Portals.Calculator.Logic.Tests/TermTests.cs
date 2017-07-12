@@ -11,7 +11,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
         [Test]
         public void CanGetCalculatorFromFactory()
         {
-            var calc = CalculatorFactory.Create(CalculationType.Term, new CalculatorData());
+            var calc = CalculatorFactory.Create(CalculationType.NoOfInstallments, new CalculatorData());
 
             Assert.AreEqual(calc.GetType(), typeof(Term));
 
@@ -30,7 +30,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 NextDate = Convert.ToDateTime("14 Mar 2017")
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.Term, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.NoOfInstallments, cd);
 
             var result = calc.Calculate();
 
@@ -53,7 +53,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 Frequency = Frequency.Quarterly
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.Term, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.NoOfInstallments, cd);
 
             var result = calc.Calculate();
 
@@ -75,7 +75,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 Frequency = Frequency.Annual
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.Term, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.NoOfInstallments, cd);
 
             var result = calc.Calculate();
 
@@ -96,7 +96,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 DocFee = 250
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.Term, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.NoOfInstallments, cd);
 
             var result = calc.Calculate();
 
@@ -122,7 +122,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 NextDate = Convert.ToDateTime("09 Dec 2016")
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.Term, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.NoOfInstallments, cd);
 
             var result = calc.Calculate();
 
@@ -148,7 +148,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 NextDate = Convert.ToDateTime("09 Dec 2016")
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.Term, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.NoOfInstallments, cd);
 
             var result = calc.Calculate();
             Assert.AreEqual(24, result.Term);
@@ -173,7 +173,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 NextDate = Convert.ToDateTime("09 Nov 2016")
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.Term, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.NoOfInstallments, cd);
 
             var result = calc.Calculate();
 
@@ -199,7 +199,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 NextDate = Convert.ToDateTime("10 Apr 2017")
             };
 
-            ICalculator calc = CalculatorFactory.Create(CalculationType.Term, cd);
+            ICalculator calc = CalculatorFactory.Create(CalculationType.NoOfInstallments, cd);
 
             var result = calc.Calculate();
 

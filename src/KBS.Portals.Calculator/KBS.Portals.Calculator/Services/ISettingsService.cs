@@ -15,6 +15,6 @@ namespace KBS.Portals.Calculator.Services
         decimal IRR { get; set; }
         decimal DocFee { get; set; }
         decimal PurFee { get; set; }
-        int Term { get; set; }
+        int NoOfInstallments { get; set; }
     }
 }
