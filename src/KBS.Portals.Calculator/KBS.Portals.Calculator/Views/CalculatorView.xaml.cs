@@ -108,7 +108,7 @@ namespace KBS.Portals.Calculator.Views
                 var calcType = calculatorCarouselModel.CalculationType;
                 FinanceAmount.IsEnabled = calcType != CalculationType.FinanceAmount;
                 NoOfInstallments.IsEnabled = calcType != CalculationType.NoOfInstallments;
-                APR.IsEnabled = !(calcType == CalculationType.Rate || calcType == CalculationType.IRRInstallment);
+                APR.IsEnabled = calcType == CalculationType.APRInstallment;
                 IRR.IsEnabled = !(calcType == CalculationType.Rate || calcType == CalculationType.APRInstallment);
                 Installment.IsEnabled = !(calcType == CalculationType.IRRInstallment || calcType == CalculationType.APRInstallment);
                 Charges.IsEnabled = calcType == CalculationType.BalRes || calcType == CalculationType.Commission;
