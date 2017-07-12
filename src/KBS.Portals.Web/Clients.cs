@@ -29,6 +29,7 @@ namespace KBS.Portals.Web
                         StandardScopes.OpenId,
                         StandardScopes.AllClaims
                     }.Select(x => x.Name).ToList(),
+                    AccessTokenLifetime = 2678400 // 31 days
                 },
                 new Client
                 {
