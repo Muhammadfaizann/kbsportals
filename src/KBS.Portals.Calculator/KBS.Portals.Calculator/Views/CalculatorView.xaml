@@ -210,8 +210,8 @@
                             </x:Arguments>
                         </customViews:FormattedEntry>
 
-                        <Label VerticalTextAlignment="Center" Grid.Row="5" Grid.Column="0" Text="Ballon" />
-                        <customViews:FormattedEntry Grid.Row="5" Grid.Column="1"
+                        <Label VerticalTextAlignment="Center" Grid.Row="5" Grid.Column="0" Text="Balloon" />
+                        <customViews:FormattedEntry x:Name="Balloon" Grid.Row="5" Grid.Column="1"
                                                     Value="{Binding CalculatorModel.Ballon}"
                                                     IsEnabled="True">
                             <x:Arguments>
