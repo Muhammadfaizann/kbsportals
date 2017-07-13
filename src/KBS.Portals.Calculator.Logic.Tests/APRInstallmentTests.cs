@@ -37,6 +37,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             Assert.AreEqual(10000, result.TotalCost);
             Assert.AreEqual(12349.8, result.TotalSchedule);
             Assert.AreEqual(2349.8, result.Charges);
+            Debug.Print(result.Schedules.ToString());
 
         }
         [Test]

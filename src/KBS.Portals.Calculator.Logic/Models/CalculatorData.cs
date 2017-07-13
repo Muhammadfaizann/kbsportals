@@ -51,69 +51,67 @@ namespace KBS.Portals.Calculator.Logic.Models
         public int Term => Convert.ToInt32( NoOfInstallments * (int)Frequency);
         public decimal LoanOverPayment { get; set; } // Value return in term Calculation
 
-        public new string ToString
+        public List<KeyValuePair<string, string>> Summary
         {
             get
             {
-                var boldMe = "<b>";
-                var unBoldMe = "</b>";
-                //Switch off for now until we can confirm summary can be html
-                boldMe = "";
-                unBoldMe = "";
-                var summary = "Finance Amount".PadRight(15) + boldMe + FinanceAmount.ToString("C") + unBoldMe + "\n";
-                summary += "APR".PadRight(15) + boldMe + (APR / 100).ToString("p") + unBoldMe + "\n";
-                summary += "IRR".PadRight(15) + boldMe + (IRR / 100).ToString("p") + unBoldMe + "\n";
-                summary += "Installment".PadRight(15) + boldMe + Installment.ToString("C") + unBoldMe + "\n";
-                summary += "No of Ins".PadRight(15) + boldMe + NoOfInstallments.ToString("G") + unBoldMe + "\n";
-                summary += "Start Date".PadRight(15) + boldMe + StartDate.ToString("d") + unBoldMe + "\n";
-                summary += "Next Date".PadRight(15) + boldMe + NextDate.ToString("d") + unBoldMe + "\n";
-                summary += "Frequency".PadRight(15) + boldMe + Frequency + unBoldMe + "\n";
-                summary += "Term".PadRight(15) + boldMe + Term.ToString("G") + " Months" + unBoldMe + "\n";
+                var results = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("Finance Amount", FinanceAmount.ToString("C")),
+                    new KeyValuePair<string, string>("APR", (APR / 100).ToString("p")),
+                    new KeyValuePair<string, string>("IRR", (IRR / 100).ToString("p")),
+                    new KeyValuePair<string, string>("Installment", Installment.ToString("C")),
+                    new KeyValuePair<string, string>("No of Ins", NoOfInstallments.ToString("G")),
+                    new KeyValuePair<string, string>("Start Date", StartDate.ToString("d")),
+                    new KeyValuePair<string, string>("Next Date", NextDate.ToString("d")),
+                    new KeyValuePair<string, string>("Term", Frequency.GetDescription())
+                };
+
 
                 if (UpFrontNo != 0)
                 {
-                    summary += "No of Up Fronts".PadRight(15) + boldMe + UpFrontNo.ToString("G") + unBoldMe + "\n";
-                    summary += "Upfront Ins".PadRight(15) + boldMe + UpFrontValue.ToString("C") + unBoldMe + "\n";
+                    results.Add(new KeyValuePair<string, string>("No of Up Fronts", UpFrontNo.ToString("G")));
+                    results.Add(new KeyValuePair<string, string>("Upfront Ins", UpFrontValue.ToString("C")));
                 }
 
                 if (DocFee != 0)
                 {
-                    summary += "Doc Fee".PadRight(15) + boldMe + DocFee.ToString("C") + unBoldMe + "\n";
+                    results.Add(new KeyValuePair<string, string>("Doc Fee", DocFee.ToString("C")));
                 }
                 if (PurchaseFee != 0)
                 {
-                    summary += "Purchase Fee".PadRight(15) + boldMe + PurchaseFee.ToString("C") + unBoldMe + "\n";
+                    results.Add(new KeyValuePair<string, string>("Purchase Fee", PurchaseFee.ToString("C")));
                 }
                 if (Commission != 0)
                 {
-                    summary += "Commission".PadRight(15) + boldMe + Commission.ToString("C") + unBoldMe + "\n";
+                    results.Add(new KeyValuePair<string, string>("Commission", Commission.ToString("C")));
                 }
                 if (Ballon != 0)
                 {
-                    summary += "Ballon".PadRight(15) + boldMe + Ballon.ToString("C") + unBoldMe + "\n";
+                    results.Add(new KeyValuePair<string, string>("Ballon", Ballon.ToString("C")));
                 }
                 if (Residual != 0)
                 {
-                    summary += "Residual".PadRight(15) + boldMe + Residual.ToString("C") + unBoldMe + "\n";
+                    results.Add(new KeyValuePair<string, string>("Residual", Residual.ToString("C")));
                 }
                 if (Charges != 0)
                 {
-                    summary += "Charges".PadRight(15) + boldMe + Charges.ToString("C") + unBoldMe + "\n";
+                    results.Add(new KeyValuePair<string, string>("Charges", Charges.ToString("C")));
                 }
                 if (TotalCost != 0)
                 {
-                    summary += "TotalCost".PadRight(15) + boldMe + TotalCost.ToString("C") + unBoldMe + "\n";
+                    results.Add(new KeyValuePair<string, string>("TotalCost", TotalCost.ToString("C")));
                 }
                 if (TotalSchedule != 0)
                 {
-                    summary += "TotalSchedule".PadRight(15) + boldMe + TotalSchedule.ToString("C") + unBoldMe + "\n";
+                    results.Add(new KeyValuePair<string, string>("TotalSchedule", TotalSchedule.ToString("C")));
                 }
                 if (LoanOverPayment != 0)
                 {
-                    summary += "LoanOverPayment".PadRight(15) + boldMe + LoanOverPayment.ToString("C") + unBoldMe + "\n";
+                    results.Add(new KeyValuePair<string, string>("LoanOverPayment", LoanOverPayment.ToString("C")));
                 }
 
-                return summary;
+                return results;
             }
         }
 
