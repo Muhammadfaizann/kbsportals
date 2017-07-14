@@ -145,7 +145,8 @@ namespace KBS.Portals.Calculator.Logic
                 {
                     if (schedule.NextDate == default(DateTime))
                     {
-                        schedule.NextDate = nextDate;
+
+                            schedule.NextDate = nextDate;
                     }
 
                     if (schedule.Type.Equals(ScheduleType.FEE) || schedule.Type.Equals(ScheduleType.DOC) )
@@ -160,8 +161,16 @@ namespace KBS.Portals.Calculator.Logic
 
                     if (schedule.Type.Equals(ScheduleType.INS) || schedule.Type.Equals(ScheduleType.BAL))
                     {
+                        if (schedule.Type.Equals(ScheduleType.BAL))
+                        {
+                            //Need to increment the next date for a one off balloon
+                            nextDate = nextDate.AddMonths((int) schedule.Frequency);
+                            schedule.NextDate =  nextDate;
+                            
+                        }
                         for (int i = 0; i <= schedule.Counts - 1; i++)
                         {
+
                             nextDate = schedule.NextDate.AddMonths(i * (int)schedule.Frequency);
                             YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, nextDate,  true, schedule.Type));
                             serial++;
@@ -204,7 +213,7 @@ namespace KBS.Portals.Calculator.Logic
                 //{
                 //    upFronts += schedule.Amount * Convert.ToDecimal(schedule.Counts);
                 //}
-                if (schedule.Type.Equals(ScheduleType.INS) || schedule.Type.Equals(ScheduleType.BAL) || schedule.Type.Equals(ScheduleType.RES))
+                if (schedule.Type.Equals(ScheduleType.INS) || schedule.Type.Equals(ScheduleType.BAL) || schedule.Type.Equals(ScheduleType.RES) || schedule.Type.Equals(ScheduleType.PUR))
                 {
                     total += schedule.Amount * Convert.ToDecimal(schedule.Counts);
                 }

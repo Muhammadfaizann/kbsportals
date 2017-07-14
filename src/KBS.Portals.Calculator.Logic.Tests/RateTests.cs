@@ -97,6 +97,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             Assert.AreEqual(11.341389, result.IRR);
             Assert.AreEqual(12.271689, result.APR);
+            Assert.AreEqual(118981.96, result.TotalSchedule);
         }
 
 
@@ -461,6 +462,83 @@ namespace KBS.Portals.Calculator.Logic.Tests
             Assert.AreEqual(10.416077, result.IRR);
             Assert.AreEqual(10.928016, result.APR);
         }
+
+        [Test]
+        public void Rate_Bal()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.Monthly,
+                FinanceAmount = 10000,
+                UpFrontNo = 0,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 55,
+                Ballon = Convert.ToDecimal(1022.20),
+                Installment = Convert.ToDecimal(207.53),
+                StartDate = Convert.ToDateTime("14 Feb 2017"),
+                NextDate = Convert.ToDateTime("14 Mar 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.Rate, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(9.000000, result.IRR);
+            Assert.AreEqual(9.380690, result.APR);
+        }
+
+
+        [Test]
+        public void Rate_BalQ()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.Quarterly,
+                FinanceAmount = 10000,
+                UpFrontNo = 0,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 36,
+                Ballon = Convert.ToDecimal(1000),
+                Installment = Convert.ToDecimal(320),
+                StartDate = Convert.ToDateTime("02 Jun 2017"),
+                NextDate = Convert.ToDateTime("02 Jul 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.Rate, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(4.870010, result.IRR);
+            Assert.AreEqual(4.980197, result.APR);
+        }
+        [Test]
+        public void Rate_Res()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.Monthly,
+                FinanceAmount = 10000,
+                UpFrontNo = 0,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 55,
+                Residual = Convert.ToDecimal(1022.20),
+                Installment = Convert.ToDecimal(207.53),
+                StartDate = Convert.ToDateTime("14 Feb 2017"),
+                NextDate = Convert.ToDateTime("14 Mar 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.Rate, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(9.021454, result.IRR);
+            Assert.AreEqual(9.403984, result.APR);
+            Assert.AreEqual(12436.35, result.TotalSchedule);
+        }
+
 
     }
 }

@@ -403,8 +403,53 @@ namespace KBS.Portals.Calculator.Logic.Tests
             Assert.AreEqual(-9999, result.Installment);
         }
 
+        [Test]
+        public void APRRate_Bal()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.Monthly,
+                FinanceAmount = 10000,
+                UpFrontNo = 0,
+                Commission = 0,
+                DocFee = 0,
+                NoOfInstallments = 55,
+                Ballon = Convert.ToDecimal(1022.20),
+                APR = 9.380690,
+                StartDate = Convert.ToDateTime("14 Feb 2017"),
+                NextDate = Convert.ToDateTime("14 Mar 2017")
+            };
 
+            ICalculator calc = CalculatorFactory.Create(CalculationType.APRInstallment, cd);
 
+            var result = calc.Calculate();
+
+            Assert.AreEqual(207.53, result.Installment);
+
+        }
+        [Test]
+        public void AprRate_Res()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.Monthly,
+                FinanceAmount = 10000,
+                UpFrontNo = 0,
+                Commission = 0,
+                DocFee = 0,
+                APR = 9.403984,
+                NoOfInstallments = 55,
+                Residual = Convert.ToDecimal(1022.20),
+                Installment = Convert.ToDecimal(207.53),
+                StartDate = Convert.ToDateTime("14 Feb 2017"),
+                NextDate = Convert.ToDateTime("14 Mar 2017")
+            };
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.APRInstallment, cd);
+
+            var result = calc.Calculate();
+            Assert.AreEqual(207.53, result.Installment);
+       }
 
     }
 }
