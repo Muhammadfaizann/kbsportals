@@ -34,7 +34,7 @@
                    BackgroundColor="White">
                 <StackLayout>
                     <Label Text="Calculation Results" FontAttributes="Bold" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
-                    <ScrollView x:Name="ResultsView"/>
+                    <ScrollView x:Name="ResultsView" VerticalOptions="StartAndExpand"/>
                     <Button Text="Okay" Clicked="DismissSummary" />
                 </StackLayout>
             </Frame>
