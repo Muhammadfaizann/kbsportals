@@ -22,7 +22,10 @@ namespace KBS.Portals.Calculator.PageModels
         private readonly ISettingsService _settingsService;
         public CalculatorModel CalculatorModel { get; set; }
         public IList<CalculatorCarouselModel> PageModels { get; set; }
+        public IDictionary<string, string> ResultsSummary { get; set; }
         private CalculationType _title;
+        public IList<KeyValuePair<string, string>> ResultDataSummary { get; set; }
+
         public CalculationType Title
         {
             get { return _title; }
@@ -63,6 +66,7 @@ namespace KBS.Portals.Calculator.PageModels
                     ICalculator calculator = CalculatorFactory.Create(Title, backendDataModel);
                     var resultData = calculator.Calculate();
                     CalculatorModel resultModel = Mapper.Map<CalculatorModel>(resultData);
+                    ResultDataSummary = resultData.Summary;
                     Mapper.Map(resultModel, CalculatorModel); // Call the set methods to trigger bindings
                 });
             }
