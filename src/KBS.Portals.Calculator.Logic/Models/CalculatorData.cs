@@ -38,7 +38,7 @@ namespace KBS.Portals.Calculator.Logic.Models
         public DateTime StartDate { get; set; }
         public DateTime NextDate { get; set; }
         public Frequency Frequency { get; set; }
-        public List<Schedule> Schedules { get; private set; } // Here for future useage by KBS to allow scheduels to be added
+        public List<Schedule> Schedules { get;  set; } // Here for future useage by KBS to allow scheduels to be added
 
         //        public decimal Charges { get; set; }
 
