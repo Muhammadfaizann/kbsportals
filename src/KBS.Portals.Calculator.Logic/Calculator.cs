@@ -34,7 +34,6 @@ namespace KBS.Portals.Calculator.Logic
         public CalculatorData Calculate()
         {
             var i = 0;
-            Input.Schedules.Clear();
             //Clear other Variables to be calculated
             if (Input.CalculationType == CalculationType.APRInstallment)
             {
@@ -72,33 +71,37 @@ namespace KBS.Portals.Calculator.Logic
                 Input.Commission = 0;
             }
 
+            if (Input.ManualSchedule == false)
+            {
+                
+                Input.Schedules.Clear();
+                if (Input.DocFee > 0)
+                {
+                    Input.AddSchedule(i, ScheduleType.DOC, 1,Frequency.None, Input.DocFee, Input.NextDate);
+                    i++;
+                }
+                if (Input.NoOfInstallments > 0 || Input.Installment > 0)
+                {
+                    Input.AddSchedule(i, ScheduleType.INS, Input.NoOfInstallments, Input.Frequency, Input.Installment, Input.NextDate);
+                    i++;
+                }
+                if (Input.Ballon > 0)
+                {
+                    Input.AddSchedule(i, ScheduleType.BAL, 1, Input.Frequency, Input.Ballon,Input.NextDate);
+                    i++;
+                }
+                if (Input.Residual > 0)
+                {
+                    Input.AddSchedule(i, ScheduleType.RES, 1, Input.Frequency, Input.Residual, Input.NextDate);
+                    i++;
+                }
+                if (Input.PurchaseFee > 0)
+                {
+                    Input.AddSchedule(i,ScheduleType.PUR, 1, Input.Frequency, Input.PurchaseFee, Input.NextDate);
+                }
+            }
 
-            if (Input.DocFee > 0)
-            {
-                Input.AddSchedule(i, ScheduleType.DOC, 1, Input.Frequency, Input.DocFee, Input.NextDate);
-                i++;
-            }
-            if (Input.NoOfInstallments > 0 || Input.Installment > 0)
-            {
-                Input.AddSchedule(i, ScheduleType.INS, Input.NoOfInstallments, Input.Frequency, Input.Installment, Input.NextDate);
-                i++;
-            }
-            if (Input.Ballon > 0)
-            {
-                Input.AddSchedule(i, ScheduleType.BAL, 1, Input.Frequency, Input.Ballon,Input.NextDate);
-                i++;
-            }
-            if (Input.Residual > 0)
-            {
-                Input.AddSchedule(i, ScheduleType.RES, 1, Input.Frequency, Input.Residual, Input.NextDate);
-                i++;
-            }
-            if (Input.PurchaseFee > 0)
-            {
-                Input.AddSchedule(i,ScheduleType.PUR, 1, Input.Frequency, Input.PurchaseFee, Input.NextDate);
-            }
-
-          BuildChron();
+            BuildChron();
 
             CalculateImplementation();
             SetTotals();

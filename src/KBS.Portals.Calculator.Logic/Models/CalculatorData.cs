@@ -15,6 +15,7 @@ namespace KBS.Portals.Calculator.Logic.Models
         {
             Schedules = new List<Schedule>();
             Frequency = Frequency.Monthly;
+            ManualSchedule = false;
         }
 
         public Product Product { get; set; } // will dictate data elemt validation (e.g HP must have a PurFee)
@@ -129,6 +130,7 @@ namespace KBS.Portals.Calculator.Logic.Models
 
             Schedules.Add(schedule);
         }
-        
+
+        public bool ManualSchedule { get; set; } // Value return in term Calculation
     }
 }
