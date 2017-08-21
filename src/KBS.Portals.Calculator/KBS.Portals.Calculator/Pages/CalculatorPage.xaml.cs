@@ -69,12 +69,30 @@ namespace KBS.Portals.Calculator.Pages
         {
             var pageModel = BindingContext as CalculatorPageModel;
             pageModel.Calculate.Execute(null);
-            SetSummaryVisibility(true);
+            BuildSummaryGrid(pageModel.ResultDataSummary);
         }
 
-        private void SetSummaryVisibility(bool isVisible)
+        private void BuildSummaryGrid(IList<KeyValuePair<string, string>> results)
         {
-            SummaryPopup.IsVisible = isVisible;
+            var resultsGrid = new Grid();
+            resultsGrid.ColumnDefinitions.Add(new ColumnDefinition
+            {
+                Width = GridLength.Star
+            });
+            resultsGrid.ColumnDefinitions.Add(new ColumnDefinition
+            {
+                Width = GridLength.Star
+            });
+            int rowIndex = 0;
+            foreach (var keyValuePair in results)
+            {
+                resultsGrid.RowDefinitions.Add(new RowDefinition{Height = GridLength.Star});
+                resultsGrid.Children.Add(new Label{Text = keyValuePair.Key}, 0, rowIndex);
+                resultsGrid.Children.Add(new Label{Text = keyValuePair.Value}, 1, rowIndex);
+                rowIndex++;
+            }
+            ResultsView.Content = resultsGrid;
+            SummaryPopup.IsVisible = true;
         }
 
         protected override void OnAppearing()
@@ -86,7 +104,7 @@ namespace KBS.Portals.Calculator.Pages
 
         private void DismissSummary(object sender, EventArgs e)
         {
-            SetSummaryVisibility(false);
+            SummaryPopup.IsVisible = false;
         }
     }
 }

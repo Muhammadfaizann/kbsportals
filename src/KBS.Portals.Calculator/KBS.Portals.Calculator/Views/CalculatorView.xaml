@@ -83,8 +83,9 @@
                                                     SelectedItem="{Binding CalculatorModel.Frequency}" />
 
                         <Label VerticalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Text="No. of Ins." />
-                        <customViews:NumericEntry x:Name="NoOfInstallments" Grid.Row="3" Grid.Column="1" Text="{Binding CalculatorModel.NoOfInstallments}"
-                               IsEnabled="True">
+                        <customViews:NumericEntry x:Name="NoOfInstallments" Grid.Row="3" Grid.Column="1"
+                                                  Text="{Binding CalculatorModel.NoOfInstallments}"
+                                                  IsEnabled="True">
                             <Entry.Behaviors>
                                 <behaviors:PositiveNumberBehavior />
                                 <behaviors:CustomLimitBehavior LowerLimit="0" UpperLimit="180" />
@@ -142,12 +143,14 @@
 
                         <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Start Date" />
                         <DatePicker Grid.Row="0" Grid.Column="1"
-                                    Date="{Binding CalculatorModel.StartDate}" MaximumDate="{Binding CalculatorModel.NextDate}">
+                                    Date="{Binding CalculatorModel.StartDate}"
+                                    MaximumDate="{Binding CalculatorModel.NextDate}">
                             <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                         </DatePicker>
                         <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Next Date" />
                         <DatePicker Grid.Row="1" Grid.Column="1"
-                                    Date="{Binding CalculatorModel.NextDate}" MinimumDate="{Binding CalculatorModel.StartDate}">
+                                    Date="{Binding CalculatorModel.NextDate}"
+                                    MinimumDate="{Binding CalculatorModel.StartDate}">
                             <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                         </DatePicker>
                     </Grid>
@@ -172,8 +175,8 @@
                         </Grid.RowDefinitions>
                         <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Up Front No." />
                         <customViews:NumericEntry Grid.Row="0" Grid.Column="1" x:Name="UpFrontNo"
-                               Text="{Binding CalculatorModel.UpFrontNo}"
-                               IsEnabled="True" />
+                                                  Text="{Binding CalculatorModel.UpFrontNo}"
+                                                  IsEnabled="True" />
 
                         <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Up Front Value" />
                         <customViews:FormattedEntry Grid.Row="1" Grid.Column="1" x:Name="UpFrontValue"
@@ -245,8 +248,8 @@
                         </Grid.RowDefinitions>
                         <Label VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Charges" />
                         <customViews:FormattedEntry x:Name="Charges" Grid.Row="0" Grid.Column="1"
-                                                Value="{Binding CalculatorModel.Charges}"
-                                                IsEnabled="False">
+                                                    Value="{Binding CalculatorModel.Charges}"
+                                                    IsEnabled="False">
                             <x:Arguments>
                                 <valueConverters:CurrencyConverter />
                             </x:Arguments>
@@ -254,16 +257,16 @@
 
                         <Label VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Total Cost" />
                         <customViews:FormattedEntry Grid.Row="1" Grid.Column="1"
-                                                Value="{Binding CalculatorModel.TotalCost}"
-                                                IsEnabled="False">
+                                                    Value="{Binding CalculatorModel.TotalCost}"
+                                                    IsEnabled="False">
                             <x:Arguments>
                                 <valueConverters:CurrencyConverter />
                             </x:Arguments>
                         </customViews:FormattedEntry>
 
                         <Label VerticalTextAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Total Schedule" />
-                        <customViews:FormattedEntry Grid.Row="2" Grid.Column="1"
-                           IsEnabled="False">
+                        <customViews:FormattedEntry Grid.Row="2" Grid.Column="1" IsEnabled="False"
+                                                    Value="{Binding CalculatorModel.TotalSchedule}">
                             <x:Arguments>
                                 <valueConverters:CurrencyConverter />
                             </x:Arguments>

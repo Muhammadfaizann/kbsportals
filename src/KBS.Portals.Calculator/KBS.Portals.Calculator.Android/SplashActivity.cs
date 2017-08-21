@@ -14,7 +14,7 @@ using CarouselView.FormsPlugin.Android;
 
 namespace KBS.Portals.Calculator.Droid
 {
-    [Activity(Label = "KBS.Portals.Calculator", NoHistory = true, Icon = "@drawable/icon", Theme = "@style/Theme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "KBS Calculator", NoHistory = true, Icon = "@drawable/launcher_icon", Theme = "@style/Theme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class SplashActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
