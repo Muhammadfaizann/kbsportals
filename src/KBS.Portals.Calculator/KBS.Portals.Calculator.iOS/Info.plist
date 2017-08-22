@@ -27,7 +27,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.kbs.portals.calculator</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>2.4</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon-60@2x.png</string>
