@@ -37,6 +37,28 @@ namespace KBS.Portals.Calculator.Logic.Tests
             Assert.AreEqual(600.86, result.Commission);
         }
         [Test]
+        public void CalculateCommissionForManual()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                FinanceAmount = 10000,
+                NoOfInstallments = 60,
+                Installment = Convert.ToDecimal(220),
+                IRR = 9,
+                StartDate = Convert.ToDateTime("14 Feb 2017"),
+                NextDate = Convert.ToDateTime("14 Mar 2017")
+            };
+            cd.AddSchedule(1, ScheduleType.INS, 60, Frequency.Monthly, 220, Convert.ToDateTime("14 Mar 2017"));
+            cd.ManualSchedule = true;
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.Commission, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(600.86, result.Commission);
+        }
+
+        [Test]
         public void CalculateCommissionForQuarterly()
         {
             CalculatorData cd = new CalculatorData()
@@ -104,7 +126,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             CalculatorData cd = new CalculatorData()
             {
                 // Added Frig to get upfront value in 
-                FinanceAmount = 36900 - 15900,
+                FinanceAmount = 36900 - 15900, // 21,000
                 IRR = 11.191345,
                 NoOfInstallments = 22,
                 UpFrontNo = 0,
@@ -129,7 +151,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             CalculatorData cd = new CalculatorData()
             {
                 // Added Frig to get upfront value in 
-                FinanceAmount = 30750 - 16750,
+                FinanceAmount = 30750 - 16750, // 14,000
                 IRR = 11.796204,
                 NoOfInstallments = 22,
                 UpFrontNo = 0,
@@ -155,7 +177,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             CalculatorData cd = new CalculatorData()
             {
                 // Added Frig to get upfront value in 
-                FinanceAmount = 16250 - (3 * 518),
+                FinanceAmount = 16250 - (3 * 518), // 14,696
                 IRR = 11.167938,
                 UpFrontNo = 0,
 //                UpFrontValue = 518,
@@ -180,7 +202,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
             CalculatorData cd = new CalculatorData()
             {
                 // Added Frig to get upfront value in 
-                FinanceAmount = 68000 - 6800,
+                FinanceAmount = 68000 - 6800,  //61,200
                 IRR = 11.000107,
                 UpFrontNo = 0,
 //                UpFrontValue = 6800,

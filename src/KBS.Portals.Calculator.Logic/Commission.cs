@@ -19,7 +19,11 @@ namespace KBS.Portals.Calculator.Logic
             var rate = Input.IRR;
             ICalculator calc = CalculatorFactory.Create(CalculationType.Rate, Input);
 
-            Input.Schedules.Clear(); // Have to clear as following line will rebuild scheduels!!!
+            if (!Input.ManualSchedule) // Manual scheduels will not be rebuilt
+            {
+                Input.Schedules.Clear();// Have to clear as following line will rebuild scheduels!!!
+            } 
+        
             var result = calc.Calculate();
 
             //If sRate > CDbl(APRInputs.IntRR) Then //This following validation operated off Inputs which never changed!!!!!

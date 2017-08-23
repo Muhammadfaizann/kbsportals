@@ -428,6 +428,32 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
         }
         [Test]
+        public void APRRate_Bal_Man()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.Monthly,
+                FinanceAmount = 10000,
+                UpFrontNo = 0,
+                Commission = 0,
+                DocFee = 0,
+                APR = 9.380690,
+                NoOfInstallments = 55,
+                StartDate = Convert.ToDateTime("14 Feb 2017"),
+                NextDate = Convert.ToDateTime("14 Mar 2017")
+            };
+            cd.AddSchedule(1, ScheduleType.INS, 55, Frequency.Monthly, 0, Convert.ToDateTime("14 Mar 2017"));
+            cd.AddSchedule(2, ScheduleType.BAL, 1, Frequency.Monthly, Convert.ToDecimal(1022.20), Convert.ToDateTime("14 oct 2021"));
+            cd.ManualSchedule = true;
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.APRInstallment, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(207.53, result.Installment);
+
+        }
+        [Test]
         public void AprRate_Res()
         {
             CalculatorData cd = new CalculatorData()
