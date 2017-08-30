@@ -463,7 +463,7 @@ namespace KBS.Portals.Calculator.Logic.Tests
                 UpFrontNo = 0,
                 Commission = 0,
                 DocFee = 0,
-                APR = 9.403984,
+                APR = 9.380690,
                 NoOfInstallments = 55,
                 Residual = Convert.ToDecimal(1022.20),
                 Installment = Convert.ToDecimal(207.53),

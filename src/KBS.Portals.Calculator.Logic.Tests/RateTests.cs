@@ -534,9 +534,39 @@ namespace KBS.Portals.Calculator.Logic.Tests
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(9.021454, result.IRR);
-            Assert.AreEqual(9.403984, result.APR);
+            Assert.AreEqual(9.0, result.IRR);
+            Assert.AreEqual(9.380690, result.APR);
             Assert.AreEqual(12436.35, result.TotalSchedule);
+        }
+
+        [Test]
+        public void Rate_1119649()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.Monthly,
+                FinanceAmount = Convert.ToDecimal(13153.68),
+                UpFrontNo = 0,
+                Commission = 0,
+                DocFee = 39,
+                NoOfInstallments = 24,
+                Residual = Convert.ToDecimal(4620.24),
+                Installment = Convert.ToDecimal(433.33),
+                StartDate = Convert.ToDateTime("03 oct 2008"),
+                NextDate = Convert.ToDateTime("15 oct 2008")
+            };
+            cd.AddSchedule(0, ScheduleType.DOC, 1, Frequency.None, 39, Convert.ToDateTime("15 Oct 2008"));
+            cd.AddSchedule(1, ScheduleType.INS, 24, Frequency.Monthly, Convert.ToDecimal(433.33), Convert.ToDateTime("15 Oct 2008"));
+            cd.AddSchedule(2, ScheduleType.RES, 1, Frequency.Monthly, Convert.ToDecimal(4620.24), Convert.ToDateTime("15 Oct 2010"));
+            cd.ManualSchedule = true;
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.Rate, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(10.349335, result.IRR);
+            Assert.AreEqual(11.114660, result.APR);
+            Assert.AreEqual(15020.16, result.TotalSchedule);
         }
 
 

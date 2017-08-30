@@ -119,6 +119,7 @@ namespace KBS.Portals.Calculator.Logic
         {
             var nextDate = default(DateTime);
             var serial = 0;
+            var lastFrequency = 0;
 
             //            NumOfInstalments = 0;
 
@@ -142,7 +143,7 @@ namespace KBS.Portals.Calculator.Logic
                     YieldCalcChron.Add(new SortKey(Input.StartDate, serial), new YieldCalc(Input.Commission, Input.StartDate, false, ScheduleType.COM));
                     serial++;
                 }
-
+                nextDate = Input.NextDate;
                 foreach (Schedule schedule in Input.Schedules)
 
                 {
@@ -154,7 +155,7 @@ namespace KBS.Portals.Calculator.Logic
 
                     if (schedule.Type.Equals(ScheduleType.FEE) || schedule.Type.Equals(ScheduleType.DOC) )
                     {
-                        YieldCalcChron.Add(new SortKey(Input.NextDate, serial), new YieldCalc(schedule.Amount, Input.NextDate, false, schedule.Type));
+                        YieldCalcChron.Add(new SortKey(Input.NextDate, serial), new YieldCalc(schedule.Amount, schedule.NextDate, false, schedule.Type));
                         serial++;
                         //                    if (schedule.Type.Equals("FEE"))  { iMonths += schedule.Counts; };
                     }
@@ -164,12 +165,10 @@ namespace KBS.Portals.Calculator.Logic
 
                     if (schedule.Type.Equals(ScheduleType.INS) || schedule.Type.Equals(ScheduleType.BAL))
                     {
-                        if (schedule.Type.Equals(ScheduleType.BAL))
+                        if (schedule.Type.Equals(ScheduleType.BAL)  && schedule.NextDate == Input.NextDate) //It has a default date need to update to last nextDate
                         {
-                            //Need to increment the next date for a one off balloon
-                            nextDate = nextDate.AddMonths((int) schedule.Frequency);
+                            nextDate = nextDate.AddMonths(lastFrequency);
                             schedule.NextDate =  nextDate;
-                            
                         }
                         for (int i = 0; i <= schedule.Counts - 1; i++)
                         {
@@ -178,22 +177,33 @@ namespace KBS.Portals.Calculator.Logic
                             YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, nextDate,  true, schedule.Type));
                             serial++;
                         }
+                        // one more increment to get ready for next line if it dstill has input.nextdate
+                        lastFrequency = (int) schedule.Frequency;
                         //                    iMonths += schedule.Counts;
                         //                        NumOfInstalments += schedule.Counts;
                     }
 
                     if (schedule.Type.Equals(ScheduleType.PUR))
                     {
+                        if (schedule.NextDate == Input.NextDate) //It has a default date need to update to last nextDate
+                        {
+                            schedule.NextDate = nextDate;
+                        }
                         // Always Collect Purchase fee on last Nextdate from INS
-                        YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, nextDate, false, schedule.Type));
+                        YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, schedule.NextDate, false, schedule.Type));
                         serial++;
                         //                    if (schedule.Type.Equals("FEE"))  { iMonths += schedule.Counts; };
                     }
                     if (schedule.Type.Equals(ScheduleType.RES))
                     {
+                        if (schedule.NextDate == Input.NextDate) //It has a default date need to update to last nextDate
+                        {
+                            nextDate = nextDate.AddMonths(lastFrequency);
+                            schedule.NextDate = nextDate;
+                        }
                         // Always Collect Residual on last Nextdate from INS
                         //schedule.NextDate.AddMonths(i * (int)schedule.Frequency)
-                        YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, nextDate, true, schedule.Type));
+                        YieldCalcChron.Add(new SortKey(nextDate, serial), new YieldCalc(schedule.Amount, schedule.NextDate, true, schedule.Type));
                         serial++;
                         //                    iMonths += schedule.Counts;
                     }
