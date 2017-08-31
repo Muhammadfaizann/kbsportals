@@ -45,15 +45,20 @@ namespace KBS.Portals.Calculator.Logic
 
                     } while (sNpv > (Convert.ToDouble(Input.Ballon) + 0.01)) ;
                 }
-                else
-                {
-                    if (!schedule.Type.Equals(ScheduleType.DOC)) { throw new Exception("Only Doc and Installment Schedule Types allowed for Term Calculation");}
-
-                }
+                //else
+                //{
+                //    Ignore     if (!schedule.Type.Equals(ScheduleType.DOC)) { throw new Exception("Only Doc and Installment Schedule Types allowed for Term Calculation");}
+                //}
             }
-            if (sNpv > (Convert.ToDouble(Input.Ballon) + 0.01) || loopCount > 9999) { throw new Exception("Unable to Calculate Term"); }
-            Input.LoanOverPayment = Convert.ToDecimal(Math.Round(sNpv,2));
-            Input.NoOfInstallments = loopCount;
+            if (sNpv > (Convert.ToDouble(Input.Ballon) + 0.01) || loopCount > 9999)
+            {
+                Input.NoOfInstallments = 9999;
+            }
+            else
+            {
+                Input.LoanOverPayment = Convert.ToDecimal(Math.Round(sNpv, 2));
+                Input.NoOfInstallments = loopCount;
+            }
         }
     }
 }

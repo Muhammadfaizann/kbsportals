@@ -101,14 +101,14 @@ namespace KBS.Portals.Calculator.Logic
                             sNpv += Math.Round(sNpv*Input.IRR*((entry.Value.Days - lastDays)/(AccountDays*100)), 4);
 
                             //On Swipe Installment is populated this cal so Amount never equals 0 this is only required for multiple INS lines
-                            //if (entry.Value.Amount.Equals(0) && entry.Value.Type.Equals(ScheduleType.INS))
-                            //{
+                            if (entry.Value.Amount.Equals(0) && entry.Value.Type.Equals(ScheduleType.INS))
+                            {
                                 sNpv += amount;
-                            //}
-                            //else
-                            //{
-                            //    sNpv = sNpv + Convert.ToDouble(entry.Value.Amount);
-                            //}
+                            }
+                            else
+                            {
+                                sNpv = sNpv + Convert.ToDouble(entry.Value.Amount);
+                            }
                             lastDays = entry.Value.Days;
                         }
                     }

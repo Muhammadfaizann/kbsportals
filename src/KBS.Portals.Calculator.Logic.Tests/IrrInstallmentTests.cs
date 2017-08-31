@@ -516,27 +516,27 @@ namespace KBS.Portals.Calculator.Logic.Tests
         {
             CalculatorData cd = new CalculatorData()
             {
-                FinanceAmount = 25000,
+                FinanceAmount = 15000,
                 UpFrontNo = 0,
                 Commission = 0,
-                DocFee = 150,
-                NoOfInstallments = 48,
+                DocFee = 0,
+                NoOfInstallments = 30,
                 Frequency = Frequency.Monthly,
-                Ballon  = 2000,
-                IRR = 9.5,
-                StartDate = Convert.ToDateTime("04 Aug 2017"),
-                NextDate = Convert.ToDateTime("04 Sep 2017")
+                Residual  = 1,
+                IRR = 8.5,
+                StartDate = Convert.ToDateTime("02 Jun 2017"),
+                NextDate = Convert.ToDateTime("02 Jul 2017")
             };
-            cd.AddSchedule(0, ScheduleType.DOC, 150, Frequency.None, 150, Convert.ToDateTime("04 Sep 2017"));
-            cd.AddSchedule(1, ScheduleType.INS, 48, Frequency.Monthly, 0, Convert.ToDateTime("04 Sep 2017"));
-            cd.AddSchedule(2, ScheduleType.BAL, 1, Frequency.Monthly, Convert.ToDecimal(2000), Convert.ToDateTime("04 oct 2021"));
-            cd.ManualSchedule = true;
+            //cd.AddSchedule(0, ScheduleType.DOC, 150, Frequency.None, 150, Convert.ToDateTime("04 Sep 2017"));
+            //cd.AddSchedule(1, ScheduleType.INS, 48, Frequency.Monthly, 0, Convert.ToDateTime("04 Sep 2017"));
+            //cd.AddSchedule(2, ScheduleType.BAL, 1, Frequency.Monthly, Convert.ToDecimal(2000), Convert.ToDateTime("04 oct 2021"));
+            //cd.ManualSchedule = true;
 
             ICalculator calc = CalculatorFactory.Create(CalculationType.IRRInstallment, cd);
 
             var result = calc.Calculate();
 
-            Assert.AreEqual(594.02, result.Installment);
+            Assert.AreEqual(556.78, result.Installment);
         }
 
 
