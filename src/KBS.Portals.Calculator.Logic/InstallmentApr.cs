@@ -99,15 +99,20 @@ namespace KBS.Portals.Calculator.Logic
                         //if (entry.Value.Amount.Equals(0) && entry.Value.Type.Equals(ScheduleType.INS))
                         //{
 
-                        if (entry.Value.Type == ScheduleType.INS || entry.Value.Type == ScheduleType.UPF)
+                        if (Input.ManualSchedule && (entry.Value.Type == ScheduleType.INS || entry.Value.Type == ScheduleType.UPF))
+                        {
+                            sNpv += amount;
+                        }
+                        else
+                        if (entry.Value.Amount.Equals(0) && (entry.Value.Type == ScheduleType.INS || entry.Value.Type == ScheduleType.UPF))
                         {
                             sNpv += amount;
                         }
                         else
                         {
-                            sNpv += Convert.ToDouble(entry.Value.Amount);
+                            sNpv = sNpv + Convert.ToDouble(entry.Value.Amount);
                         }
-                            lastDays = entry.Value.Days;
+                        lastDays = entry.Value.Days;
                     }
                     skipCount--;
                 }

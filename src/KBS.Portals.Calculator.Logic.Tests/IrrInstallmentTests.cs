@@ -537,6 +537,12 @@ namespace KBS.Portals.Calculator.Logic.Tests
             var result = calc.Calculate();
 
             Assert.AreEqual(556.78, result.Installment);
+
+
+            cd.Residual = 2000;
+            result = calc.Calculate();
+
+            Assert.AreEqual(497.17, result.Installment);
         }
 
 
