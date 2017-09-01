@@ -151,7 +151,7 @@ namespace KBS.Portals.Calculator.Logic
                 // Update Schedule with Instalment
                 foreach (var schedule in Input.Schedules)
                 {
-                    if (schedule.Type.Equals(ScheduleType.INS))
+                    if (schedule.Type.Equals(ScheduleType.INS) && schedule.Amount.Equals(0))
                     {
                         schedule.Amount = Input.Installment;
                     }
