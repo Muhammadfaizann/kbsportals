@@ -31,6 +31,8 @@ namespace KBS.Portals.Calculator.iOS
             
             UINavigationBar.Appearance.TintColor = UIColor.FromRGB(0xCF, 0x67, 0x33);
 
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
             return base.FinishedLaunching(app, options);
         }
 

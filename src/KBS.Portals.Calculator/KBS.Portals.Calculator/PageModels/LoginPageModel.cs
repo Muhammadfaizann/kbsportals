@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using FreshMvvm;
 using KBS.Portals.Calculator.Enums;
 using KBS.Portals.Calculator.Pages;
@@ -128,7 +127,14 @@ namespace KBS.Portals.Calculator.PageModels
             var mainContainer = new NavContainer(NavigationContainerNames.MainContainer);
             Application.Current.MainPage = mainContainer;
         }
-        
+
+        public Command Register => new Command(
+            () =>
+            {
+                Application.Current.MainPage.Navigation.PushModalAsync(FreshPageModelResolver.ResolvePageModel<RegisterPageModel>());
+            }
+        );
+
         public new event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

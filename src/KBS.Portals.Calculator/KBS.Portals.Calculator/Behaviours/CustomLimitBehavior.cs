@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KBS.Portals.Calculator.CustomViews;
-using Xamarin.Forms;
+﻿using KBS.Portals.Calculator.CustomViews;
 
 namespace KBS.Portals.Calculator.Behaviours
 {
@@ -42,7 +36,7 @@ namespace KBS.Portals.Calculator.Behaviours
             }
         }
 
-        protected override bool IsValid(NumericEntry entry)
+        public override bool IsValid(NumericEntry entry)
         {
             return (_lowerLimit == null || entry.Value >= _lowerLimit) && (_upperLimit == null || entry.Value <= _upperLimit);
         }

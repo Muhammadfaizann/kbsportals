@@ -41,7 +41,9 @@
     </Compile>
     <Compile Include="Behaviours\BaseEntryBehavior.cs" />
     <Compile Include="Behaviours\CustomLimitBehavior.cs" />
+    <Compile Include="Behaviours\EmailValidatorBehaviour.cs" />
     <Compile Include="Behaviours\PositiveNumberBehavior.cs" />
+    <Compile Include="Behaviours\RequiredBehaviour.cs" />
     <Compile Include="Config\AutoMapperConfig.cs" />
     <Compile Include="CustomViews\BindablePicker.cs" />
     <Compile Include="CustomViews\CollapsibleLayout.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="PageModels\FeedbackPageModel.cs" />
     <Compile Include="PageModels\LoginPageModel.cs" />
     <Compile Include="PageModels\LogoutPageModel.cs" />
+    <Compile Include="PageModels\RegisterPageModel.cs" />
     <Compile Include="Pages\CalculatorPage.xaml.cs">
       <DependentUpon>CalculatorPage.xaml</DependentUpon>
     </Compile>
@@ -67,6 +70,9 @@
     </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
@@ -127,6 +133,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\FeedbackPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\RegisterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
