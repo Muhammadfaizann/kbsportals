@@ -1,7 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Net;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 using FreshMvvm;
 using KBS.Portals.Calculator.Behaviours;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator.PageModels
@@ -36,28 +42,28 @@ namespace KBS.Portals.Calculator.PageModels
             set { _email = value; }
         }
 
-        public Command Register => new Command(() =>
+        public Command Register => new Command(async () =>
             {
                 var emailValidator = new EmailValidatorBehaviour();
                 var email = CurrentPage.FindByName<Entry>("EmailEntry");
 
                 if (!emailValidator.IsValid(email) || string.IsNullOrWhiteSpace(Name))
                 {
-                    CurrentPage.DisplayAlert("Data required",
+                    await CurrentPage.DisplayAlert("Data required",
                         "You must type a Name and a valid Email Address",
                         "Close");
                 }
                 else
                 {
-                    if (RegisterApi())
+                    if (await RegisterApi())
                     {
-                        CurrentPage.DisplayAlert("Register sent",
+                        await CurrentPage.DisplayAlert("Register sent",
                             "Thank you for registering your interest, we will be in touch soon",
                             "Close");
                     }
                     else
                     {
-                        CurrentPage.DisplayAlert("Error",
+                        await CurrentPage.DisplayAlert("Error",
                             "Unfortunately something has gone wrong, please try again later",
                             "Close");
                     }
@@ -65,9 +71,34 @@ namespace KBS.Portals.Calculator.PageModels
             }
         );
 
-        private bool RegisterApi()
+        private async Task<bool> RegisterApi()
         {
-            return false;
+            using (HttpClient client = new HttpClient())
+            {
+#if DEBUG
+                var uri = new Uri("https://dev.local/api/register");
+#else
+                var uri = new Uri("https://kbs.ie/api/register");
+#endif
+
+                try
+                {
+                    var data = new {Name, Email};
+                    var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync(uri, content);
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return false;
+                }
+
+                return false;
+            }
         }
 
         public new event PropertyChangedEventHandler PropertyChanged;

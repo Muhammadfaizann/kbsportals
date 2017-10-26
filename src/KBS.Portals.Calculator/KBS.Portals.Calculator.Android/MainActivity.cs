@@ -23,6 +23,7 @@ namespace KBS.Portals.Calculator.Droid
             SetupHockeyApp();
             Forms.Init(this, bundle);
             LoadApplication(new App());
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
         }
 
         protected override void OnDestroy()
