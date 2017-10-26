@@ -23,8 +23,7 @@ namespace KBS.Portals.Web.Services
                 EnableSsl = smtpEnableSsl,
 
                 Credentials = new System.Net.NetworkCredential(smtpUser, smtpPassword),
-                DeliveryMethod = SmtpDeliveryMethod.Network,                
-                UseDefaultCredentials = false,
+                DeliveryMethod = SmtpDeliveryMethod.Network
             };
         }
 
