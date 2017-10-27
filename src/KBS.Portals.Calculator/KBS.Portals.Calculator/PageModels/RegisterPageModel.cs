@@ -78,7 +78,7 @@ namespace KBS.Portals.Calculator.PageModels
 #if DEBUG
                 var uri = new Uri("https://dev.local/api/register");
 #else
-                var uri = new Uri("https://kbs.ie/api/register");
+                var uri = new Uri("http://kbscalculatorportals.azurewebsites.net/api/register");
 #endif
 
                 try
