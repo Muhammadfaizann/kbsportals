@@ -217,3 +217,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/src/KBS.Portals.Calculator/KBS.Portals.Calculator/KBS.Portals.Calculator.nuget.targets
+*.targets

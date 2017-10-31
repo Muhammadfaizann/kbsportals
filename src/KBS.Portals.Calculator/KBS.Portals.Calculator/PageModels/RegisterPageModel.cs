@@ -49,23 +49,32 @@ namespace KBS.Portals.Calculator.PageModels
 
                 if (!emailValidator.IsValid(email) || string.IsNullOrWhiteSpace(Name))
                 {
-                    await CurrentPage.DisplayAlert("Data required",
+                    if (await CurrentPage.DisplayAlert("Data required",
                         "You must type a Name and a valid Email Address",
-                        "Close");
+                        "Ok", "Close"))
+                    {
+                        await Application.Current.MainPage.Navigation.PopModalAsync();
+                    }
                 }
                 else
                 {
                     if (await RegisterApi())
                     {
-                        await CurrentPage.DisplayAlert("Register sent",
+                        if (await CurrentPage.DisplayAlert("Register sent",
                             "Thank you for registering your interest, we will be in touch soon",
-                            "Close");
+                            "Ok", "Close"))
+                        {
+                            await Application.Current.MainPage.Navigation.PopModalAsync();
+                        };
                     }
                     else
                     {
-                        await CurrentPage.DisplayAlert("Error",
+                        if (await CurrentPage.DisplayAlert("Error",
                             "Unfortunately something has gone wrong, please try again later",
-                            "Close");
+                            "Ok", "Close"))
+                        {
+                            await Application.Current.MainPage.Navigation.PopModalAsync();
+                        }
                     }
                 }
             }
