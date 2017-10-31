@@ -61,7 +61,7 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Distribution: KBS SOFTWARE LIMITED (HBP32PQ8F9)</CodesignKey>
+    <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignProvision>8422b0d3-1174-435d-a8df-6bf6c7cacb50</CodesignProvision>
     <MtouchDebug>true</MtouchDebug>
