@@ -49,12 +49,10 @@ namespace KBS.Portals.Calculator.PageModels
 
                 if (!emailValidator.IsValid(email) || string.IsNullOrWhiteSpace(Name))
                 {
-                    if (await CurrentPage.DisplayAlert("Data required",
+                    await CurrentPage.DisplayAlert("Data required",
                         "You must type a Name and a valid Email Address",
-                        "Ok", "Close"))
-                    {
-                        await Application.Current.MainPage.Navigation.PopModalAsync();
-                    }
+                        "Ok", "Close");
+
                 }
                 else
                 {
@@ -80,6 +78,11 @@ namespace KBS.Portals.Calculator.PageModels
             }
         );
 
+        public Command GoBack => new Command(async () =>
+        {
+            await Application.Current.MainPage.Navigation.PopModalAsync();
+        });
+
         private async Task<bool> RegisterApi()
         {
             using (HttpClient client = new HttpClient())
@@ -92,6 +95,7 @@ namespace KBS.Portals.Calculator.PageModels
 
                 try
                 {
+                    uri = new Uri("http://kbscalculatorportals.azurewebsites.net/api/register");
                     var data = new {Name, Email};
                     var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
                     var response = await client.PostAsync(uri, content);
