@@ -46,7 +46,7 @@ namespace KBS.Portals.Calculator.Logic.Models
         public decimal TotalCost { get; set; }
         public decimal TotalSchedule { get; set; }
 
-        public decimal Charges => TotalSchedule - TotalCost - Commission - DocFee - PurchaseFee;
+        public decimal Charges => TotalSchedule - TotalCost - DocFee - PurchaseFee;
 
 
         public int Term => Convert.ToInt32( NoOfInstallments * (int)Frequency);
