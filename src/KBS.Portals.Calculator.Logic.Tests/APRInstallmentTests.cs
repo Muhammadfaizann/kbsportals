@@ -477,5 +477,34 @@ namespace KBS.Portals.Calculator.Logic.Tests
             Assert.AreEqual(207.53, result.Installment);
        }
 
+        [Test]
+        public void APRRate_IrregularPayments()
+        {
+            CalculatorData cd = new CalculatorData()
+            {
+                Frequency = Frequency.Monthly,
+                FinanceAmount = 18000,
+                UpFrontNo = 0,
+                Commission = 300,
+                DocFee = 0,
+                APR = 9.24,
+                NoOfInstallments = 4,
+                StartDate = Convert.ToDateTime("15 Mar 2018"),
+                NextDate = Convert.ToDateTime("30 Jun 2018")
+            };
+            cd.AddSchedule(1, ScheduleType.INS, 4, Frequency.Annual, Convert.ToDecimal(250), Convert.ToDateTime("30 Jun 2018"));
+            cd.AddSchedule(2, ScheduleType.INS, 4, Frequency.Annual, Convert.ToDecimal(250), Convert.ToDateTime("30 Sep 2018"));
+            cd.AddSchedule(3, ScheduleType.INS, 4, Frequency.Annual, Convert.ToDecimal(0), Convert.ToDateTime("30 Nov 2018"));
+            cd.AddSchedule(4, ScheduleType.INS, 3, Frequency.Annual, Convert.ToDecimal(250), Convert.ToDateTime("30 Mar 2019"));
+            cd.ManualSchedule = true;
+
+            ICalculator calc = CalculatorFactory.Create(CalculationType.APRInstallment, cd);
+
+            var result = calc.Calculate();
+
+            Assert.AreEqual(4735, result.Installment);
+
+        }
+
     }
 }
