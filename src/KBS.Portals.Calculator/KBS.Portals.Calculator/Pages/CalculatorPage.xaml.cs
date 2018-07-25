@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using CarouselView.FormsPlugin.Abstractions;
 using FreshMvvm;
-using KBS.Portals.Calculator.Logic.Enums;
 using KBS.Portals.Calculator.Models;
 using KBS.Portals.Calculator.PageModels;
 using KBS.Portals.Calculator.Services;
@@ -105,6 +101,27 @@ namespace KBS.Portals.Calculator.Pages
         private void DismissSummary(object sender, EventArgs e)
         {
             SummaryPopup.IsVisible = false;
+        }
+        private void EmailSummary(object sender, EventArgs e)
+        {
+            try
+            {
+                var pageModel = BindingContext as CalculatorPageModel;
+                StringBuilder emailContent = new StringBuilder();
+                emailContent.Append("Calculation Results Summary");
+                emailContent.Append("\n");
+                foreach (var kvp in pageModel.ResultDataSummary)
+                {
+                    emailContent.Append(kvp.Key + ":" + kvp.Value);
+                    emailContent.Append("\n");
+                }
+                Device.OpenUri(new Uri("mailto:?subject=Calculation Summar&body=" + emailContent));
+            }
+            catch (Exception ex)
+            {
+                SummaryPopup.IsVisible = false;
+                DisplayAlert("Email", "There was an error sending email, please try again","OK");
+            }
         }
     }
 }
