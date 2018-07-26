@@ -95,7 +95,6 @@ namespace KBS.Portals.Calculator.PageModels
 
                 try
                 {
-                    uri = new Uri("http://kbscalculatorportals.azurewebsites.net/api/register");
                     var data = new {Name, Email};
                     var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
                     var response = await client.PostAsync(uri, content);
