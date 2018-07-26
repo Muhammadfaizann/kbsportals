@@ -115,7 +115,7 @@ namespace KBS.Portals.Calculator.Pages
                     emailContent.Append(kvp.Key + ":" + kvp.Value);
                     emailContent.Append("\n");
                 }
-                Device.OpenUri(new Uri("mailto:?subject=Calculation Summar&body=" + emailContent));
+                Device.OpenUri(new Uri("mailto:?subject=Calculation Summary&body=" + emailContent));
             }
             catch (Exception ex)
             {
