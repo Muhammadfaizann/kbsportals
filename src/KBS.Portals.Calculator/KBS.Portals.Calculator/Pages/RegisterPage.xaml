@@ -29,5 +29,9 @@
         <Button x:Name="RegisterButton" Command="{Binding Register}" Text="Register" WidthRequest="150" Margin="0, 40, 0, 0"
                 HorizontalOptions="Center" FontSize="15" BorderRadius="2"
                 IsEnabled="{Binding IsBusy, Converter={StaticResource InvertBooleanConverter}}" />
+
+        <Button x:Name="BackButton" Command="{Binding GoBack}" Text="Back" WidthRequest="150" Margin="0, 20, 0, 0"
+                HorizontalOptions="Center" FontSize="15" BorderRadius="2"/>
+
     </StackLayout>
 </ContentPage>

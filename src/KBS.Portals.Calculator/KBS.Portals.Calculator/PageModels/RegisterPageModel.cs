@@ -49,12 +49,10 @@ namespace KBS.Portals.Calculator.PageModels
 
                 if (!emailValidator.IsValid(email) || string.IsNullOrWhiteSpace(Name))
                 {
-                    if (await CurrentPage.DisplayAlert("Data required",
+                    await CurrentPage.DisplayAlert("Data required",
                         "You must type a Name and a valid Email Address",
-                        "Ok", "Close"))
-                    {
-                        await Application.Current.MainPage.Navigation.PopModalAsync();
-                    }
+                        "Ok", "Close");
+
                 }
                 else
                 {
@@ -79,6 +77,11 @@ namespace KBS.Portals.Calculator.PageModels
                 }
             }
         );
+
+        public Command GoBack => new Command(async () =>
+        {
+            await Application.Current.MainPage.Navigation.PopModalAsync();
+        });
 
         private async Task<bool> RegisterApi()
         {
