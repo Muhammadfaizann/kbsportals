@@ -226,7 +226,7 @@ namespace KBS.Portals.Calculator.Logic
                 //{
                 //    upFronts += schedule.Amount * Convert.ToDecimal(schedule.Counts);
                 //}
-                if (schedule.Type.Equals(ScheduleType.INS) || schedule.Type.Equals(ScheduleType.BAL) || schedule.Type.Equals(ScheduleType.RES) || schedule.Type.Equals(ScheduleType.PUR))
+                if (schedule.Type.Equals(ScheduleType.DOC) || schedule.Type.Equals(ScheduleType.INS) || schedule.Type.Equals(ScheduleType.BAL) || schedule.Type.Equals(ScheduleType.RES) || schedule.Type.Equals(ScheduleType.PUR))
                 {
                     total += schedule.Amount * Convert.ToDecimal(schedule.Counts);
                 }
