@@ -28,7 +28,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.kbs.portals.calculator</string>
 	<key>CFBundleVersion</key>
-	<string>2.5</string>
+	<string>2.6</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon-60@2x.png</string>
@@ -47,7 +47,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0</string>
+	<string>2.1</string>
 	<key>XSLaunchImageAssets</key>
 	<string>Resources/Media.xcassets/LaunchImages.launchimage</string>
 	<key>XSAppIconAssets</key>
