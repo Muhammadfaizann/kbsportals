@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionCode="2" android:versionName="2.5" package="com.kbs.portals.calculator">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionCode="2" android:versionName="2.6" package="com.kbs.portals.calculator">
 	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="26" />
 	<application android:label="KBS Calculator" android:icon="@drawable/launcher_icon"></application>
 </manifest>
