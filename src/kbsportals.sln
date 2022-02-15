@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KBS.Portals.Calculator.Logic", "KBS.Portals.Calculator.Logic\KBS.Portals.Calculator.Logic.csproj", "{CF269F85-0B3A-4A73-AB6A-27646437FE10}"
 EndProject
@@ -363,5 +363,8 @@ Global
 		{2024E3DB-B658-42DC-B2F5-126DB709FCD5} = {7724500F-5612-40CA-B8DD-8CEC9558F22C}
 		{76428C57-E34F-406D-B87F-69E583EA0684} = {7724500F-5612-40CA-B8DD-8CEC9558F22C}
 		{FAF6B68B-4F87-4723-8246-AB09E2FC2139} = {0CBEFB4C-44B6-47B3-A92A-DEC78C886770}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24932793-5137-4A14-863F-059624FD7993}
 	EndGlobalSection
 EndGlobal
