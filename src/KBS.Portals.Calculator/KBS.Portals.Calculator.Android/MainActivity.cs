@@ -6,6 +6,7 @@ using HockeyApp.Android;
 using HockeyApp.Android.Metrics;
 using KBS.Portals.Calculator.Droid.Services;
 using KBS.Portals.Calculator.Services;
+
 using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator.Droid
@@ -22,6 +23,7 @@ namespace KBS.Portals.Calculator.Droid
             ActionBar.SetIcon(null);
             SetupHockeyApp();
             Forms.Init(this, bundle);
+            
             LoadApplication(new App());
             System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
         }

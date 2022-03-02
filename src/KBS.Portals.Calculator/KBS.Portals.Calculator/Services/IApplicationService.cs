@@ -8,7 +8,7 @@ namespace KBS.Portals.Calculator.Services
 {
     public interface IApplicationService
     {
-        void Quit();
+        
         string AppId { get; }
     }
 }

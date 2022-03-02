@@ -126,12 +126,6 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\KBS.Portals.Calculator.Logic\KBS.Portals.Calculator.Logic.csproj">
-      <Project>{cf269f85-0b3a-4a73-ab6a-27646437fe10}</Project>
-      <Name>KBS.Portals.Calculator.Logic</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Pages\FeedbackPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -142,6 +136,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\KBS.Portals.Calculator.Logic\KBS.Portals.Calculator.Logic.csproj">
+      <Project>{cf269f85-0b3a-4a73-ab6a-27646437fe10}</Project>
+      <Name>KBS.Portals.Calculator.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

@@ -25,6 +25,7 @@ namespace KBS.Portals.Calculator.Views
 
             var innerListView = ((Master as NavigationPage)?.CurrentPage as ContentPage)?.Content as ListView;
             innerListView.SeparatorVisibility = SeparatorVisibility.None;
+           
         }
 
         private Style MainContainerStyle()
@@ -34,7 +35,8 @@ namespace KBS.Portals.Calculator.Views
             {
                 Property = NavigationPage.BarBackgroundColorProperty,
                 Value = Color.FromHex("#FFFFFF")
-            });
+            } 
+            );
             return style;
         }
     }

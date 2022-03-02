@@ -2,6 +2,7 @@
 using KBS.Portals.Calculator.Config;
 using KBS.Portals.Calculator.Enums;
 using KBS.Portals.Calculator.PageModels;
+using KBS.Portals.Calculator.Pages;
 using KBS.Portals.Calculator.Services;
 using Xamarin.Forms;
 

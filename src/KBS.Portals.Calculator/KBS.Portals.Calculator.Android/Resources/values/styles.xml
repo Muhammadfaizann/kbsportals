@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-
+	<color name="Blue">#66B2FF</color>
+	
+	
   <style name="MainTheme" parent="MainTheme.Base">
+	  <item name="android:colorActivatedHighlight">@color/Blue</item>
   </style>
+	
   <!-- Base theme applied no matter what API -->
   <style name="MainTheme.Base" parent="@android:style/Theme.Material.Light">
     <!--If you are using revision 22.1 please use just windowNoTitle. Without android:-->
@@ -12,12 +16,12 @@
     <item name="android:homeAsUpIndicator">@drawable/ic_menu</item>
     <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette -->
     <!-- colorPrimary is used for the default action bar background -->
-    <item name="colorPrimary">#2196F3</item>
+    <item name="colorPrimary">#66B2FF</item>
     <!-- colorPrimaryDark is used for the status bar -->
-    <item name="colorPrimaryDark">#1976D2</item>
+    <item name="colorPrimaryDark">#66B2FF</item>
     <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-    <item name="colorAccent">#cf6733</item>
+    <item name="colorAccent">#66B2FF</item>
     <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
@@ -32,7 +36,7 @@
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-    <item name="colorAccent">#cf6733</item>
+    <item name="colorAccent">#66B2FF</item>
   </style>
 
   <style name="Theme.Splash" parent="@android:style/Theme.Material.Light">

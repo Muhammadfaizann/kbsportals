@@ -26,7 +26,7 @@ namespace KBS.Portals.Calculator.Services
             HttpClient client = new HttpClient();
             Dictionary<string, string> form = new Dictionary<string, string>
             {
-                ["name"] = string.Format("{0} (Platform: {1})", settingsService.Username, Device.OS),
+                ["name"] = string.Format("{0} (Platform: {1})", settingsService.Username, Device.RuntimePlatform),
                 ["subject"] = "In-app feedback" + (calculatorModel == null ? "" : " - includes calculator data"),
                 ["text"] = message + (calculatorModel == null ? "" : "\n\n---------------\n\nCalculator data:\n\n" + modelJson)
             };

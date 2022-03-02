@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace KBS.Portals.Calculator.ValueConverters
 {
-    class CurrencyConverter : IValueConverter
+    public class CurrencyConverter : IValueConverter
     {
         public string CurrencySymbol { get; set; }
         

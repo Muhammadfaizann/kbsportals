@@ -7,14 +7,17 @@
         <ResourceDictionary>
             <x:String x:Key="CurrencySymbol">€</x:String>
             <Color x:Key="EntryColour">#5e5e5e</Color>
+            <Color x:Key="CustomBlue">#66B2FF</Color>
             <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#cf6733" />
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource CustomBlue}" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="BorderRadius" Value="0" />
-                <Setter Property="FontSize" Value="17" />
+                
             </Style>
             <Style TargetType="Label">
-                <Setter Property="TextColor" Value="#8e8e8e" />
+                <Setter Property="TextColor"
+                        Value="#8e8e8e" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

@@ -49,7 +49,7 @@ namespace KBS.Portals.Calculator.CustomViews
             {
                 FontSize = 16,
                 FontAttributes = FontAttributes.Bold,
-                TextColor = Color.FromHex("#cf6733")
+                TextColor = Color.FromHex("#66B2FF")
             };
             _titleBar = new StackLayout
             {

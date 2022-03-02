@@ -13,12 +13,11 @@ namespace KBS.Portals.Calculator.Pages
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
+
         }
 
         protected override bool OnBackButtonPressed()
         {
-            var loginPageModel = BindingContext as LoginPageModel;
-            loginPageModel.Quit();
             return base.OnBackButtonPressed();
         }
 

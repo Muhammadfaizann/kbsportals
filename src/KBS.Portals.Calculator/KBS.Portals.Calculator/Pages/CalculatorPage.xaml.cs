@@ -7,6 +7,7 @@ using KBS.Portals.Calculator.Models;
 using KBS.Portals.Calculator.PageModels;
 using KBS.Portals.Calculator.Services;
 using KBS.Portals.Calculator.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +19,7 @@ namespace KBS.Portals.Calculator.Pages
         public CalculatorPage()
         {
             InitializeComponent();
-            if (Device.OS == TargetPlatform.Android)
+            if (Device.RuntimePlatform == Device.Android)
                 ReinitialiseCarousel();
             ToolbarItems.Add(new ToolbarItem("Reset Calculator", "reset_calculator", () =>
             {
@@ -94,7 +95,7 @@ namespace KBS.Portals.Calculator.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (Device.OS == TargetPlatform.iOS)
+            if (Device.RuntimePlatform == Device.iOS)
                 ReinitialiseCarousel();
         }
 
@@ -115,7 +116,7 @@ namespace KBS.Portals.Calculator.Pages
                     emailContent.Append(kvp.Key + ":" + kvp.Value);
                     emailContent.Append("\n");
                 }
-                Device.OpenUri(new Uri("mailto:?subject=Calculation Summary&body=" + emailContent));
+                Launcher.OpenAsync(new Uri("mailto:?subject=Calculation Summary&body=" + emailContent));
             }
             catch (Exception ex)
             {

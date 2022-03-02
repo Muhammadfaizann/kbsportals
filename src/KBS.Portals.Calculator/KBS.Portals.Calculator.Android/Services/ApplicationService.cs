@@ -16,11 +16,7 @@ namespace KBS.Portals.Calculator.Droid.Services
 {
     public class ApplicationService : IApplicationService
     {
-        public void Quit()
-        {
-            var activity = (Activity) Forms.Context;
-            activity.FinishAffinity();
-        }
+        
 
         public string AppId => MainActivity.AppId;
     }

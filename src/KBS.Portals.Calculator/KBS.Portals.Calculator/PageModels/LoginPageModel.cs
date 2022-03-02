@@ -80,7 +80,7 @@ namespace KBS.Portals.Calculator.PageModels
 
         public void Quit()
         {
-            _applicationService.Quit();
+           // _applicationService.Quit();
         }
 
         private async void TryTokenLogin()

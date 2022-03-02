@@ -6,7 +6,7 @@
              x:Class="KBS.Portals.Calculator.Pages.RegisterPage"
              Title="Register"
              Padding="40,0"
-             BackgroundColor="White">>
+             BackgroundColor="White">
     <ContentPage.Resources>
         <ResourceDictionary>
             <valueConverters:InvertBooleanConverter x:Key="InvertBooleanConverter" />
