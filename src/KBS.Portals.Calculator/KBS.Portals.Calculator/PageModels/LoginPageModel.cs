@@ -77,12 +77,6 @@ namespace KBS.Portals.Calculator.PageModels
                 if (!string.IsNullOrEmpty(_settingsService.AccessToken)) TryTokenLogin();
             }
         }
-
-        public void Quit()
-        {
-           // _applicationService.Quit();
-        }
-
         private async void TryTokenLogin()
         {
             IsBusy = true;
